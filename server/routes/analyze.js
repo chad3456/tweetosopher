@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { collectTwitter, normalizeHandle } from '../lib/sources/twitter.js';
+import { collectTwitter, normalizeHandle, X_DEPTHS } from '../lib/sources/twitter.js';
 import { collectSubstack, normalizeSubstack } from '../lib/sources/substack.js';
 import { DEPTHS } from '../lib/pipeline/index.js';
 import { buildCorpus } from '../lib/corpus.js';
@@ -10,7 +10,15 @@ import { demoVerdict } from '../../demo/verdict.js';
 
 export const router = Router();
 
-const PLATFORMS = new Set(['twitter', 'substack']);
+/**
+ * X only, for now.
+ *
+ * The Substack pipeline is still in the tree and still tested — it is switched
+ * off at the product surface rather than deleted, so re-enabling it is one
+ * environment variable rather than an archaeology exercise.
+ */
+const SUBSTACK_ENABLED = process.env.ENABLE_SUBSTACK === 'true';
+const PLATFORMS = new Set(['twitter', ...(SUBSTACK_ENABLED ? ['substack'] : [])]);
 
 function sourceCredentials(platform) {
   if (platform === 'twitter') return Boolean(process.env.X_BEARER_TOKEN);
@@ -50,12 +58,14 @@ router.get('/health', (_req, res) => {
     ok: true,
     engine: hasCredentials() ? 'live' : 'demo',
     model: process.env.TWEETOSOPHER_MODEL || 'claude-opus-5',
+    platforms: [...PLATFORMS],
     sources: {
       twitter: {
         timeline: Boolean(process.env.X_BEARER_TOKEN),
         likes: Boolean(process.env.X_USER_ACCESS_TOKEN),
+        depth: process.env.X_DEPTH || 'standard',
       },
-      substack: true,
+      substack: SUBSTACK_ENABLED,
     },
   });
 });
@@ -66,8 +76,14 @@ router.post('/analyze', async (req, res) => {
 
   if (!PLATFORMS.has(platform)) {
     return res.status(400).json({
-      error: `Unknown platform "${rawPlatform}".`,
-      hint: 'Supported: twitter, substack.',
+      error:
+        platform === 'substack'
+          ? 'Substack is switched off in this deployment.'
+          : `Unknown platform "${rawPlatform}".`,
+      hint:
+        platform === 'substack'
+          ? 'Set ENABLE_SUBSTACK=true to turn the Substack pipeline back on.'
+          : `Supported: ${[...PLATFORMS].join(', ')}.`,
     });
   }
   if (!rawHandle || !String(rawHandle).trim()) {
@@ -121,7 +137,11 @@ router.post('/analyze', async (req, res) => {
     if (useDemoCorpus) {
       collection = demoCollection(platform);
     } else if (platform === 'twitter') {
-      collection = await collectTwitter(rawHandle);
+      collection = await collectTwitter(rawHandle, {
+        depth: X_DEPTHS[req.body?.depth] ? req.body.depth : undefined,
+        onProgress: (event) =>
+          stream.send({ stage: 'collecting', message: event.message, phase: event.stage }),
+      });
     } else {
       // The Substack pipeline runs several stages and can take a while at
       // depth, so its progress is forwarded onto the same NDJSON stream the

@@ -61,13 +61,31 @@ function formatDate(iso) {
 
 const KIND_LABEL = {
   post: 'Post',
+  thread: 'Thread',
   reply: 'Reply',
   quote: 'Quote post',
   retweet: 'Repost',
   like: 'Liked post',
+  note: 'Note',
   essay: 'Essay',
   'essay-summary': 'Essay (summary)',
 };
+
+/** The provenance line under an exhibit: what kind of thing this is, exactly. */
+function exhibitMeta(post) {
+  const bits = [KIND_LABEL[post.kind] ?? 'Item'];
+
+  if (post.kind === 'thread' && post.parts) bits[0] = `Thread · ${post.parts} posts`;
+  // A repost or a like is someone else's words that the subject chose to
+  // endorse. Saying whose keeps the exhibit honest about authorship.
+  if (post.via && (post.kind === 'retweet' || post.kind === 'like')) {
+    bits.push(`originally @${post.via}`);
+  }
+
+  const date = formatDate(post.createdAt);
+  if (date) bits.push(date);
+  return bits.join(' · ');
+}
 
 export function renderVerdict(root, data) {
   root.replaceChildren();
@@ -141,11 +159,7 @@ export function renderVerdict(root, data) {
     const ex = section('exhibit', 'The post that gives you away');
     const frame = el('figure', 'exhibit');
 
-    const metaBits = [
-      KIND_LABEL[data.definingPost.kind] ?? 'Item',
-      formatDate(data.definingPost.createdAt),
-    ].filter(Boolean);
-    frame.append(el('p', 'exhibit__meta', metaBits.join(' · ')));
+    frame.append(el('p', 'exhibit__meta', exhibitMeta(data.definingPost)));
 
     if (data.definingPost.title) {
       frame.append(el('h4', 'exhibit__title', data.definingPost.title));
@@ -253,8 +267,22 @@ export function renderVerdict(root, data) {
       'Corpus —',
       `${data.stats.analysed} of ${data.stats.collected} collected items read (${data.stats.own} in their own words, ${data.stats.amplified} amplified).`,
     ),
-    line('Confidence —', `${data.confidence.level}. ${data.confidence.caveat}`),
   );
+
+  if (data.pipeline) {
+    const p = data.pipeline;
+    const parts = [
+      `${p.posts} posts`,
+      p.threads ? `${p.threads} threads reassembled` : null,
+      p.replies ? `${p.replies} replies` : null,
+      p.quotes ? `${p.quotes} quotes` : null,
+      p.retweets ? `${p.retweets} reposts` : null,
+      p.likes ? `${p.likes} likes` : null,
+    ].filter(Boolean);
+    prov.append(line('Collection —', `${parts.join(', ')} · depth "${p.depth}".`));
+  }
+
+  prov.append(line('Confidence —', `${data.confidence.level}. ${data.confidence.caveat}`));
 
   for (const note of data.coverage?.notes ?? []) {
     prov.append(line('Gap —', note));

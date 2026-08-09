@@ -5,10 +5,10 @@ import { renderVerdict, renderError } from './verdict.js';
 
 const $ = (sel) => document.querySelector(sel);
 
+const PLATFORM = 'twitter';
+
 const form = $('#analyze-form');
 const handleInput = $('#handle');
-const sigil = $('#sigil');
-const hint = $('#hint');
 const submit = $('#submit');
 const modeNote = $('#mode-note');
 const engineBadge = $('#engine-badge');
@@ -23,37 +23,6 @@ const verdictRoot = $('#verdict');
 const artifact = mountArtifact($('#artifact'));
 playIntro({ onReveal: (v) => artifact.reveal(v) });
 linkHeroScroll(artifact);
-
-/* ── Platform affordances ──────────────────────────────────────────────── */
-
-const PLATFORM_UI = {
-  twitter: {
-    sigil: '@',
-    placeholder: 'marbledust',
-    hint: 'A handle, or a full profile URL.',
-  },
-  substack: {
-    sigil: '¶',
-    placeholder: 'the-long-way',
-    hint: 'A publication name, or its full URL.',
-  },
-};
-
-function currentPlatform() {
-  return form.elements.platform.value;
-}
-
-function syncPlatform() {
-  const ui = PLATFORM_UI[currentPlatform()];
-  sigil.textContent = ui.sigil;
-  handleInput.placeholder = ui.placeholder;
-  hint.textContent = ui.hint;
-}
-
-form.querySelectorAll('input[name="platform"]').forEach((radio) => {
-  radio.addEventListener('change', syncPlatform);
-});
-syncPlatform();
 
 /* ── Engine status ─────────────────────────────────────────────────────── */
 
@@ -82,12 +51,10 @@ let health = null;
     );
   }
   if (!health.sources.twitter.timeline) {
-    notes.push(
-      'No X_BEARER_TOKEN: Twitter subjects fall back to the sample archive. Substack works without credentials.',
-    );
+    notes.push('No X_BEARER_TOKEN: readings run against the sample archive.');
   } else if (!health.sources.twitter.likes) {
     notes.push(
-      'No X_USER_ACCESS_TOKEN: likes will not be read, so the panel judges output only.',
+      'No X_USER_ACCESS_TOKEN: likes are not read, so the panel judges output but not taste.',
     );
   }
   modeNote.textContent = notes.join(' ');
@@ -152,7 +119,7 @@ const STAGE_HEADLINE = {
 
 let inFlight = null;
 
-async function run(handle, platform) {
+async function run(handle) {
   inFlight?.abort();
   const controller = new AbortController();
   inFlight = controller;
@@ -163,7 +130,7 @@ async function run(handle, platform) {
   try {
     for await (const event of analyze({
       handle,
-      platform,
+      platform: PLATFORM,
       signal: controller.signal,
     })) {
       if (STAGE_HEADLINE[event.stage]) {
@@ -179,7 +146,7 @@ async function run(handle, platform) {
         renderVerdict(verdictRoot, event.result);
         revealSections(verdictRoot);
         scrollTo(verdictRoot);
-        history.replaceState(null, '', `?platform=${platform}&handle=${encodeURIComponent(handle)}`);
+        history.replaceState(null, '', `?handle=${encodeURIComponent(handle)}`);
       }
     }
   } catch (err) {
@@ -208,7 +175,7 @@ form.addEventListener('submit', (e) => {
     handleInput.focus();
     return;
   }
-  run(handle, currentPlatform());
+  run(handle);
 });
 
 // "Submit another subject" lives inside the rendered verdict.
@@ -222,15 +189,9 @@ verdictRoot.addEventListener('click', (e) => {
 
 /* ── Deep links ────────────────────────────────────────────────────────── */
 
-const params = new URLSearchParams(location.search);
-const linkedHandle = params.get('handle');
-const linkedPlatform = params.get('platform');
+const linkedHandle = new URLSearchParams(location.search).get('handle');
 
 if (linkedHandle) {
-  if (linkedPlatform && PLATFORM_UI[linkedPlatform]) {
-    form.elements.platform.value = linkedPlatform;
-    syncPlatform();
-  }
   handleInput.value = linkedHandle;
-  run(linkedHandle, currentPlatform());
+  run(linkedHandle);
 }

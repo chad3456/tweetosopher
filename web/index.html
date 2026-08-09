@@ -45,9 +45,10 @@
         </h1>
 
         <p class="hero__lede" data-reveal>
-          A standing panel of thirty philosophers reads your posting back to you.
-          They argue. They assign you a thinker. They write the wall text and
-          hang the one post that gives you away.
+          A standing panel of thirty philosophers reads your timeline back to
+          you — threads reassembled, quotes given their referent, likes counted
+          as taste. They argue. They assign you a thinker. They write the wall
+          text and hang the one post that gives you away.
         </p>
 
         <a class="hero__cue" href="#desk">
@@ -77,22 +78,12 @@
         </div>
 
         <form class="desk__form" id="analyze-form" autocomplete="off">
-          <fieldset class="platform" aria-label="Platform">
-            <legend class="sr-only">Platform</legend>
-            <label class="platform__opt">
-              <input type="radio" name="platform" value="twitter" checked />
-              <span>Twitter <span class="platform__x">/ X</span></span>
-            </label>
-            <label class="platform__opt">
-              <input type="radio" name="platform" value="substack" />
-              <span>Substack</span>
-            </label>
-          </fieldset>
+          <p class="desk__platform">Twitter <span aria-hidden="true">/</span> X</p>
 
           <div class="field">
             <label class="field__label" for="handle">Subject</label>
             <div class="field__row">
-              <span class="field__sigil" id="sigil">@</span>
+              <span class="field__sigil" aria-hidden="true">@</span>
               <input
                 id="handle"
                 name="handle"
@@ -100,11 +91,14 @@
                 placeholder="marbledust"
                 spellcheck="false"
                 autocapitalize="off"
+                autocorrect="off"
+                maxlength="120"
                 required
               />
             </div>
             <p class="field__hint" id="hint">
-              A handle, or a full profile URL.
+              A handle, or a full profile URL. Posts, replies, quotes, reposts
+              and — with a user token — likes.
             </p>
           </div>
 

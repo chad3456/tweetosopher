@@ -39,6 +39,30 @@ export class HttpError extends Error {
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /**
+ * How long to wait after a throttled response.
+ *
+ * Two conventions, and hosts do not agree on which to use. `Retry-After` is the
+ * standard one (seconds). X sends `x-rate-limit-reset`, an absolute epoch
+ * *second* — reading that as a duration would sleep for fifty-odd years, so it
+ * has to be differenced against now. Returns null when neither is usable, which
+ * leaves the caller on plain exponential backoff.
+ */
+function retryDelayFrom(res) {
+  const retryAfter = Number(res.headers.get('retry-after'));
+  if (Number.isFinite(retryAfter) && retryAfter > 0) {
+    return Math.min(retryAfter * 1000, 60_000);
+  }
+
+  const reset = Number(res.headers.get('x-rate-limit-reset'));
+  if (Number.isFinite(reset) && reset > 0) {
+    const ms = reset * 1000 - Date.now();
+    // A window that has already passed, or one absurdly far out, is not useful.
+    if (ms > 0 && ms < 15 * 60_000) return ms;
+  }
+  return null;
+}
+
+/**
  * A deliberately small robots.txt reader.
  *
  * It implements the parts that matter for a read-only crawler — grouped
@@ -201,12 +225,11 @@ export class PoliteClient {
         }
 
         if (res.status === 429 || res.status >= 500) {
-          const retryAfter = Number(res.headers.get('retry-after'));
           throw new HttpError(`HTTP ${res.status}`, {
             status: res.status,
             url: url.href,
             retryable: true,
-            retryAfterMs: Number.isFinite(retryAfter) ? retryAfter * 1000 : null,
+            retryAfterMs: retryDelayFrom(res),
           });
         }
 

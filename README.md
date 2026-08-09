@@ -6,7 +6,8 @@ with citations, tells you a real anecdote from that philosopher's life that
 rhymes with your posting, gives you a name tag, and hangs the one post that gives
 you away.
 
-Supports **Twitter / X** and **Substack**.
+**Twitter / X.** (A Substack pipeline is built and tested but switched off —
+see [Substack](#substack-switched-off).)
 
 ---
 
@@ -38,8 +39,8 @@ wire anything up. Each credential you add upgrades one part:
 | Set this | You get |
 |---|---|
 | *(nothing)* | Sample corpus + a prepared demonstration verdict |
-| `ANTHROPIC_API_KEY` | **Real verdicts.** Substack works fully at this point — no Substack key exists or is needed |
-| `X_BEARER_TOKEN` | Real Twitter/X profiles and timelines |
+| `ANTHROPIC_API_KEY` | **Real verdicts** over the sample corpus |
+| `X_BEARER_TOKEN` | Real profiles, timelines, threads, quotes and reposts |
 | `X_USER_ACCESS_TOKEN` | Likes, which is where taste actually lives — see below |
 
 ---
@@ -78,11 +79,9 @@ A verdict is one structured object:
 
 ## How it reads a corpus
 
-**Collection.** Twitter gives up to ~300 timeline items (posts, replies, quotes,
-reposts) plus liked tweets if a user token is present. Substack goes through a
-multi-stage pipeline — see [The Substack pipeline](#the-substack-pipeline) below.
-Essays are condensed to their opening and a mid-body sample: the two places a
-writer's actual thinking is least likely to be throat-clearing or sign-off.
+**Collection.** A staged pipeline — see [The X pipeline](#the-x-pipeline) below —
+producing posts, reassembled threads, replies, quotes with their referents,
+reposts, and (with a user token) likes.
 
 **Curation** ([`server/lib/corpus.js`](server/lib/corpus.js)). Taking the newest
 N posts over-weights whatever someone happened to be doing last week. Instead the
@@ -105,55 +104,88 @@ the first analysis.
 
 ---
 
-## The Substack pipeline
+## The X pipeline
 
-Substack needs no credentials, so it gets a real scraper rather than a single
-feed fetch. Five stages, in `server/lib/pipeline/`:
+Four stages, in `server/lib/pipeline/x/`:
 
 ```
-resolve  → publication metadata and author id
-feed     → /feed          — ~20 recent posts with full bodies. One request.
-archive  → /api/v1/archive — the whole back catalogue, paginated
-hydrate  → per-post full text for anything the archive only summarised
-notes    → Substack Notes: short, frequent, unedited — the closest thing
-           this platform has to a timeline, and the densest voice per token
+profile   → the account, its metrics, its bio
+timeline  → posts, replies, quotes and reposts, paginated
+likes     → what they endorse  (needs a user token — see below)
+stitch    → self-threads reassembled into single items
 ```
 
 ```bash
-npm run scrape -- astralcodexten              # standard
-npm run scrape -- astralcodexten --depth deep # + full bodies
-npm run scrape -- astralcodexten --json       # machine-readable
-npm run scrape -- astralcodexten --corpus     # + the assembled prompt corpus
-npm test                                      # 13 tests against a fixture Substack
+npm run scrape -- marbledust                 # standard
+npm run scrape -- marbledust --depth deep    # further back
+npm run scrape -- marbledust --json          # machine-readable
+npm run scrape -- marbledust --corpus        # + the assembled prompt corpus
+npm test                                     # 30 tests against fixture APIs
 ```
 
-`--depth` is a dial, not a boolean: `fast` is one request and belongs behind an
-interactive form, `deep` is dozens and belongs in a job. Set the default with
-`SUBSTACK_DEPTH`, or per request with `"depth"` in the analyze body. Stage
-progress streams onto the same NDJSON channel the panel uses, so the page shows
+`--depth` is a dial, not a boolean: `fast` is one page and belongs behind an
+interactive form, `deep` is eight and burns rate limit. Set the default with
+`X_DEPTH`, or per request with `"depth"` in the analyze body. Stage progress
+streams onto the same NDJSON channel the panel uses, so the page shows
 collection happening rather than a pause.
 
-**Stages fail independently.** A run that gets the archive but not the notes is a
-thinner reading, not an error. Only a run that ends with nothing throws. Every
-gap — a paywalled post, a dead endpoint, a missing token — is recorded and
-surfaces in the verdict's provenance block, so the reader knows what the panel
-could not see.
+### Three things a naive collector gets wrong
+
+Reading `data[].text` and shipping it produces a corpus with three specific
+holes, and each one damages exactly what this product is trying to read.
+
+**Threads arrive shredded.** A twelve-post argument becomes twelve disconnected
+fragments — the most valuable thing in the corpus, destroyed by the collection
+step. `stitch` groups by `conversation_id`, keeps only genuine *self*-threads (a
+reply to someone else is a different speech act and stays its own item), orders
+them chronologically and numbers the parts, so the panel can see the shape of an
+argument and not just its content. Engagement uses the root post's numbers;
+summing across a thread would wildly overstate reach.
+
+**Reposts arrive truncated.** The API returns `RT @someone: first 140 chars…`.
+Endorsement is real signal, but a truncated one is noise. Expansions get the
+full original text, and `via` records whose words they actually were — so the
+panel is never invited to attribute someone else's sentence to the subject.
+
+**Quote posts arrive without their referent.** "this is exactly right" tells a
+panel of philosophers nothing at all unless you know what *this* was. The quoted
+post is fetched and appended as context.
+
+There is a fourth, quieter one: long posts come back with `text` truncated and
+the real body only in `note_tweet.text`. Since the longest things someone writes
+are where their argument lives, reading `text` first would systematically
+discard the best items in the corpus.
+
+**Stages fail independently.** A run that gets the timeline but not the likes is
+a thinner reading, not an error. Only a run that ends with nothing throws. Every
+gap is recorded and surfaces in the verdict's provenance block, so the reader
+knows what the panel could not see.
 
 ### Being a good guest
 
 Everything goes through one client (`pipeline/http.js`) that serialises requests
-per host with a minimum gap between them, backs off exponentially on 429/5xx and
-honours `Retry-After`, caches responses in-memory for the run, sends an
-identifying User-Agent, and **fetches and obeys robots.txt**. Politeness here is
-not just etiquette: a scraper that hammers a host gets blocked, and a blocked
-scraper is a broken product. Only public posts are read; paywalled ones are
-detected, marked, and used only as far as their public excerpt goes.
+per host with a minimum gap between them, backs off exponentially on 429/5xx,
+caches responses in-memory for the run, and sends an identifying User-Agent.
+Politeness here is not just etiquette: a client that hammers a host gets blocked,
+and a blocked client is a broken product.
+
+Backoff reads **both** conventions, because hosts do not agree on one:
+`Retry-After` is a duration in seconds, while X sends `x-rate-limit-reset` as an
+absolute epoch second. Treating the latter as a duration would sleep for roughly
+fifty years, so it is differenced against now — there is a test for it.
+
+When crawling rather than calling an API, the client also **fetches and obeys
+robots.txt**. It is deliberately *not* consulted for the X API: robots.txt
+governs crawlers discovering pages, and applying a crawl directive to a
+credentialed, documented API call would be cargo-culted politeness. Only public
+posts are read either way.
 
 ### The repair agent
 
-Substack's JSON endpoints are undocumented and change without notice. The
-built-in extractors encode what they looked like when this was written — a
-statement about the past, not a guarantee about the present.
+X's API v2 is documented and versioned, so here the agent is a safety net rather
+than load-bearing — it matters most for the Substack pipeline, whose endpoints
+are undocumented and change without notice. Both platforms share one extraction
+path so there is one story to reason about.
 
 So extraction is expressed as a **plan**: a declarative map from field names to
 candidate paths, tried best-first.
@@ -210,6 +242,9 @@ Everything lives in `.env` — see [`.env.example`](.env.example).
 | `TWEETOSOPHER_EFFORT` | `high` | `low` \| `medium` \| `high` \| `xhigh` \| `max` |
 | `X_BEARER_TOKEN` | — | App-only bearer |
 | `X_USER_ACCESS_TOKEN` | — | User context, `likes.read` |
+| `X_DEPTH` | `standard` | `fast` \| `standard` \| `deep` |
+| `X_API_BASE` | X's API | Point at a mirror or a fixture |
+| `ENABLE_SUBSTACK` | `false` | Re-enable the Substack platform |
 | `SUBSTACK_DEPTH` | `standard` | `fast` \| `standard` \| `deep` |
 | `PORT` | `8787` | API port |
 
@@ -222,20 +257,24 @@ server/
   index.js               Express app; serves dist/ in production
   routes/analyze.js      NDJSON streaming endpoint + /api/health
   lib/philosophers.js    The roster
-  lib/sources/twitter.js X API v2 collection
-  lib/sources/substack.js Façade over the pipeline
+  lib/sources/twitter.js Façade over the X pipeline
+  lib/sources/substack.js Façade over the Substack pipeline (off by default)
   lib/pipeline/
-    index.js             Orchestrator, depth levels, stage merging
     http.js              Rate limiting, backoff, robots.txt, caching
-    stages.js            resolve / feed / archive / hydrate / notes
     plans.js             Declarative extraction plans + validation
     agent.js             The repair agent
+    x/
+      index.js           X orchestrator, depth levels
+      stages.js          profile / timeline / likes / stitch
+      plans.js           X API v2 extraction plans
+    index.js             Substack orchestrator
+    stages.js            resolve / feed / archive / hydrate / notes
     text.js              RSS parsing, HTML→text, paywall detection
   lib/corpus.js          Sampling and prompt assembly
   lib/engine.js          Prompt, output schema, the model call
   lib/cache.js           90-minute in-memory verdict cache
 scripts/scrape.js        Standalone pipeline CLI
-tests/                   Pipeline tests against a fixture Substack
+tests/                   Pipeline tests against fixture X and Substack APIs
 web/
   src/artifact.js        Three.js hero — procedural marble, plinth, dust
   src/motion.js          GSAP intro, scroll link, section reveals
@@ -263,9 +302,22 @@ skipped and everything renders in its final state.
 
 ---
 
+## Substack (switched off)
+
+A full Substack pipeline — feed, paginated archive, per-post hydration, Notes,
+paywall detection — is in `server/lib/pipeline/` and still covered by 13 tests.
+It is disabled at the product surface rather than deleted:
+
+```bash
+ENABLE_SUBSTACK=true                          # re-enable the platform
+npm run scrape -- the-long-way --platform substack
+```
+
 ## Caveats
 
 - Public posts only. Nothing is persisted beyond a 90-minute in-process cache.
+- Protected accounts cannot be read, and X's free API tier limits how far back
+  the timeline goes — `deep` reaches further, not forever.
 - The cache is per-node. Put Redis behind `lib/cache.js` before running more than
   one instance.
 - Verdicts are a reading, not a diagnosis, and the panel has been dead for some

@@ -38,6 +38,11 @@ ${rosterForPrompt()}
 
 - **Read for the shape of a mind, not for topics.** Two people can both post about software and be Kant and Diogenes. What matters is how they move: what they treat as settled, what they keep worrying, whether they argue or perform, whether they seek rules or dissolve them, what they find funny, what they cannot let go of.
 - **Their own words are voice; what they amplify is taste.** Weigh both, and say when the two disagree — a person whose posts are serene and whose likes are all knives is telling you something.
+- **Read the form as well as the content.** Items are labelled with what they are, and the labels mean different things:
+  - \`(thread)\` — one argument written in instalments, numbered \`(1/n)\`. This is someone at their most deliberate; how they open, where they break, and what they leave until last are all evidence.
+  - \`(quote)\` — their comment first, then \`> quoting @someone: …\`. Judge the comment, and note what kind of thing they choose to attach themselves to.
+  - \`(retweet)\` and \`(like)\` — someone else's words. Never attribute the wording to the subject. What is theirs is the act of endorsement.
+  - \`(reply)\` — how they behave in someone else's space, which is often where the mask slips.
 - **Anchor every claim.** Each item is numbered like [7]. Cite the numbers you are drawing on. If you cannot point at an item, you do not know it.
 - **Do not flatter.** This is a reading, not a horoscope. If the corpus shows someone performing depth they have not earned, or recycling other people's positions, or posting mostly to be seen agreeing — say so, in the panel's voice, without cruelty. The best verdicts are ones the subject slightly winces at and then screenshots.
 - **A thin corpus is a real finding.** If there is little to go on, say what you can support and set confidence accordingly. Never invent a person out of forty posts about lunch.
@@ -256,11 +261,16 @@ function hydrate(analysis, corpus, collection) {
       url: cited?.url ?? null,
       createdAt: cited?.createdAt ?? null,
       kind: cited?.kind ?? null,
+      // Carried so the exhibit label can say "Thread · 4 posts" and name whose
+      // words a repost or a like actually was.
+      parts: cited?.parts ?? null,
+      via: cited?.via ?? null,
     },
     subject: collection.profile,
     platform: collection.platform,
     stats: corpus.stats,
     coverage: collection.coverage,
+    pipeline: collection.pipeline ?? null,
     model: MODEL,
     generatedAt: new Date().toISOString(),
   };
