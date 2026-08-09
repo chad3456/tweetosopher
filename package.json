@@ -1,0 +1,30 @@
+{
+  "name": "tweetosopher",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A museum of the online mind — feed it a handle, a panel of philosophers reads your timeline back to you.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "concurrently -n api,web -c magenta,cyan \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "node --watch server/index.js",
+    "dev:web": "vite",
+    "build": "vite build",
+    "start": "NODE_ENV=production node server/index.js",
+    "preview": "npm run build && npm run start"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "gsap": "^3.13.0",
+    "three": "^0.181.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "vite": "^7.1.7"
+  }
+}
