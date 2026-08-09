@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { collectTwitter, normalizeHandle } from '../lib/sources/twitter.js';
 import { collectSubstack, normalizeSubstack } from '../lib/sources/substack.js';
+import { DEPTHS } from '../lib/pipeline/index.js';
 import { buildCorpus } from '../lib/corpus.js';
 import { convenePanel, hasCredentials } from '../lib/engine.js';
 import * as cache from '../lib/cache.js';
@@ -122,7 +123,14 @@ router.post('/analyze', async (req, res) => {
     } else if (platform === 'twitter') {
       collection = await collectTwitter(rawHandle);
     } else {
-      collection = await collectSubstack(rawHandle);
+      // The Substack pipeline runs several stages and can take a while at
+      // depth, so its progress is forwarded onto the same NDJSON stream the
+      // panel uses — the reader sees collection happening rather than a pause.
+      collection = await collectSubstack(rawHandle, {
+        depth: DEPTHS[req.body?.depth] ? req.body.depth : undefined,
+        onProgress: (event) =>
+          stream.send({ stage: 'collecting', message: event.message, phase: event.stage }),
+      });
     }
 
     // ── Curate ────────────────────────────────────────────────────────────

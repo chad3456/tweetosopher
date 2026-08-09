@@ -83,10 +83,20 @@ export function buildCorpus(collection) {
   const own = all.filter((i) => i.kind !== 'like' && i.kind !== 'retweet');
   const taste = all.filter((i) => i.kind === 'like' || i.kind === 'retweet');
 
-  const ownSample = interleave(
-    [byRecency(own), byReach(own), bySubstance(own)],
-    collection.platform === 'substack' ? 24 : 120,
-  );
+  // Long and short form get separate budgets. A Substack writer's notes are
+  // short, frequent and unedited — closer to a timeline than to their essays,
+  // and the cheapest voice per token available. Sampling them from the same
+  // pool as the essays would let recency crowd the essays out entirely.
+  const longform = own.filter((i) => i.kind !== 'note');
+  const shortform = own.filter((i) => i.kind === 'note');
+
+  const ownSample = [
+    ...interleave(
+      [byRecency(longform), byReach(longform), bySubstance(longform)],
+      collection.platform === 'substack' ? 24 : 120,
+    ),
+    ...interleave([byRecency(shortform), byReach(shortform)], 60),
+  ];
   const tasteSample = interleave([byRecency(taste), byReach(taste)], 40);
 
   const index = new Map();
