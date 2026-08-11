@@ -227,6 +227,42 @@ export class EngineError extends Error {
   }
 }
 
+/**
+ * Resolve every `[n]` the panel cited into the item it points at.
+ *
+ * Only the cited indices, and only the fields a reader needs — the corpus can
+ * run to hundreds of items and the client has no business receiving all of it.
+ * This is what lets the floor-plan visualisation weigh a claim by the evidence
+ * under it, and tell the subject's own words apart from things they amplified,
+ * without the client re-deriving anything.
+ */
+function citationIndex(analysis, corpus) {
+  const wanted = new Set();
+  const walk = (node) => {
+    if (typeof node === 'string') {
+      for (const m of node.matchAll(/\[(\d{1,3})\]/g)) wanted.add(Number(m[1]));
+    } else if (Array.isArray(node)) {
+      node.forEach(walk);
+    } else if (node && typeof node === 'object') {
+      Object.values(node).forEach(walk);
+    }
+  };
+  walk(analysis);
+
+  const out = {};
+  for (const n of wanted) {
+    const item = corpus.index.get(n);
+    if (!item) continue; // A hallucinated citation resolves to nothing, as it should.
+    out[n] = {
+      kind: item.kind,
+      likes: item.likes ?? 0,
+      createdAt: item.createdAt ?? null,
+      excerpt: (item.title || item.text || '').slice(0, 140),
+    };
+  }
+  return out;
+}
+
 /** Attach roster metadata so the client never has to know the philosopher list. */
 function hydrate(analysis, corpus, collection) {
   const withMeta = (id) => {
@@ -266,6 +302,7 @@ function hydrate(analysis, corpus, collection) {
       parts: cited?.parts ?? null,
       via: cited?.via ?? null,
     },
+    citations: citationIndex(analysis, corpus),
     subject: collection.profile,
     platform: collection.platform,
     stats: corpus.stats,

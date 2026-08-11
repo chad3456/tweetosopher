@@ -1,3 +1,5 @@
+import { renderFloorPlan } from './floorplan.js';
+
 /**
  * Renders a verdict as museum wall text.
  *
@@ -196,6 +198,15 @@ export function renderVerdict(root, data) {
     }
     panel.append(grid);
     root.append(panel);
+  }
+
+  // ── Floor plan ─────────────────────────────────────────────────────────
+  // Placed after the exhibit and before the prose breakdown: by here the reader
+  // knows who they were assigned and why, and the partition answers the next
+  // question — how much of that verdict rests on what.
+  const plan = section('floorplan', 'Floor plan of the collection');
+  if (renderFloorPlan(plan, data)) {
+    root.append(plan);
   }
 
   // ── Themes & tensions ──────────────────────────────────────────────────

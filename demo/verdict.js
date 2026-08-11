@@ -218,6 +218,31 @@ const SUBSTACK_VERDICT = (corpus) => ({
   },
 });
 
+/** Same shape the live engine produces — see citationIndex() in engine.js. */
+function demoCitations(raw, corpus) {
+  const wanted = new Set();
+  const walk = (node) => {
+    if (typeof node === 'string') {
+      for (const m of node.matchAll(/\[(\d{1,3})\]/g)) wanted.add(Number(m[1]));
+    } else if (Array.isArray(node)) node.forEach(walk);
+    else if (node && typeof node === 'object') Object.values(node).forEach(walk);
+  };
+  walk(raw);
+
+  const out = {};
+  for (const n of wanted) {
+    const item = corpus.index.get(n);
+    if (!item) continue;
+    out[n] = {
+      kind: item.kind,
+      likes: item.likes ?? 0,
+      createdAt: item.createdAt ?? null,
+      excerpt: (item.title || item.text || '').slice(0, 140),
+    };
+  }
+  return out;
+}
+
 export function demoVerdict({ corpus, collection }) {
   const raw =
     collection.platform === 'substack'
@@ -241,6 +266,7 @@ export function demoVerdict({ corpus, collection }) {
       parts: cited?.parts ?? null,
       via: cited?.via ?? null,
     },
+    citations: demoCitations(raw, corpus),
     subject: collection.profile,
     platform: collection.platform,
     stats: corpus.stats,

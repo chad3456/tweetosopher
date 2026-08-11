@@ -275,8 +275,11 @@ server/
   lib/cache.js           90-minute in-memory verdict cache
 scripts/scrape.js        Standalone pipeline CLI
 tests/                   Pipeline tests against fixture X and Substack APIs
+docs/                    Standalone, self-contained floor-plan page
 web/
   src/artifact.js        Three.js hero — procedural marble, plinth, dust
+  src/voronoi.js         Weighted Voronoi treemap solver (power diagram)
+  src/floorplan.js       Renders the treemap as museum marquetry
   src/motion.js          GSAP intro, scroll link, section reveals
   src/verdict.js         Renders a verdict as museum wall text
   src/api.js             NDJSON stream client
@@ -301,6 +304,51 @@ Under `prefers-reduced-motion` the intro, parallax, dust and reveals are all
 skipped and everything renders in its final state.
 
 ---
+
+## The floor plan
+
+Each verdict is also drawn as a **weighted Voronoi treemap** — one room per claim
+the panel made:
+
+- **area** ∝ how many cited posts the claim rests on
+- **shade** — a diverging scale: their own words ← mixed → what they amplified
+- **label** — identity and the exact count, in the cell
+
+**The areas are real, and that is the whole point.** A Voronoi diagram over
+scattered seeds looks identical and means nothing: its cell sizes are an accident
+of where the seeds landed. `web/src/voronoi.js` computes a genuine additively
+weighted power diagram and iterates until each room matches its share.
+
+The update rule is *additive*, and that detail is the ballgame. The textbook
+multiplicative form (scale each weight by the area ratio) was tried first and
+left cells up to **88% off target** — a treemap with wrong areas is worse than no
+treemap, because it looks authoritative while lying. Two things were wrong with
+it: weights only mean anything as *differences* in a power diagram, so scaling
+them all drifts without separating them; and clamping each weight against its
+nearest neighbour is symmetric, so a big room got throttled by the small rooms
+crowding it. The additive form is dimensionally honest — `w` has units of
+length², and so does `(target − area)`, so the error adds to the weight directly.
+Measured over 320 runs (40 seeds × 8 weight patterns): **worst area error
+0.478%**, no starved cells.
+
+Area is still a soft channel — people read it to about ±20% — so identity and
+magnitude never rest on it alone: every room is direct-labelled with its exact
+figure, and a table view carries the same numbers.
+
+The colour scale is *diverging*, not categorical, because voice-versus-taste is a
+polarity rather than an identity — and because a Voronoi is an all-pairs form,
+where any two cells can touch, which caps categorical encoding at three series.
+Both poles were validated against the actual chart surface for lightness band,
+chroma floor, CVD separation and contrast, in both themes.
+
+The server ships a `citations` index alongside each verdict — only the indices
+the panel actually cited, resolved to their kind — which is what lets the drawing
+tell the subject's own words from things they amplified without the client
+re-deriving anything.
+
+A standalone, self-contained version of the drawing lives in
+[`docs/floorplan-artifact.html`](docs/floorplan-artifact.html) — open it directly
+in a browser; it needs no server and no network.
 
 ## Substack (switched off)
 

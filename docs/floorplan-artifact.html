@@ -1,0 +1,990 @@
+<title>The Floor Plan of a Mind</title>
+
+<style>
+  /* ═══════════════════════════════════════════════════════════════════════
+     A surveyor's sheet for the Tweetosopher floor plan.
+
+     Light tokens live on bare :root. Dark redefines only tokens, twice — once
+     under prefers-color-scheme guarded against an explicit light choice, once
+     under [data-theme="dark"] — so all three viewer states resolve.
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --ground: #e9e1d2;
+    --plate: #e2d8c5;
+    --plate-sunk: #dbd0ba;
+    --ink: #181310;
+    --ink-soft: #4b4239;
+    --ink-faint: #7d7160;
+    --rule: #a99d87;
+    --rule-faint: #c4b9a3;
+    --accent: #8c2f1c;
+
+    /* Diverging data scale. Poles validated against this plate for lightness
+       band, chroma floor, CVD separation and 3:1 contrast — do not hand-tune. */
+    --voice: #35619e;
+    --taste: #9d3520;
+    --mid: #b9ac96;
+    --on-fill: #fdfaf3;
+    --fill-halo: rgba(20, 15, 10, 0.42);
+
+    --display: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+    --mono: ui-monospace, 'SFMono-Regular', 'Cascadia Mono', Menlo, Consolas, monospace;
+
+    --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px;
+    --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+      --ground: #14100d;
+      --plate: #191410;
+      --plate-sunk: #221b15;
+      --ink: #efe7d7;
+      --ink-soft: #b3a794;
+      --ink-faint: #8b7f6d;
+      --rule: #443a30;
+      --rule-faint: #2e281f;
+      --accent: #d9694a;
+
+      --voice: #5b8bd0;
+      --taste: #cf6a48;
+      --mid: #5b5145;
+      --on-fill: #14100d;
+      --fill-halo: rgba(240, 232, 216, 0.35);
+    }
+  }
+
+  :root[data-theme='dark'] {
+    --ground: #14100d;
+    --plate: #191410;
+    --plate-sunk: #221b15;
+    --ink: #efe7d7;
+    --ink-soft: #b3a794;
+    --ink-faint: #8b7f6d;
+    --rule: #443a30;
+    --rule-faint: #2e281f;
+    --accent: #d9694a;
+
+    --voice: #5b8bd0;
+    --taste: #cf6a48;
+    --mid: #5b5145;
+    --on-fill: #14100d;
+    --fill-halo: rgba(240, 232, 216, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--display);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sheet {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: var(--s6) var(--s5) var(--s8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s6);
+  }
+
+  /* ── Title block: the corner stamp on an architectural drawing ───────── */
+
+  .titleblock {
+    border: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 720px) {
+    .titleblock { grid-template-columns: 2.2fr 1fr; }
+  }
+
+  .titleblock__main { padding: var(--s5); }
+
+  .titleblock__meta {
+    padding: var(--s5);
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s3) var(--s4);
+    align-content: start;
+  }
+
+  @media (min-width: 720px) {
+    .titleblock__meta { border-top: 0; border-left: 1px solid var(--rule); }
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 var(--s3);
+  }
+
+  h1 {
+    font-size: clamp(30px, 5.2vw, 52px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    margin: 0 0 var(--s3);
+    text-wrap: balance;
+  }
+
+  h1 em { font-style: italic; color: var(--accent); }
+
+  .lede {
+    margin: 0;
+    max-width: 60ch;
+    color: var(--ink-soft);
+  }
+
+  .field { display: grid; gap: 2px; }
+
+  .field dt {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .field dd {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Controls ────────────────────────────────────────────────────────── */
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--s4) var(--s5);
+  }
+
+  .specimens { display: flex; flex-wrap: wrap; gap: var(--s1); }
+
+  .tab {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 9px 14px;
+    border: 1px solid var(--rule);
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease;
+  }
+
+  .tab:hover { background: var(--plate-sunk); }
+
+  .tab[aria-pressed='true'] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--ground);
+  }
+
+  .tab:focus-visible,
+  .ghost:focus-visible,
+  .drawer summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .ghost {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 9px 14px;
+    border: 1px dashed var(--rule);
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+
+  .ghost:hover { border-style: solid; color: var(--ink); }
+
+  .fidelity {
+    margin-left: auto;
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .fidelity b {
+    display: block;
+    font-family: var(--display);
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── The plan ────────────────────────────────────────────────────────── */
+
+  .plan { display: grid; gap: 0; }
+
+  .plan svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--plate);
+    border: 1px solid var(--rule);
+  }
+
+  .cell { cursor: pointer; outline: none; }
+
+  /* A plate-coloured gap between fills so adjacent rooms never blend. */
+  .cell__shape {
+    stroke: var(--plate);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    transition: opacity 0.2s ease;
+  }
+
+  .cell--voice-3 .cell__shape { fill: var(--voice); }
+  .cell--voice-2 .cell__shape { fill: color-mix(in oklab, var(--voice) 66%, var(--mid)); }
+  .cell--voice-1 .cell__shape { fill: color-mix(in oklab, var(--voice) 33%, var(--mid)); }
+  .cell--mixed   .cell__shape { fill: var(--mid); }
+  .cell--taste-1 .cell__shape { fill: color-mix(in oklab, var(--taste) 33%, var(--mid)); }
+  .cell--taste-2 .cell__shape { fill: color-mix(in oklab, var(--taste) 66%, var(--mid)); }
+  .cell--taste-3 .cell__shape { fill: var(--taste); }
+
+  .cell:hover .cell__shape,
+  .cell.is-active .cell__shape { opacity: 0.82; }
+
+  .cell:focus-visible .cell__shape { stroke: var(--ink); stroke-width: 3.5; }
+
+  .cell__label {
+    font-family: var(--display);
+    font-size: 22px;
+    fill: var(--on-fill);
+    paint-order: stroke fill;
+    stroke: var(--fill-halo);
+    stroke-width: 3.5;
+    stroke-linejoin: round;
+    pointer-events: none;
+  }
+
+  .cell__count {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
+
+  /* Readout: below the plan, never over it — an overlay would cover the very
+     rooms being compared. Fixed slot, so hovering never shifts the page. */
+  .readout {
+    border: 1px solid var(--rule);
+    border-top: 0;
+    background: var(--plate-sunk);
+    padding: var(--s4) var(--s5);
+    min-height: 116px;
+  }
+
+  .readout[data-empty='true'] .readout__name { color: var(--ink-faint); }
+
+  .readout__name {
+    font-size: 22px;
+    margin: 0 0 2px;
+  }
+
+  .readout__meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 var(--s2);
+  }
+
+  .readout__detail {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 15px;
+    max-width: 78ch;
+  }
+
+  /* ── Legend ──────────────────────────────────────────────────────────── */
+
+  .legend {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--s3);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .ramp { display: flex; gap: 2px; }
+
+  .ramp span { width: 34px; height: 11px; display: block; }
+
+  .ramp span:nth-child(1) { background: var(--voice); }
+  .ramp span:nth-child(2) { background: color-mix(in oklab, var(--voice) 66%, var(--mid)); }
+  .ramp span:nth-child(3) { background: color-mix(in oklab, var(--voice) 33%, var(--mid)); }
+  .ramp span:nth-child(4) { background: var(--mid); }
+  .ramp span:nth-child(5) { background: color-mix(in oklab, var(--taste) 33%, var(--mid)); }
+  .ramp span:nth-child(6) { background: color-mix(in oklab, var(--taste) 66%, var(--mid)); }
+  .ramp span:nth-child(7) { background: var(--taste); }
+
+  /* ── Notes & table ───────────────────────────────────────────────────── */
+
+  .notes {
+    display: grid;
+    gap: var(--s5);
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 780px) {
+    .notes { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .note h2 {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 var(--s2);
+    padding-bottom: var(--s2);
+    border-bottom: 1px solid var(--rule-faint);
+  }
+
+  .note p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+
+  .drawer { border-top: 1px solid var(--rule); padding-top: var(--s4); }
+
+  .drawer summary {
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .table-wrap { overflow-x: auto; margin-top: var(--s4); }
+
+  table {
+    width: 100%;
+    min-width: 620px;
+    border-collapse: collapse;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 8px 12px 8px 0;
+    border-bottom: 1px solid var(--rule-faint);
+  }
+
+  th {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  td.num, th.num { text-align: right; }
+
+  .swatch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 8px;
+    vertical-align: -1px;
+  }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: var(--s4);
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.8;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    max-width: 80ch;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition-duration: 0.001ms !important; }
+  }
+
+  @media (max-width: 640px) {
+    .cell__label { font-size: 30px; }
+    .cell__count { font-size: 17px; }
+    .fidelity { margin-left: 0; text-align: left; }
+  }
+</style>
+
+<div class="sheet">
+  <header class="titleblock">
+    <div class="titleblock__main">
+      <p class="eyebrow">Tweetosopher · survey drawing 04</p>
+      <h1>The floor plan of <em>a mind</em></h1>
+      <p class="lede">
+        A panel of philosophers reads someone's timeline and makes a set of claims about
+        them. This is that verdict drawn as a plan: one room per claim, its
+        <strong>area proportional to how many cited posts the claim rests on</strong>, and its
+        shade showing whether that evidence is the subject speaking or endorsing
+        somebody else.
+      </p>
+    </div>
+    <dl class="titleblock__meta">
+      <div class="field"><dt>Projection</dt><dd>Power diagram</dd></div>
+      <div class="field"><dt>Solver</dt><dd>Lloyd + additive</dd></div>
+      <div class="field"><dt>Scale</dt><dd id="stat-scale">—</dd></div>
+      <div class="field"><dt>Rooms</dt><dd id="stat-rooms">—</dd></div>
+    </dl>
+  </header>
+
+  <div class="controls">
+    <div class="specimens" id="specimens" role="group" aria-label="Sample reading"></div>
+    <button class="ghost" id="resurvey" type="button">Re-survey ↻</button>
+    <p class="fidelity">
+      <b id="fidelity">—</b>
+      worst area error
+    </p>
+  </div>
+
+  <figure class="plan" style="margin:0">
+    <svg id="plan" viewBox="0 0 960 600" role="img"
+         aria-labelledby="plan-title plan-desc" preserveAspectRatio="xMidYMid meet">
+      <title id="plan-title">Floor plan of the collection</title>
+      <desc id="plan-desc"></desc>
+    </svg>
+    <figcaption class="readout" id="readout" data-empty="true" aria-live="polite">
+      <p class="readout__name" id="readout-name">Hover or tab into a room</p>
+      <p class="readout__meta" id="readout-meta">Each room is one claim the panel made</p>
+      <p class="readout__detail" id="readout-detail"></p>
+    </figcaption>
+  </figure>
+
+  <div class="legend">
+    <span>their own words</span>
+    <span class="ramp" role="img" aria-label="Diverging scale from their own words through mixed to what they amplified">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </span>
+    <span>what they amplified</span>
+  </div>
+
+  <div class="notes">
+    <section class="note">
+      <h2>Why the areas are true</h2>
+      <p>
+        A Voronoi diagram over scattered seeds looks like this but means nothing — the
+        cell sizes are an accident of where the seeds landed. This is a weighted power
+        diagram, solved until every room matches its share. The figure above the plan is
+        the largest error still present; press <em>Re-survey</em> and the rooms rearrange
+        while the areas hold.
+      </p>
+    </section>
+    <section class="note">
+      <h2>Why area is not enough</h2>
+      <p>
+        People read area to about ±20%, so area alone would be a soft claim. Every room
+        is therefore direct-labelled with its exact count, and the table below carries the
+        same figures as numbers — the shape gives you the gestalt, the label gives you the
+        value.
+      </p>
+    </section>
+    <section class="note">
+      <h2>Why this colour scale</h2>
+      <p>
+        Voice-versus-taste is a polarity, not an identity, so it takes a diverging ramp —
+        two poles and a neutral middle — rather than one colour per room. Both poles were
+        checked against this surface for contrast and for red–green colour blindness, in
+        both themes.
+      </p>
+    </section>
+  </div>
+
+  <details class="drawer">
+    <summary>Read the plan as a table</summary>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Room</th>
+            <th>Kind</th>
+            <th class="num">Cited</th>
+            <th class="num">Own words</th>
+            <th class="num">Amplified</th>
+            <th class="num">Share of data</th>
+            <th class="num">Share as drawn</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </details>
+
+  <footer>
+    The three subjects here are invented specimens written to exercise the drawing — a
+    voice-heavy reading, a taste-heavy one, and an evenly divided one. They are not real
+    accounts and the verdicts are not about anybody. In the live product the same drawing
+    is generated from a real timeline.
+  </footer>
+</div>
+
+<script type="module">
+  /* ═══════════════════════════════════════════════════════════════════════
+     Weighted Voronoi treemap — same solver as the product.
+
+     Inlined rather than imported because a published page cannot fetch from
+     another origin. See server-side notes for why the update rule is additive:
+     the textbook multiplicative form left cells up to 88% off their targets.
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  const polygonArea = (poly) => {
+    let a = 0;
+    for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+      a += (poly[j][0] + poly[i][0]) * (poly[j][1] - poly[i][1]);
+    }
+    return Math.abs(a / 2);
+  };
+
+  const polygonCentroid = (poly) => {
+    let x = 0, y = 0, a = 0;
+    for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+      const cross = poly[j][0] * poly[i][1] - poly[i][0] * poly[j][1];
+      a += cross;
+      x += (poly[j][0] + poly[i][0]) * cross;
+      y += (poly[j][1] + poly[i][1]) * cross;
+    }
+    if (Math.abs(a) < 1e-9) {
+      const n = poly.length || 1;
+      return [poly.reduce((s, p) => s + p[0], 0) / n, poly.reduce((s, p) => s + p[1], 0) / n];
+    }
+    a *= 3;
+    return [x / a, y / a];
+  };
+
+  function clipHalfPlane(poly, a, b, c) {
+    if (!poly.length) return poly;
+    const out = [];
+    const inside = (p) => a * p[0] + b * p[1] <= c;
+    for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+      const cur = poly[i], prev = poly[j];
+      const curIn = inside(cur), prevIn = inside(prev);
+      if (curIn !== prevIn) {
+        const dx = cur[0] - prev[0], dy = cur[1] - prev[1];
+        const denom = a * dx + b * dy;
+        if (Math.abs(denom) > 1e-12) {
+          const t = (c - a * prev[0] - b * prev[1]) / denom;
+          out.push([prev[0] + t * dx, prev[1] + t * dy]);
+        }
+      }
+      if (curIn) out.push(cur);
+    }
+    return out;
+  }
+
+  /* Site i owns x where |x−pᵢ|² − wᵢ ≤ |x−pⱼ|² − wⱼ, which is a half-plane. */
+  const powerDiagram = (sites, clip) =>
+    sites.map((si) => {
+      let cell = clip;
+      for (const sj of sites) {
+        if (sj === si || !cell.length) continue;
+        cell = clipHalfPlane(
+          cell,
+          2 * (sj.x - si.x),
+          2 * (sj.y - si.y),
+          sj.x ** 2 + sj.y ** 2 - si.x ** 2 - si.y ** 2 - sj.w + si.w,
+        );
+      }
+      return cell;
+    });
+
+  function rng(seed) {
+    let t = seed >>> 0;
+    return () => {
+      t = (t + 0x6d2b79f5) >>> 0;
+      let r = Math.imul(t ^ (t >>> 15), 1 | t);
+      r = (r + Math.imul(r ^ (r >>> 7), 61 | r)) ^ r;
+      return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function voronoiTreemap(data, clip, { seed = 1, iterations = 200, tolerance = 0.004 } = {}) {
+    const total = data.reduce((s, d) => s + Math.max(d.weight, 1e-6), 0);
+    const clipArea = polygonArea(clip);
+    const targets = data.map((d) => (Math.max(d.weight, 1e-6) / total) * clipArea);
+
+    const random = rng(seed);
+    const xs = clip.map((p) => p[0]), ys = clip.map((p) => p[1]);
+    const minX = Math.min(...xs), maxX = Math.max(...xs);
+    const minY = Math.min(...ys), maxY = Math.max(...ys);
+
+    const sites = data.map(() => ({
+      x: minX + random() * (maxX - minX),
+      y: minY + random() * (maxY - minY),
+      w: 0,
+    }));
+
+    /* w has units of length², and so does (target − area) — so the error adds
+       to the weight directly. Gain above ~0.7 oscillates; 0.35 is stable. */
+    const GAIN = 0.35, LLOYD = 0.4;
+    const scale = Math.min(maxX - minX, maxY - minY);
+    let cells;
+
+    for (let iter = 0; iter < iterations; iter++) {
+      cells = powerDiagram(sites, clip);
+
+      cells.forEach((cell, i) => {
+        if (cell.length < 3) {
+          let biggest = 0;
+          cells.forEach((c, k) => {
+            if (polygonArea(c) > polygonArea(cells[biggest])) biggest = k;
+          });
+          const host = cells[biggest].length >= 3 ? cells[biggest] : clip;
+          const [cx, cy] = polygonCentroid(host);
+          sites[i].x = cx + (random() - 0.5) * scale * 0.1;
+          sites[i].y = cy + (random() - 0.5) * scale * 0.1;
+          sites[i].w = 0;
+          return;
+        }
+        const [cx, cy] = polygonCentroid(cell);
+        sites[i].x += (cx - sites[i].x) * LLOYD;
+        sites[i].y += (cy - sites[i].y) * LLOYD;
+      });
+
+      cells = powerDiagram(sites, clip);
+
+      let worst = 0;
+      cells.forEach((cell, i) => {
+        const area = cell.length >= 3 ? polygonArea(cell) : 0;
+        worst = Math.max(worst, Math.abs(targets[i] - area) / targets[i]);
+        sites[i].w += GAIN * (targets[i] - area);
+      });
+
+      const floor = Math.min(...sites.map((s) => s.w));
+      for (const site of sites) site.w -= floor;
+
+      if (worst < tolerance) break;
+    }
+
+    cells = powerDiagram(sites, clip);
+    return cells.map((polygon, i) => {
+      const area = polygonArea(polygon);
+      return {
+        polygon,
+        area,
+        target: targets[i],
+        share: area / clipArea,
+        targetShare: targets[i] / clipArea,
+        centroid: polygon.length >= 3 ? polygonCentroid(polygon) : [sites[i].x, sites[i].y],
+        error: targets[i] ? Math.abs(area - targets[i]) / targets[i] : 0,
+      };
+    });
+  }
+
+  /* ── Specimens ────────────────────────────────────────────────────────
+     Invented subjects, chosen to exercise three different distributions:
+     voice-dominant, taste-dominant, and evenly split.                     */
+
+  const SPECIMENS = [
+    {
+      handle: 'marbledust',
+      philosopher: 'Byung-Chul Han',
+      note: 'voice-heavy · one contradiction resting entirely on likes',
+      rooms: [
+        { label: 'Byung-Chul Han', kind: 'the assignment', own: 6, amp: 2,
+          detail: 'The panel’s assignment. Burnout relocated from the work to the performance of the work — the achievement subject, arrived at independently.' },
+        { label: 'Self-supervision', kind: 'preoccupation', own: 3, amp: 0,
+          detail: 'Burnout located in the performance rather than the work; decisions costing more than their outcomes; ideas tested for whether they survive without an audience.' },
+        { label: 'Attention as the last unowned thing', kind: 'preoccupation', own: 2, amp: 1,
+          detail: 'Twelve pages re-read four nights running; grief over a closed tab; a liked line about faking spent attention.' },
+        { label: 'Suspicion of the platform vernacular', kind: 'preoccupation', own: 3, amp: 0,
+          detail: '“Content creator” as fifteen years of damage; the algorithm as an imagined audience rather than a machine.' },
+        { label: 'Withdrawal, attempted and reversed', kind: 'preoccupation', own: 2, amp: 0,
+          detail: 'Leaving and rejoining the group chat unnoticed; the long way to the shop as a venue rather than a solution.' },
+        { label: 'Contradiction I', kind: 'contradiction', own: 4, amp: 0,
+          detail: 'Argues that ideas needing an audience are suspect, and reserves the most polished writing for the highest-reach posts.' },
+        { label: 'Contradiction II', kind: 'contradiction', own: 0, amp: 2,
+          detail: 'The words are gentle and unaccusing; the likes are considerably sharper. The taste has an appetite the voice does not admit to.' },
+        { label: 'Contradiction III', kind: 'contradiction', own: 2, amp: 0,
+          detail: 'Diagnoses performance as the source of exhaustion while performing the diagnosis — and appears to know it.' },
+      ],
+    },
+    {
+      handle: 'postscarcity',
+      philosopher: 'Jean Baudrillard',
+      note: 'taste-heavy · a reading built mostly from what they amplify',
+      rooms: [
+        { label: 'Jean Baudrillard', kind: 'the assignment', own: 3, amp: 7,
+          detail: 'Almost nothing here is first-hand. The account curates other people’s claims about the real until the curation becomes the position.' },
+        { label: 'The copy eats the original', kind: 'preoccupation', own: 1, amp: 5,
+          detail: 'Five reposts on synthetic media in a fortnight, each framed as evidence rather than argued.' },
+        { label: 'Irony as total climate', kind: 'preoccupation', own: 2, amp: 3,
+          detail: 'The register never breaks. Sincerity appears only inside quotation marks.' },
+        { label: 'Markets as metaphysics', kind: 'preoccupation', own: 2, amp: 2,
+          detail: 'Price treated as the only surviving measure of the real — half stated, half endorsed.' },
+        { label: 'Contradiction I', kind: 'contradiction', own: 0, amp: 4,
+          detail: 'Insists nothing can be authentic while amplifying, without irony, four people insisting on their own authenticity.' },
+        { label: 'Contradiction II', kind: 'contradiction', own: 3, amp: 0,
+          detail: 'The only unironic posts are about a dog. The panel considers this the most honest material in the corpus.' },
+      ],
+    },
+    {
+      handle: 'qeddiary',
+      philosopher: 'Ludwig Wittgenstein',
+      note: 'evenly divided · many small rooms, no dominant claim',
+      rooms: [
+        { label: 'Ludwig Wittgenstein', kind: 'the assignment', own: 4, amp: 3,
+          detail: 'Suspects the problem is the sentence. Numbered remarks, definitions demanded, arguments dissolved rather than won.' },
+        { label: 'Definitions before disputes', kind: 'preoccupation', own: 3, amp: 2,
+          detail: 'Twenty-odd replies whose entire content is asking what a word is being made to mean.' },
+        { label: 'Proof as a genre', kind: 'preoccupation', own: 3, amp: 2,
+          detail: 'Treats a good explanation and a correct one as different achievements, and prefers the first.' },
+        { label: 'Silence as a position', kind: 'preoccupation', own: 2, amp: 3,
+          detail: 'Long gaps that align precisely with the loudest weeks on the platform.' },
+        { label: 'Teaching, compulsively', kind: 'preoccupation', own: 3, amp: 2,
+          detail: 'Cannot pass an error without correcting it; apologises for the correction; makes it anyway.' },
+        { label: 'Contradiction I', kind: 'contradiction', own: 2, amp: 2,
+          detail: 'Argues that most disagreement is verbal, then conducts a long verbal disagreement about it.' },
+      ],
+    },
+  ];
+
+  /* ── Render ───────────────────────────────────────────────────────────── */
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const W = 960, H = 600, INSET = 5;
+  const CLIP = [[INSET, INSET], [W - INSET, INSET], [W - INSET, H - INSET], [INSET, H - INSET]];
+
+  const svg = document.getElementById('plan');
+  const desc = document.getElementById('plan-desc');
+  const readout = document.getElementById('readout');
+  const rName = document.getElementById('readout-name');
+  const rMeta = document.getElementById('readout-meta');
+  const rDetail = document.getElementById('readout-detail');
+  const tbody = document.getElementById('tbody');
+  const fidelity = document.getElementById('fidelity');
+  const statScale = document.getElementById('stat-scale');
+  const statRooms = document.getElementById('stat-rooms');
+  const tabs = document.getElementById('specimens');
+
+  /* Rounded symmetrically: Math.round breaks ties toward +∞, which would make
+     a 6-own/2-amplified room land a step paler than its mirror image. */
+  const stepFor = (p) => {
+    const q = Math.max(-1, Math.min(1, p));
+    const step = Math.sign(q) * Math.round(Math.abs(q) * 3);
+    return step < 0 ? `voice-${-step}` : step > 0 ? `taste-${step}` : 'mixed';
+  };
+
+  const seedFrom = (text) => {
+    let h = 2166136261;
+    for (const ch of String(text)) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); }
+    return h >>> 0;
+  };
+
+  let current = 0;
+  let nudge = 0;
+  let active = null;
+
+  function clearReadout() {
+    active?.classList.remove('is-active');
+    active = null;
+    readout.dataset.empty = 'true';
+    rName.textContent = 'Hover or tab into a room';
+    rMeta.textContent = 'Each room is one claim the panel made';
+    rDetail.textContent = '';
+  }
+
+  function draw() {
+    const spec = SPECIMENS[current];
+    const rooms = spec.rooms.map((r) => ({
+      ...r,
+      weight: r.own + r.amp,
+      polarity: r.own + r.amp ? (r.amp - r.own) / (r.own + r.amp) : 0,
+    }));
+
+    const layout = voronoiTreemap(rooms, CLIP, {
+      seed: seedFrom(spec.handle) + nudge,
+    });
+
+    const totalCited = rooms.reduce((s, r) => s + r.weight, 0);
+    const worst = Math.max(...layout.map((l) => l.error));
+
+    fidelity.textContent = `${(worst * 100).toFixed(2)}%`;
+    statScale.textContent = `${totalCited} cited items`;
+    statRooms.textContent = String(rooms.length);
+
+    desc.textContent =
+      `A partition of ${totalCited} cited items into ${rooms.length} rooms for @${spec.handle}, ` +
+      `assigned to ${spec.philosopher}. ` +
+      rooms.map((r) => `${r.label}: ${r.weight} items, ${r.own} their own words, ${r.amp} amplified`).join('. ') +
+      '. The same figures are in the table below the plan.';
+
+    for (const node of [...svg.querySelectorAll('g')]) node.remove();
+    clearReadout();
+
+    const plate = document.createElementNS(NS, 'g');
+    plate.setAttribute('role', 'list');
+
+    layout.forEach((cell, i) => {
+      const room = rooms[i];
+      if (cell.polygon.length < 3) return;
+
+      const g = document.createElementNS(NS, 'g');
+      g.setAttribute('class', `cell cell--${stepFor(room.polarity)}`);
+      g.setAttribute('tabindex', '0');
+      g.setAttribute('role', 'listitem');
+      g.setAttribute(
+        'aria-label',
+        `${room.label}, ${room.kind}: ${room.weight} cited items, ${room.own} in their own words, ${room.amp} amplified.`,
+      );
+
+      const path = document.createElementNS(NS, 'path');
+      path.setAttribute('class', 'cell__shape');
+      path.setAttribute('d', `M${cell.polygon.map((p) => `${p[0].toFixed(2)},${p[1].toFixed(2)}`).join('L')}Z`);
+      g.append(path);
+
+      /* Label only where it fits — a leader line into a sliver is worse than
+         the table row that already exists. */
+      if (cell.area > (W * H) / 24) {
+        const [cx, cy] = cell.centroid;
+        const lines = [];
+        let line = '';
+        for (const word of room.label.split(' ')) {
+          if ((`${line} ${word}`).trim().length > 17 && line) { lines.push(line.trim()); line = word; }
+          else line = `${line} ${word}`.trim();
+        }
+        if (line) lines.push(line);
+
+        const text = document.createElementNS(NS, 'text');
+        text.setAttribute('class', 'cell__label');
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('x', cx.toFixed(1));
+        text.setAttribute('y', (cy - (lines.length - 1) * 11).toFixed(1));
+
+        lines.forEach((l, n) => {
+          const tspan = document.createElementNS(NS, 'tspan');
+          tspan.setAttribute('x', cx.toFixed(1));
+          if (n) tspan.setAttribute('dy', '23');
+          tspan.textContent = l;
+          text.append(tspan);
+        });
+
+        const count = document.createElementNS(NS, 'tspan');
+        count.setAttribute('class', 'cell__count');
+        count.setAttribute('x', cx.toFixed(1));
+        count.setAttribute('dy', '25');
+        count.textContent = `${room.weight} cited`;
+        text.append(count);
+        g.append(text);
+      }
+
+      const show = () => {
+        active?.classList.remove('is-active');
+        g.classList.add('is-active');
+        active = g;
+        readout.dataset.empty = 'false';
+        rName.textContent = room.label;
+        rMeta.textContent =
+          `${room.kind} · ${room.weight} cited item${room.weight === 1 ? '' : 's'} · ` +
+          `${room.own} their words, ${room.amp} amplified`;
+        rDetail.textContent = room.detail;
+      };
+
+      g.addEventListener('pointerenter', show);
+      g.addEventListener('focus', show);
+      g.addEventListener('pointerleave', clearReadout);
+      g.addEventListener('blur', clearReadout);
+
+      plate.append(g);
+    });
+
+    svg.append(plate);
+
+    tbody.replaceChildren();
+    rooms
+      .map((room, i) => ({ room, cell: layout[i] }))
+      .sort((a, b) => b.room.weight - a.room.weight)
+      .forEach(({ room, cell }) => {
+        const tr = document.createElement('tr');
+
+        const name = document.createElement('td');
+        const chip = document.createElement('span');
+        chip.className = 'swatch';
+        chip.style.background = `var(--sw-${stepFor(room.polarity)})`;
+        name.append(chip, document.createTextNode(room.label));
+
+        const cells = [
+          name,
+          Object.assign(document.createElement('td'), { textContent: room.kind }),
+          Object.assign(document.createElement('td'), { textContent: String(room.weight), className: 'num' }),
+          Object.assign(document.createElement('td'), { textContent: String(room.own), className: 'num' }),
+          Object.assign(document.createElement('td'), { textContent: String(room.amp), className: 'num' }),
+          Object.assign(document.createElement('td'), { textContent: `${(cell.targetShare * 100).toFixed(1)}%`, className: 'num' }),
+          Object.assign(document.createElement('td'), { textContent: `${(cell.share * 100).toFixed(1)}%`, className: 'num' }),
+        ];
+        tr.append(...cells);
+        tbody.append(tr);
+      });
+  }
+
+  SPECIMENS.forEach((spec, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'tab';
+    b.textContent = `@${spec.handle}`;
+    b.title = spec.note;
+    b.setAttribute('aria-pressed', String(i === 0));
+    b.addEventListener('click', () => {
+      current = i;
+      nudge = 0;
+      [...tabs.children].forEach((n, k) => n.setAttribute('aria-pressed', String(k === i)));
+      draw();
+    });
+    tabs.append(b);
+  });
+
+  document.getElementById('resurvey').addEventListener('click', () => {
+    nudge += 7919;
+    draw();
+  });
+
+  draw();
+</script>
+
+<style>
+  /* Swatch tokens for the table, mirroring the cell fills. Declared after the
+     script's classes exist so the two never drift apart. */
+  :root {
+    --sw-voice-3: var(--voice);
+    --sw-voice-2: color-mix(in oklab, var(--voice) 66%, var(--mid));
+    --sw-voice-1: color-mix(in oklab, var(--voice) 33%, var(--mid));
+    --sw-mixed: var(--mid);
+    --sw-taste-1: color-mix(in oklab, var(--taste) 33%, var(--mid));
+    --sw-taste-2: color-mix(in oklab, var(--taste) 66%, var(--mid));
+    --sw-taste-3: var(--taste);
+  }
+</style>
