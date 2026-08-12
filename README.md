@@ -1,17 +1,65 @@
-# Tweetosopher
+# The Test of Morality
 
-**A museum of the online mind.** Hand it a handle. A standing panel of thirty
-philosophers reads the timeline, argues, assigns you a thinker, explains itself
-with citations, tells you a real anecdote from that philosopher's life that
-rhymes with your posting, gives you a name tag, and hangs the one post that gives
-you away.
+**An examination in moral philosophy.** Answer questions drawn from real arguments —
+the trolley problem, the ring of Gyges, the veil of ignorance, the categorical
+imperative, Ubuntu, wu wei, the banality of evil — and the pattern in your answers gets
+a name, a distribution across ten moral traditions, and a reading of what it commits you
+to.
 
-**Twitter / X.** (A Substack pipeline is built and tested but switched off —
-see [Substack](#substack-switched-off).)
+It computes; it does not consult a model. Every figure on your result is arithmetic on
+the answers you gave, it runs entirely in your browser, and nothing you answer is ever
+sent anywhere. No API key, no account, works offline.
+
+The corpus behind it is **352 planned entries** across **266 named thinkers** and 108
+traditions, each a markdown file that explains the idea, states the strongest objection
+to it, and carries the questions the test asks. See [`theories/README.md`](theories/README.md).
+
+**Also in this repository: [Tweetosopher](web/tweetosopher.html)** — the other instrument,
+which reads an X timeline instead of asking questions. A standing panel of thirty
+philosophers reads the timeline, argues, assigns you a thinker, explains itself with
+citations, tells a real anecdote from that philosopher's life that rhymes with your
+posting, gives you a name tag, and hangs the one post that gives you away. It needs an
+Anthropic key for live analysis and falls back to a demonstration archive without one.
+It is served at `/tweetosopher.html`.
 
 ---
 
 ## Quick start
+
+```bash
+npm install
+npm run dev          # Vite on :5173, API on :8787
+```
+
+Open **http://localhost:5173** for the test. It needs no keys and no network.
+
+Production-shaped, one server one port:
+
+```bash
+npm run preview      # builds both pages, serves from :8787
+```
+
+## Working on the corpus
+
+```bash
+npm run corpus       # regenerate the registry, then compile theories/ into the bundle
+npm run validate     # check every entry against theories/SCHEMA.md
+npm test             # 41 tests: the X pipeline, the Substack pipeline, the scoring engine
+```
+
+`npm run validate` currently fails, and should: it reports one problem per entry not yet
+written. To see only real defects in what exists:
+
+```bash
+npm run validate 2>&1 | grep -v "missing — every registry id needs a file"
+```
+
+---
+
+# Tweetosopher
+
+Everything below documents the second instrument.
+
 
 ```bash
 npm install

@@ -3,141 +3,87 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tweetosopher — the museum of the online mind</title>
+    <title>The Test of Morality</title>
     <meta
       name="description"
-      content="Feed it a handle. A standing panel of philosophers reads your timeline back to you, assigns you a thinker, and writes the wall text."
+      content="Answer questions drawn from three thousand years of moral philosophy. The test tells you which tradition your judgements actually belong to, and shows the arithmetic."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/src/styles.css" />
+    <link rel="stylesheet" href="/src/test/styles.css" />
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ece4d5'/%3E%3Ctext y='74' x='50' text-anchor='middle' font-size='72' font-family='Georgia,serif' fill='%23191410'%3ET%3C/text%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e8e9ec'/%3E%3Ctext y='76' x='50' text-anchor='middle' font-size='78' font-family='Georgia,serif' fill='%231b1d24'%3E%C2%A7%3C/text%3E%3C/svg%3E"
     />
   </head>
   <body>
-    <div class="grain" aria-hidden="true"></div>
+    <a class="skip" href="#main">Skip to the test</a>
 
-    <header class="topbar">
-      <span class="topbar__mark">Tweetosopher</span>
-      <span class="topbar__spacer" aria-hidden="true"></span>
-      <span class="topbar__meta" id="engine-badge">est. reading room</span>
-    </header>
+    <main id="main">
+      <!-- ── The desk ────────────────────────────────────────────────── -->
+      <section class="stage" id="stage-intro">
+        <header class="frontis">
+          <p class="imprint" id="imprint">A standing examination in moral philosophy</p>
+          <h1>The Test<br /><em>of Morality</em></h1>
+          <p class="lede">
+            Every question below is drawn from a real argument — a theory, a paradox, a
+            thought experiment that somebody built to make a specific thing hard. Answer
+            enough of them and the pattern in your answers has a name, whether or not you
+            chose it.
+          </p>
+        </header>
 
-    <!-- ── Hero ─────────────────────────────────────────────────────────── -->
-    <section class="hero" id="hero">
-      <canvas id="artifact" aria-hidden="true"></canvas>
+        <div class="tracks" id="tracks" role="group" aria-label="Choose a sitting"></div>
 
-      <div class="hero__inner">
-        <p class="eyebrow" data-reveal>Permanent collection · Wing IV</p>
+        <div class="desk-foot">
+          <button class="primary" id="begin" type="button">Begin the sitting</button>
+          <p class="note" id="corpus-note"></p>
+        </div>
+      </section>
 
-        <h1 class="hero__title" id="hero-title" aria-label="Tweetosopher">
-          <span class="hero__word" data-split>Tweet</span><span
-            class="hero__word hero__word--italic"
-            data-split
-            >osopher</span
-          >
-        </h1>
-
-        <p class="hero__lede" data-reveal>
-          A standing panel of thirty philosophers reads your timeline back to
-          you — threads reassembled, quotes given their referent, likes counted
-          as taste. They argue. They assign you a thinker. They write the wall
-          text and hang the one post that gives you away.
-        </p>
-
-        <a class="hero__cue" href="#desk">
-          <span>Enter the reading room</span>
-          <span class="hero__cue-rule" aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <p class="hero__plate" data-reveal>
-        <em>Untitled (Self, Performed Continuously)</em> · mixed media, ongoing ·
-        gift of the artist
-      </p>
-    </section>
-
-    <!-- ── Acquisition desk ─────────────────────────────────────────────── -->
-    <section class="desk" id="desk">
-      <div class="rule" aria-hidden="true"></div>
-
-      <div class="desk__grid">
-        <div class="desk__label">
-          <span class="num">01</span>
-          <h2>The acquisition desk</h2>
-          <p>
-            Hand over a handle. Nothing is stored beyond a ninety-minute cache,
-            and only public posts are read.
+      <!-- ── The sitting ─────────────────────────────────────────────── -->
+      <section class="stage" id="stage-sitting" hidden>
+        <div class="rail">
+          <div class="rail__bar"><i id="progress"></i></div>
+          <p class="rail__meta">
+            <span id="counter">Question 1</span>
+            <span id="source-note"></span>
           </p>
         </div>
 
-        <form class="desk__form" id="analyze-form" autocomplete="off">
-          <p class="desk__platform">Twitter <span aria-hidden="true">/</span> X</p>
+        <article class="question" id="question" aria-live="polite">
+          <p class="question__origin" id="origin"></p>
+          <h2 class="question__prompt" id="prompt"></h2>
+          <div class="options" id="options" role="group" aria-label="Choose the answer closest to your view"></div>
+        </article>
 
-          <div class="field">
-            <label class="field__label" for="handle">Subject</label>
-            <div class="field__row">
-              <span class="field__sigil" aria-hidden="true">@</span>
-              <input
-                id="handle"
-                name="handle"
-                type="text"
-                placeholder="marbledust"
-                spellcheck="false"
-                autocapitalize="off"
-                autocorrect="off"
-                maxlength="120"
-                required
-              />
-            </div>
-            <p class="field__hint" id="hint">
-              A handle, or a full profile URL. Posts, replies, quotes, reposts
-              and — with a user token — likes.
-            </p>
-          </div>
-
-          <button class="btn" type="submit" id="submit">
-            <span class="btn__label">Convene the panel</span>
-            <span class="btn__rule" aria-hidden="true"></span>
-          </button>
-
-          <p class="desk__note" id="mode-note"></p>
-        </form>
-      </div>
-    </section>
-
-    <!-- ── Deliberation ─────────────────────────────────────────────────── -->
-    <section class="deliberation" id="deliberation" hidden aria-live="polite">
-      <div class="deliberation__inner">
-        <div class="deliberation__seal" aria-hidden="true">
-          <span></span><span></span><span></span>
+        <div class="sitting-foot">
+          <button id="back" type="button">Back</button>
+          <p class="note">Nothing is sent anywhere. The whole test runs in this tab.</p>
         </div>
-        <p class="deliberation__stage" id="stage-text">Convening.</p>
-        <ul class="deliberation__log" id="stage-log"></ul>
-      </div>
-    </section>
+      </section>
 
-    <!-- ── Verdict ──────────────────────────────────────────────────────── -->
-    <main class="verdict" id="verdict" hidden></main>
+      <!-- ── The verdict ─────────────────────────────────────────────── -->
+      <section class="stage" id="stage-result" hidden></section>
+    </main>
 
     <footer class="colophon">
-      <div class="rule" aria-hidden="true"></div>
       <p>
-        Tweetosopher reads public posts only. Verdicts are written by a language
-        model instructed to be specific and unflattering; they are a reading, not
-        a diagnosis, and the panel has been dead for some time.
+        The corpus behind this test is <strong id="foot-count">—</strong> entries of moral
+        philosophy, each explained in full and each carrying the questions you were asked.
+        It computes; it does not consult a model. Every figure on your result is arithmetic
+        on the answers you gave, and you can check it.
       </p>
-      <p class="colophon__meta">
-        <span id="colophon-engine"></span>
+      <p>
+        <a href="/tweetosopher.html">Tweetosopher</a>, the other instrument in this repository,
+        reads a timeline instead of asking questions.
       </p>
     </footer>
 
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/test/app.js"></script>
   </body>
 </html>
