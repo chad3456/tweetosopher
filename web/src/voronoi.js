@@ -117,18 +117,24 @@ export function rng(seed) {
  * @returns {{index:number, polygon:[number,number][], area:number, target:number, centroid:[number,number], error:number}[]}
  */
 export function voronoiTreemap(data, clip, opts = {}) {
-  const { seed = 1, iterations = 160, tolerance = 0.008 } = opts;
+  // 32 attempts. Measured on a 90:1 ratio across five cells — the hardest shape
+  // either instrument produces — over 200 seeds: 16 attempts failed 11 times, 24
+  // failed twice, 32 failed none. It is close to free, because the loop stops at
+  // the first descent that converges, so the extra attempts are only ever spent
+  // on the inputs that need them: 200 runs of the worst case take ~700ms either
+  // way. Raising `iterations` instead does not help — a starved descent is stuck,
+  // not slow, so the fix is another seeding rather than more passes over a dead one.
+  const { seed = 1, iterations = 160, tolerance = 0.008, attempts = 32 } = opts;
   const total = data.reduce((s, d) => s + Math.max(d.weight, 1e-6), 0);
   const clipArea = polygonArea(clip);
   const targets = data.map((d) => (Math.max(d.weight, 1e-6) / total) * clipArea);
 
-  // Seed sites inside the clip by rejection sampling, which keeps this working
-  // for any convex clip shape rather than only rectangles.
-  const random = rng(seed);
   const xs = clip.map((p) => p[0]);
   const ys = clip.map((p) => p[1]);
   const [minX, maxX] = [Math.min(...xs), Math.max(...xs)];
   const [minY, maxY] = [Math.min(...ys), Math.max(...ys)];
+  const scale = Math.min(maxX - minX, maxY - minY);
+
   const inClip = (x, y) => {
     for (let i = 0, j = clip.length - 1; i < clip.length; j = i++) {
       const [x1, y1] = clip[j];
@@ -137,18 +143,6 @@ export function voronoiTreemap(data, clip, opts = {}) {
     }
     return true;
   };
-
-  const sites = data.map(() => {
-    for (let tries = 0; tries < 200; tries++) {
-      const x = minX + random() * (maxX - minX);
-      const y = minY + random() * (maxY - minY);
-      if (inClip(x, y)) return { x, y, w: 0 };
-    }
-    return { x: (minX + maxX) / 2, y: (minY + maxY) / 2, w: 0 };
-  });
-
-  const scale = Math.min(maxX - minX, maxY - minY);
-  let cells;
 
   /*
    * The update rule is additive, and that detail is the whole ballgame.
@@ -162,67 +156,153 @@ export function voronoiTreemap(data, clip, opts = {}) {
    * neighbour is symmetric, so a big cell got throttled by the small cells
    * crowding it.
    *
-   * The additive form works because it is dimensionally honest: in a power
-   * diagram w has units of length², and so does (target − area), so the error
-   * can be added to the weight directly. Re-centring on the minimum each pass
-   * keeps the absolute values bounded while preserving every difference.
-   *
-   * Measured over 320 runs (40 seeds × 8 weight patterns, from [5,5,5,5,5] to
-   * [50,1]): worst area error 0.478%, no starved cells. GAIN above ~0.7
-   * overshoots and oscillates; 0.35 is comfortably inside the stable band.
+   * The additive form is dimensionally honest: in a power diagram w has units of
+   * length², and so does (target − area), so the error adds to the weight
+   * directly. Re-centring on the minimum each pass keeps the absolute values
+   * bounded while preserving every difference. GAIN above ~0.7 overshoots and
+   * oscillates; 0.35 sits comfortably inside the stable band.
    */
   const GAIN = 0.35;
   const LLOYD = 0.4;
 
-  for (let iter = 0; iter < iterations; iter++) {
-    cells = powerDiagram(sites, clip);
-
-    // Lloyd: pull each site to its cell's centroid so cells stay compact
-    // instead of degenerating into slivers.
-    cells.forEach((cell, i) => {
-      if (cell.length < 3) {
-        // Starved cell. Re-seed it inside the roomiest neighbour rather than
-        // leaving it lost for the rest of the run.
-        let biggest = 0;
-        cells.forEach((c, k) => {
-          if (polygonArea(c) > polygonArea(cells[biggest])) biggest = k;
-        });
-        const host = cells[biggest].length >= 3 ? cells[biggest] : clip;
-        const [cx, cy] = polygonCentroid(host);
-        sites[i].x = cx + (random() - 0.5) * scale * 0.1;
-        sites[i].y = cy + (random() - 0.5) * scale * 0.1;
-        sites[i].w = 0;
-        return;
+  /**
+   * One descent from one seeding. Returns the best complete layout it saw.
+   *
+   * A single run can fail outright: with few cells and lopsided weights, a site
+   * can be squeezed out of the diagram entirely and never recover, because a
+   * site with no area is a site the area feedback cannot push. Rescuing it in
+   * place does not reliably work either — the rescue has to reset the weight,
+   * which throws away the very accumulation that would have grown the cell, so
+   * an aggressive rescue can loop forever. Rather than pretend one descent
+   * always converges, `solve` reports honestly whether it produced a complete
+   * layout, and the caller reseeds and tries again.
+   */
+  const solve = (attemptSeed) => {
+    const random = rng(attemptSeed);
+    const sites = data.map(() => {
+      for (let tries = 0; tries < 200; tries++) {
+        const x = minX + random() * (maxX - minX);
+        const y = minY + random() * (maxY - minY);
+        if (inClip(x, y)) return { x, y, w: 0 };
       }
-      const [cx, cy] = polygonCentroid(cell);
-      sites[i].x += (cx - sites[i].x) * LLOYD;
-      sites[i].y += (cy - sites[i].y) * LLOYD;
+      return { x: (minX + maxX) / 2, y: (minY + maxY) / 2, w: 0 };
     });
 
-    cells = powerDiagram(sites, clip);
+    let best = null;
+    let bestWorst = Infinity;
+    let starvedFor = data.map(() => 0);
 
-    let worst = 0;
-    cells.forEach((cell, i) => {
-      const area = cell.length >= 3 ? polygonArea(cell) : 0;
-      worst = Math.max(worst, Math.abs(targets[i] - area) / targets[i]);
-      sites[i].w += GAIN * (targets[i] - area);
-    });
+    for (let iter = 0; iter < iterations; iter++) {
+      let cells = powerDiagram(sites, clip);
 
-    const floor = Math.min(...sites.map((s) => s.w));
-    for (const site of sites) site.w -= floor;
+      cells.forEach((cell, i) => {
+        if (cell.length < 3) {
+          starvedFor[i] += 1;
+          // Give the weight feedback a few passes to grow the cell on its own
+          // before intervening; only relocate if it is genuinely stuck.
+          if (starvedFor[i] < 4) return;
+          starvedFor[i] = 0;
+          let host = -1;
+          let hostArea = -1;
+          cells.forEach((c, k) => {
+            if (c.length < 3) return;
+            const a = polygonArea(c);
+            if (a > hostArea) { hostArea = a; host = k; }
+          });
+          const room = host >= 0 ? cells[host] : clip;
+          const [cx, cy] = polygonCentroid(room);
+          sites[i].x = cx + (random() - 0.5) * scale * 0.25;
+          sites[i].y = cy + (random() - 0.5) * scale * 0.25;
+          // Land on the host's weight, not on 0. Weights are floor-normalised to
+          // a minimum of 0 each pass, so 0 is the weakest weight on the board and
+          // a weakest site beside a strong one gets no region at all — the reset
+          // would re-cause the starvation it is meant to cure.
+          sites[i].w = host >= 0 ? sites[host].w : 0;
+          return;
+        }
+        starvedFor[i] = 0;
+        const [cx, cy] = polygonCentroid(cell);
+        sites[i].x += (cx - sites[i].x) * LLOYD;
+        sites[i].y += (cy - sites[i].y) * LLOYD;
+      });
 
-    if (worst < tolerance) break;
+      cells = powerDiagram(sites, clip);
+
+      let worst = 0;
+      let complete = true;
+      cells.forEach((cell, i) => {
+        const area = cell.length >= 3 ? polygonArea(cell) : 0;
+        if (area <= 0) complete = false;
+        worst = Math.max(worst, Math.abs(targets[i] - area) / targets[i]);
+      });
+
+      // Snapshot BEFORE the weight update, so the saved sites are the ones that
+      // actually produced the `worst` just measured. Snapshotting after would
+      // store a state nobody evaluated.
+      if (complete && worst < bestWorst) {
+        bestWorst = worst;
+        best = sites.map((s) => ({ ...s }));
+      }
+      if (complete && worst < tolerance) break;
+
+      cells.forEach((cell, i) => {
+        const area = cell.length >= 3 ? polygonArea(cell) : 0;
+        sites[i].w += GAIN * (targets[i] - area);
+      });
+      const floor = Math.min(...sites.map((s) => s.w));
+      for (const site of sites) site.w -= floor;
+    }
+
+    return { sites: best, worst: bestWorst };
+  };
+
+  // Starvation is a property of where the sites happened to land, so a fresh
+  // seeding usually clears it. Attempts are walked deterministically from the
+  // caller's seed, so the same input still yields the same picture every time.
+  let chosen = null;
+  let chosenWorst = Infinity;
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    const { sites, worst } = solve((seed + attempt * 0x9e3779b9) >>> 0);
+    if (sites && worst < chosenWorst) {
+      chosen = sites;
+      chosenWorst = worst;
+    }
+    if (chosen && chosenWorst < tolerance) break;
   }
 
-  cells = powerDiagram(sites, clip);
+  // Every attempt starved. Fall back to an unweighted Lloyd relaxation, which
+  // cannot starve a cell — the areas will be wrong, and `error` will say so,
+  // rather than the caller being handed a plate with a category missing.
+  if (!chosen) {
+    const random = rng(seed);
+    chosen = data.map(() => {
+      for (let tries = 0; tries < 200; tries++) {
+        const x = minX + random() * (maxX - minX);
+        const y = minY + random() * (maxY - minY);
+        if (inClip(x, y)) return { x, y, w: 0 };
+      }
+      return { x: (minX + maxX) / 2, y: (minY + maxY) / 2, w: 0 };
+    });
+    for (let iter = 0; iter < 60; iter++) {
+      const cells = powerDiagram(chosen, clip);
+      cells.forEach((cell, i) => {
+        if (cell.length < 3) return;
+        const [cx, cy] = polygonCentroid(cell);
+        chosen[i].x += (cx - chosen[i].x) * LLOYD;
+        chosen[i].y += (cy - chosen[i].y) * LLOYD;
+      });
+    }
+  }
+
+  const cells = powerDiagram(chosen, clip);
   return cells.map((polygon, i) => {
-    const area = polygonArea(polygon);
+    const area = polygon.length >= 3 ? polygonArea(polygon) : 0;
     return {
       index: i,
       polygon,
       area,
       target: targets[i],
-      centroid: polygon.length >= 3 ? polygonCentroid(polygon) : [sites[i].x, sites[i].y],
+      centroid: polygon.length >= 3 ? polygonCentroid(polygon) : [chosen[i].x, chosen[i].y],
       // How far off the requested proportion this cell landed. Surfaced so the
       // caller can tell an honest partition from a failed one.
       error: targets[i] ? Math.abs(area - targets[i]) / targets[i] : 0,

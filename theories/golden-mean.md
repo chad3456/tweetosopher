@@ -119,7 +119,7 @@ questions:
         label: >-
           Conditioning, and it shows: what it reliably transmits is the
           moral confidence of whoever was doing the raising.
-        scores: { relativist: 0.8, existentialist: 0.5, authority: 0.7 }
+        scores: { relativist: 0.9, existentialist: 0.4, authority: 0.7 }
       - id: c
         label: >-
           It is why explicit rules matter. A person can check a rule against
