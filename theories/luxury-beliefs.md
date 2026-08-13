@@ -343,6 +343,19 @@ absorbs the failure mode. On this reading the strongest form of the objection to
 never "the people advocating it are hypocrites" but "here is the distribution of the
 downside, and it does not overlap with the people who chose it."
 
+At its strongest the concept identifies something the alternatives miss. Hypocrisy is the
+charge that someone fails to live by their stated view, and it is usually both true and
+uninteresting, since almost everyone does. Veblen's conspicuous consumption explains display
+that is expensive to the displayer. What Henderson is pointing at is neither: a position
+whose adoption is cheap for the holder precisely because the cost is structurally borne
+elsewhere, so the holder is not failing to live by it — they are living by it, comfortably,
+because the arrangement never reaches them. Consider a school-discipline policy advocated
+from a district whose own schools are selective, or a tolerant view of an addictive product
+held by people whose social capital absorbs the risk of it. In both, the advocate is
+perfectly sincere and perfectly insulated, and neither hypocrisy nor Veblen has a word for
+that combination. That is a real gap in the vocabulary, and filling it is a contribution
+independent of who has since picked the term up.
+
 **Now the objections, which are strong and which the concept's popular use ignores.**
 
 *It is unfalsifiable as usually stated.* Almost every policy opinion held by a comfortable

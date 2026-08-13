@@ -310,9 +310,10 @@ also making a status bid, and the pose of being the one unillusioned man in the 
 itself a position in the market.
 
 Three things about the essay are usually left out when the phrase is deployed. Wolfe was a
-satirist with his own politics, and the piece is an attack, not a survey. The Panther 21
-defendants were all acquitted, in 1971, after the longest criminal trial in New York State's
-history to that point — the fund paid for a defence that turned out to be warranted. And
+satirist with his own politics, and the piece is an attack, not a survey. The defendants
+in the Panther 21 case were acquitted on all counts in 1971, after a trial that ran for
+months and that the jury took under an hour to decide — the fund paid for a defence that
+turned out to be warranted. And
 Bernstein was surveilled and briefed against by the FBI during the same period, which means
 the evening had a consequence for him beyond the loss of face Wolfe inflicted. None of that
 refutes Wolfe. All of it complicates the confident use of his term.
