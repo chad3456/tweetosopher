@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "A museum of the online mind — feed it a handle, a panel of philosophers reads your timeline back to you.",
+  "description": "The Test of Morality \u2014 an examination in moral philosophy, scored against 352 entries. Ships with Tweetosopher, which reads a timeline instead of asking questions.",
   "engines": {
     "node": ">=20"
   },
@@ -15,7 +15,11 @@
     "start": "NODE_ENV=production node server/index.js",
     "scrape": "node scripts/scrape.js",
     "test": "node --test \"tests/**/*.test.js\"",
-    "preview": "npm run build && npm run start"
+    "preview": "npm run build && npm run start",
+    "corpus": "node scripts/build-registry.mjs && node scripts/build-corpus.mjs",
+    "validate": "node scripts/validate-theories.mjs",
+    "prebuild": "node scripts/build-corpus.mjs",
+    "predev:web": "node scripts/build-corpus.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.0",
@@ -23,7 +27,8 @@
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "gsap": "^3.13.0",
-    "three": "^0.181.0"
+    "three": "^0.181.0",
+    "yaml": "^2.9.0"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",

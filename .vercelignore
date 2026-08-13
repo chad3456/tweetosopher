@@ -1,0 +1,19 @@
+# Excluded from the Vercel deployment.
+#
+# Be careful what goes in here. Two paths were listed and had to be removed, because
+# "not served to the browser" is not the same as "not needed":
+#
+#   theories/  is read at BUILD time. scripts/build-corpus.mjs compiles the markdown
+#              corpus into the bundle, so excluding it fails the build with ENOENT —
+#              and a failed build leaves Vercel serving the previous deployment, which
+#              looks exactly like a deploy that silently did nothing.
+#   demo/      is imported at RUNTIME by server/routes/analyze.js, which the API
+#              function loads. Excluding it breaks /api/analyze in production only.
+#
+# Only list things nothing builds from and nothing imports.
+
+tests/
+docs/
+*.png
+.env
+.env.*

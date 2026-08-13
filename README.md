@@ -1,17 +1,130 @@
-# Tweetosopher
+# The Test of Morality
 
-**A museum of the online mind.** Hand it a handle. A standing panel of thirty
-philosophers reads the timeline, argues, assigns you a thinker, explains itself
-with citations, tells you a real anecdote from that philosopher's life that
-rhymes with your posting, gives you a name tag, and hangs the one post that gives
-you away.
+**An examination in moral philosophy.** Answer questions drawn from real arguments —
+the trolley problem, the ring of Gyges, the veil of ignorance, the categorical
+imperative, Ubuntu, wu wei, the banality of evil — and the pattern in your answers gets
+a name, a distribution across ten moral traditions, and a reading of what it commits you
+to.
 
-**Twitter / X.** (A Substack pipeline is built and tested but switched off —
-see [Substack](#substack-switched-off).)
+It computes; it does not consult a model. Every figure on your result is arithmetic on
+the answers you gave, it runs entirely in your browser, and nothing you answer is ever
+sent anywhere. No API key, no account, works offline.
+
+The corpus behind it is **352 planned entries** across **266 named thinkers** and 108
+traditions, each a markdown file that explains the idea, states the strongest objection
+to it, and carries the questions the test asks. See [`theories/README.md`](theories/README.md).
+
+**Also in this repository: [Tweetosopher](web/tweetosopher.html)** — the other instrument,
+which reads an X timeline instead of asking questions. A standing panel of thirty
+philosophers reads the timeline, argues, assigns you a thinker, explains itself with
+citations, tells a real anecdote from that philosopher's life that rhymes with your
+posting, gives you a name tag, and hangs the one post that gives you away. It needs an
+Anthropic key for live analysis and falls back to a demonstration archive without one.
+It is served at `/tweetosopher.html`.
 
 ---
 
 ## Quick start
+
+```bash
+npm install
+npm run dev          # Vite on :5173, API on :8787
+```
+
+Open **http://localhost:5173** for the test. It needs no keys and no network.
+
+Production-shaped, one server one port:
+
+```bash
+npm run preview      # builds both pages, serves from :8787
+```
+
+## Working on the corpus
+
+```bash
+npm run corpus       # regenerate the registry, then compile theories/ into the bundle
+npm run validate     # check every entry against theories/SCHEMA.md
+npm test             # 41 tests: the X pipeline, the Substack pipeline, the scoring engine
+```
+
+`npm run validate` currently fails, and should: it reports one problem per entry not yet
+written. To see only real defects in what exists:
+
+```bash
+npm run validate 2>&1 | grep -v "missing — every registry id needs a file"
+```
+
+
+## Deploying to Vercel
+
+The Test of Morality is fully static — it computes in the browser — so it deploys as a
+static site with nothing to configure. Tweetosopher's live analysis is the only part that
+needs a server, and it ships as one serverless function that the test never calls.
+
+### From the dashboard
+
+1. Push the branch to GitHub.
+2. At **vercel.com/new**, import `chad3456/tweetosopher`.
+3. Vercel reads `vercel.json` and fills everything in — framework Vite, build
+   `npm run build`, output `dist`. Change nothing.
+4. Under **Environment Variables**, add these only if you want Tweetosopher to do live
+   analysis. **The Test of Morality needs none of them and works without any.**
+
+   | name | needed for | notes |
+   | --- | --- | --- |
+   | `ANTHROPIC_API_KEY` | Tweetosopher live analysis | without it, it serves a demo archive |
+   | `X_BEARER_TOKEN` | reading a timeline | app-only token from the X developer portal |
+   | `X_USER_ACCESS_TOKEN` | reading likes | OAuth 2.0 user token with `likes.read` |
+   | `X_DEPTH` | how far back to read | `fast`, `standard` or `deep` |
+
+5. **Deploy.** First build takes about a minute.
+
+### From the CLI
+
+```bash
+npm i -g vercel
+vercel login
+vercel                 # preview deployment, prints a URL
+vercel --prod          # promote to production
+```
+
+Adding env vars from the CLI, if you want them:
+
+```bash
+vercel env add ANTHROPIC_API_KEY production
+vercel env add X_BEARER_TOKEN production
+vercel --prod          # redeploy so the function picks them up
+```
+
+### Verifying the deployment
+
+```bash
+curl -s https://YOUR-DEPLOYMENT.vercel.app/ -o /dev/null -w "%{http_code}\n"          # 200
+curl -s https://YOUR-DEPLOYMENT.vercel.app/tweetosopher.html -o /dev/null -w "%{http_code}\n"
+curl -s https://YOUR-DEPLOYMENT.vercel.app/api/health
+```
+
+`/api/health` reports `"engine":"demo"` until `ANTHROPIC_API_KEY` is set, then `"live"`.
+If the test itself loads and works, the deployment is good — it has no server to fail.
+
+### What is deployed, and what is not
+
+`.vercelignore` keeps `theories/` out of the deployment. That is deliberate and not a
+loss: the corpus is compiled into the bundle by `npm run build`, so every question and
+result ships, while the 350 full markdown essays — which nothing at runtime reads — do
+not need to be uploaded on every deploy.
+
+**A caution.** `vercel.json` sets a one-year immutable cache on `/assets/*`, which is
+safe because Vite fingerprints those filenames. Do not extend that rule to `/(.*)` —
+`index.html` must stay revalidated or visitors will be served a stale page pointing at
+asset names that no longer exist.
+
+---
+
+# Tweetosopher
+
+Everything below documents the second instrument.
+
 
 ```bash
 npm install

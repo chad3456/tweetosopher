@@ -1,0 +1,552 @@
+/**
+ * The Test of Morality.
+ *
+ * Deliberately not Tweetosopher. That one is a warm museum — bone paper, vermilion,
+ * Bodoni. This is an examination: cool slate ground, a blue-grey ink, and one brass
+ * accent used only where the reader has committed to something. The restraint is the
+ * point; a test that looks like it wants a particular answer is not a test.
+ *
+ * Themes are defined token-first so all three viewer states resolve: bare :root is the
+ * complete light palette, the media query handles a dark OS, and [data-theme] wins over
+ * both when set explicitly.
+ */
+
+:root {
+  --paper: #eef0f3;
+  --paper-2: #e3e6eb;
+  --paper-3: #d6dae1;
+  --ink: #1b1d24;
+  --ink-soft: #3d4350;
+  --ink-faint: #6b7280;
+  --rule: #c3c9d2;
+  --rule-2: #d9dde3;
+  --brass: #8a6a1f;
+  --brass-soft: #a98a3c;
+  --bar: #5c6673;
+  --bar-lead: #8a6a1f;
+  --pos: #3f6151;
+  --neg: #7a4a46;
+
+  --serif: 'Newsreader', Charter, Georgia, serif;
+  --display: 'Instrument Serif', 'Newsreader', Georgia, serif;
+  --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --s1: 4px;  --s2: 8px;  --s3: 14px; --s4: 22px;
+  --s5: 34px; --s6: 52px; --s7: 78px; --s8: 116px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #14161b;
+    --paper-2: #1c1f26;
+    --paper-3: #262a33;
+    --ink: #e6e8ec;
+    --ink-soft: #b6bcc7;
+    --ink-faint: #838b98;
+    --rule: #333846;
+    --rule-2: #272b35;
+    --brass: #d7b063;
+    --brass-soft: #b3924f;
+    --bar: #7d8695;
+    --bar-lead: #d7b063;
+    --pos: #7fb79a;
+    --neg: #c98f88;
+  }
+}
+
+:root[data-theme='dark'] {
+  --paper: #14161b;
+  --paper-2: #1c1f26;
+  --paper-3: #262a33;
+  --ink: #e6e8ec;
+  --ink-soft: #b6bcc7;
+  --ink-faint: #838b98;
+  --rule: #333846;
+  --rule-2: #272b35;
+  --brass: #d7b063;
+  --brass-soft: #b3924f;
+  --bar: #7d8695;
+  --bar-lead: #d7b063;
+  --pos: #7fb79a;
+  --neg: #c98f88;
+}
+
+* { box-sizing: border-box; }
+
+/* A component that sets `display` outranks the user-agent sheet's
+   `[hidden] { display: none }`, so `.hero`, being a grid, stayed visible under the
+   test that had replaced it. Anything hidden is hidden, whatever it displays as. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+main { max-width: 1080px; margin: 0 auto; padding: var(--s7) var(--s5) var(--s6); }
+
+.skip {
+  position: absolute; left: -9999px;
+  background: var(--ink); color: var(--paper); padding: var(--s3);
+}
+.skip:focus { left: var(--s3); top: var(--s3); z-index: 10; }
+
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .001ms !important; animation-duration: .001ms !important; }
+}
+
+/* ── Frontispiece ───────────────────────────────────────────────────────── */
+
+.frontis { text-align: center; max-width: 42rem; margin: 0 auto var(--s6); }
+
+.imprint {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--ink-faint); margin: 0 0 var(--s4);
+}
+
+h1 {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(48px, 9vw, 92px); line-height: .98;
+  margin: 0 0 var(--s4); letter-spacing: -.01em; text-wrap: balance;
+}
+h1 em { font-style: italic; color: var(--brass); }
+
+.lede { color: var(--ink-soft); margin: 0 auto; max-width: 34rem; font-size: 19px; }
+
+/* ── Track chooser ──────────────────────────────────────────────────────── */
+
+.tracks {
+  display: grid; gap: var(--s3);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  max-width: 46rem; margin: 0 auto var(--s5);
+}
+
+.track {
+  text-align: left; cursor: pointer; font: inherit; color: inherit;
+  background: var(--paper-2); border: 1px solid var(--rule);
+  padding: var(--s4); display: grid; gap: var(--s1);
+  transition: border-color .15s ease, background .15s ease;
+}
+/* Hover only where a pointer can actually leave. On touch, :hover sticks after a
+   tap, so an unchosen option would keep the accent border and read as selected —
+   which in a test is not a cosmetic bug but a wrong answer on the screen. */
+@media (hover: hover) {
+  .track:hover { border-color: var(--brass-soft); }
+}
+.track[aria-pressed='true'] {
+  border-color: var(--brass); background: var(--paper-3);
+  box-shadow: inset 3px 0 0 var(--brass);
+}
+.track__n {
+  font-family: var(--mono); font-size: 26px; color: var(--brass);
+  font-variant-numeric: tabular-nums; line-height: 1;
+}
+.track__label { font-size: 17px; }
+.track__note { font-size: 14px; color: var(--ink-faint); line-height: 1.45; }
+
+.desk-foot { text-align: center; display: grid; gap: var(--s3); justify-items: center; }
+
+button {
+  font: inherit; cursor: pointer; color: inherit;
+  background: transparent; border: 1px solid var(--rule);
+  padding: var(--s3) var(--s4);
+  font-family: var(--mono); font-size: 12px;
+  letter-spacing: .16em; text-transform: uppercase;
+  transition: border-color .15s ease, color .15s ease;
+}
+@media (hover: hover) {
+  button:hover { border-color: var(--brass); color: var(--brass); }
+  button[disabled]:hover { border-color: var(--rule); color: inherit; }
+  .primary:hover { background: var(--brass); border-color: var(--brass); color: #fff; }
+  .option:hover { border-color: var(--brass-soft); color: inherit; }
+}
+button[disabled] { opacity: .4; cursor: not-allowed; }
+
+.primary {
+  background: var(--ink); color: var(--paper); border-color: var(--ink);
+  padding: var(--s3) var(--s6);
+}
+
+.note { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); margin: 0;
+        letter-spacing: .08em; }
+
+/* ── The sitting ────────────────────────────────────────────────────────── */
+
+.rail { max-width: 46rem; margin: 0 auto var(--s5); }
+.rail__bar { height: 2px; background: var(--rule-2); overflow: hidden; }
+.rail__bar i { display: block; height: 100%; width: 0; background: var(--brass);
+               transition: width .3s ease; }
+.rail__meta {
+  display: flex; justify-content: space-between; gap: var(--s3);
+  font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
+  color: var(--ink-faint); margin: var(--s2) 0 0; text-transform: uppercase;
+}
+
+.question { max-width: 46rem; margin: 0 auto; }
+
+.question__origin {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--brass); margin: 0 0 var(--s3);
+}
+
+.question__prompt {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(22px, 3.2vw, 30px); line-height: 1.32;
+  margin: 0 0 var(--s5); text-wrap: pretty;
+}
+
+.options { display: grid; gap: var(--s3); }
+
+.option {
+  text-align: left; font-family: var(--serif); font-size: 17px;
+  text-transform: none; letter-spacing: normal; line-height: 1.5;
+  padding: var(--s4); background: var(--paper-2);
+  display: grid; grid-template-columns: 26px 1fr; gap: var(--s3);
+  align-items: start;
+}
+.option__mark {
+  font-family: var(--mono); font-size: 12px; color: var(--ink-faint);
+  border: 1px solid var(--rule); width: 24px; height: 24px;
+  display: grid; place-items: center; margin-top: 2px;
+}
+.option[aria-pressed='true'] { border-color: var(--brass); background: var(--paper-3); }
+.option[aria-pressed='true'] .option__mark {
+  background: var(--brass); border-color: var(--brass); color: #fff;
+}
+
+.sitting-foot {
+  max-width: 46rem; margin: var(--s5) auto 0;
+  display: flex; justify-content: space-between; align-items: center; gap: var(--s3);
+}
+
+/* ── The verdict ────────────────────────────────────────────────────────── */
+
+.verdict-head {
+  display: grid; gap: var(--s4); margin-bottom: var(--s6);
+  padding-bottom: var(--s5); border-bottom: 3px double var(--rule);
+}
+@media (min-width: 780px) {
+  .verdict-head { grid-template-columns: 1fr auto; align-items: end; }
+}
+
+.verdict-head h2 {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(36px, 6vw, 62px); line-height: 1; margin: 0 0 var(--s2);
+  text-wrap: balance;
+}
+.verdict-head .gloss { color: var(--ink-soft); margin: 0; max-width: 34rem; }
+
+.headline-figure { font-family: var(--mono); text-align: left; }
+@media (min-width: 780px) { .headline-figure { text-align: right; } }
+.headline-figure b {
+  display: block; font-family: var(--display); font-weight: 400;
+  font-size: 52px; line-height: 1; color: var(--brass);
+  font-variant-numeric: tabular-nums;
+}
+.headline-figure span {
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.headline-figure em {
+  display: block; font-style: normal; margin-top: var(--s1);
+  font-size: 11px; color: var(--ink-faint); font-variant-numeric: tabular-nums;
+}
+
+.sec { margin: var(--s7) 0 0; }
+.sec-head { display: flex; align-items: baseline; gap: var(--s3); margin-bottom: var(--s5); }
+.sec-head h3 {
+  font-family: var(--mono); font-size: 11px; font-weight: 400;
+  letter-spacing: .24em; text-transform: uppercase;
+  color: var(--ink-faint); margin: 0; white-space: nowrap;
+}
+.sec-head .line { flex: 1; height: 1px; background: var(--rule-2); }
+@media (max-width: 460px) {
+  .sec-head h3 { white-space: normal; letter-spacing: .14em; }
+  .sec-head .line { flex: 1 0 24px; }
+}
+
+/* Voronoi plate ---------------------------------------------------------- */
+
+.plate { border: 1px solid var(--rule); background: var(--paper-2); }
+.plate svg { display: block; width: 100%; height: auto; }
+
+.cell { cursor: default; }
+.cell__shape { stroke: var(--paper-2); stroke-width: 2; stroke-linejoin: round;
+               transition: opacity .18s ease; }
+.cell:hover .cell__shape, .cell.is-on .cell__shape { opacity: .84; }
+.cell:focus-visible .cell__shape { stroke: var(--ink); stroke-width: 3.5; }
+
+/* Ink on every tile except the accent, which is dark enough to take paper.
+   Both tokens flip with the theme, and so does the ramp they sit on. */
+.cell__label { font-family: var(--serif); font-size: 20px; fill: var(--ink);
+               pointer-events: none; }
+.cell--lead .cell__label { fill: var(--paper); }
+.cell__pct { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; }
+
+.readout {
+  border-top: 1px solid var(--rule); padding: var(--s4);
+  min-height: 7.4rem;
+}
+.readout h4 { font-family: var(--serif); font-weight: 400; font-size: 21px; margin: 0; }
+.readout .m {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-faint); margin: var(--s1) 0 var(--s2);
+}
+.readout p:last-child { margin: 0; color: var(--ink-soft); font-size: 16px; }
+
+.plate-note { margin: var(--s3) 0 0; max-width: 62ch; font-size: 14px;
+              color: var(--ink-faint); line-height: 1.55; }
+
+/* Disposition bars ------------------------------------------------------- */
+
+.dispositions { display: grid; gap: var(--s4); }
+
+.disp { display: grid; gap: var(--s2); }
+.disp__head {
+  display: flex; justify-content: space-between; gap: var(--s3);
+  font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-faint);
+}
+.disp__name { color: var(--ink); }
+
+.disp__track {
+  position: relative; height: 26px; background: var(--paper-2);
+  border: 1px solid var(--rule-2);
+}
+/* The centre line is the zero, and it is drawn because a diverging bar without a
+   marked origin is just a bar pointing in a direction. */
+.disp__track::before {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+  width: 1px; background: var(--rule);
+}
+.disp__fill { position: absolute; top: 4px; bottom: 4px; }
+.disp__fill[data-sign='pos'] { background: var(--pos); }
+.disp__fill[data-sign='neg'] { background: var(--neg); }
+
+.disp__poles {
+  display: flex; justify-content: space-between; gap: var(--s3);
+  font-size: 13px; color: var(--ink-faint);
+}
+
+/* Case verdicts ---------------------------------------------------------- */
+
+.cases { display: grid; gap: var(--s3); }
+
+.case {
+  border: 1px solid var(--rule); background: var(--paper-2); padding: var(--s4);
+  display: grid; gap: var(--s2);
+}
+.case__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s2) var(--s3); }
+.case__title { font-size: 19px; margin: 0; font-weight: 500; }
+.case__who {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
+  color: var(--ink-faint); text-transform: uppercase;
+}
+.case__band {
+  font-family: var(--display); font-size: 22px; color: var(--brass); margin: 0;
+}
+.case__text { margin: 0; color: var(--ink-soft); font-size: 16px; }
+.case__flag {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
+  color: var(--ink-faint); margin: 0; text-transform: uppercase;
+}
+
+.result-foot {
+  margin-top: var(--s7); padding-top: var(--s5); border-top: 1px solid var(--rule);
+  display: flex; flex-wrap: wrap; gap: var(--s3); align-items: center;
+}
+
+/* ── Colophon ───────────────────────────────────────────────────────────── */
+
+.colophon {
+  max-width: 1080px; margin: 0 auto; padding: var(--s6) var(--s5) var(--s7);
+  border-top: 1px solid var(--rule-2);
+  font-size: 14px; color: var(--ink-faint); line-height: 1.6;
+}
+.colophon p { max-width: 68ch; margin: 0 0 var(--s3); }
+.colophon a { color: var(--brass); }
+
+/* ── Hero ───────────────────────────────────────────────────────────────── */
+
+.hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: min(92vh, 860px);
+  display: grid; align-items: center;
+  border-bottom: 1px solid var(--rule);
+}
+
+.hero__field { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
+
+/* The edges are the device. Fills alone at this contrast disappear into the ground,
+   which turned a live partition into an expensive gradient — so the boundary is
+   drawn explicitly and the fill only separates one region from its neighbour. */
+.hero__cell {
+  stroke: var(--rule); stroke-width: 1.25; stroke-linejoin: round;
+  transition: fill 5s linear;
+}
+
+/* Clears the middle so the type has a quiet ground, and leaves the partition
+   readable at the edges. A radial that reaches the corners erases the whole thing. */
+.hero__wash {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(58% 46% at 50% 42%, var(--paper) 42%, transparent 100%),
+    linear-gradient(to bottom, transparent 62%, var(--paper) 100%);
+}
+
+.hero__inner {
+  max-width: 46rem; margin: 0 auto; padding: var(--s8) var(--s5) var(--s7);
+  text-align: center;
+}
+
+.hero__eyebrow {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--ink-faint); margin: 0 0 var(--s5);
+}
+
+.hero__title {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(38px, 6.6vw, 76px); line-height: 1.04;
+  margin: 0 0 var(--s5); letter-spacing: -.015em; text-wrap: balance;
+}
+.hero__title em { font-style: italic; color: var(--brass); }
+
+.hero__sub {
+  color: var(--ink-soft); font-size: 19px; margin: 0 auto var(--s6);
+  max-width: 34rem;
+}
+
+.hero__actions {
+  display: flex; gap: var(--s3); justify-content: center; flex-wrap: wrap;
+  margin-bottom: var(--s4);
+}
+.hero__actions .primary { text-decoration: none; display: inline-block; }
+
+.hero__meta {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
+  color: var(--ink-faint); margin: 0;
+}
+
+.hero__scroll {
+  position: absolute; bottom: var(--s4); left: 50%; transform: translateX(-50%);
+  color: var(--ink-faint); text-decoration: none; font-size: 20px;
+  width: 44px; height: 44px; display: grid; place-items: center;
+}
+
+/* ── Sections ───────────────────────────────────────────────────────────── */
+
+.sec { margin: var(--s8) 0 0; }
+.sec-head h2 {
+  font-family: var(--mono); font-size: 11px; font-weight: 400;
+  letter-spacing: .24em; text-transform: uppercase; color: var(--ink-faint);
+  margin: 0; white-space: nowrap;
+}
+@media (max-width: 460px) { .sec-head h2 { white-space: normal; letter-spacing: .14em; } }
+
+.sec-lede { color: var(--ink-soft); max-width: 46rem; margin: 0 0 var(--s5); font-size: 18px; }
+.sec-note { margin: var(--s4) 0 0; max-width: 64ch; font-size: 14px;
+            color: var(--ink-faint); line-height: 1.55; }
+
+.about__lede p {
+  font-family: var(--serif); font-size: clamp(20px, 2.6vw, 26px); line-height: 1.45;
+  max-width: 40rem; margin: 0 0 var(--s7); color: var(--ink);
+}
+
+.steps { list-style: none; padding: 0; margin: 0 0 var(--s7);
+         display: grid; gap: var(--s5); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.step { display: grid; gap: var(--s2); align-content: start; }
+.step__n {
+  font-family: var(--display); font-size: 40px; line-height: 1; color: var(--brass);
+  border-bottom: 1px solid var(--rule); padding-bottom: var(--s2); margin-bottom: var(--s2);
+}
+.step h3 { font-size: 20px; font-weight: 500; margin: 0; }
+.step p { margin: 0; color: var(--ink-soft); font-size: 16px; }
+
+.claims { display: grid; gap: var(--s4); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.claim { border-left: 2px solid var(--brass); padding-left: var(--s4); }
+.claim h4 { margin: 0 0 var(--s2); font-size: 17px; font-weight: 500; }
+.claim p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+
+/* ── Theme grid ─────────────────────────────────────────────────────────── */
+
+.theme-grid { display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+
+.theme {
+  text-align: left; font-family: var(--serif); text-transform: none; letter-spacing: normal;
+  padding: var(--s4); background: var(--paper-2); display: grid; gap: var(--s2);
+  align-content: start; min-height: 190px;
+}
+.theme__name { font-family: var(--display); font-size: 26px; margin: 0; line-height: 1.1; }
+.theme__blurb { margin: 0; color: var(--ink-soft); font-size: 15px; line-height: 1.5; }
+.theme__meta {
+  margin: auto 0 0; font-family: var(--mono); font-size: 11px;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--brass);
+}
+.theme--empty { opacity: .5; }
+.theme--empty .theme__meta { color: var(--ink-faint); }
+
+/* ── Test picker ────────────────────────────────────────────────────────── */
+
+.picker-head h2 { font-family: var(--display); font-size: clamp(32px, 5vw, 52px); margin: 0 0 var(--s3); }
+.test-grid { display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+.test-card { display: grid; gap: var(--s1); padding: var(--s4); background: var(--paper-2);
+             text-align: left; text-transform: none; letter-spacing: normal; }
+.test-card__n { font-family: var(--display); font-size: 34px; line-height: 1; color: var(--brass); }
+.test-card__label { font-family: var(--serif); font-size: 16px; }
+.test-card__note { font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
+                   text-transform: uppercase; color: var(--ink-faint); }
+.picker-foot { margin-top: var(--s5); }
+
+/* ── Verdict head ───────────────────────────────────────────────────────── */
+
+.verdict { margin-bottom: var(--s6); }
+.verdict-label, .sphere__label {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--ink-faint); margin: 0 0 var(--s2);
+}
+.verdict-name {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(40px, 7vw, 74px); line-height: 1; margin: 0 0 var(--s2);
+  text-wrap: balance;
+}
+.verdict-role { font-style: italic; color: var(--brass); margin: 0 0 var(--s3); font-size: 19px; }
+.verdict-voice { margin: 0; color: var(--ink-soft); font-size: 18px; max-width: 40rem; }
+.verdict-why { margin: var(--s4) 0 0; font-size: 15px; color: var(--ink-faint); max-width: 60ch; }
+
+.sphere {
+  margin-top: var(--s5); padding: var(--s5);
+  background: var(--paper-2); border-left: 3px solid var(--brass);
+}
+.sphere__name { font-family: var(--display); font-size: 32px; margin: 0 0 var(--s2); }
+.sphere__line { margin: 0 0 var(--s3); font-size: 17px; max-width: 46rem; }
+.sphere__meta { margin: 0; font-family: var(--mono); font-size: 11px;
+                letter-spacing: .1em; color: var(--ink-faint); }
+
+/* ── Bench ──────────────────────────────────────────────────────────────── */
+
+.bench { display: grid; gap: 1px; background: var(--rule-2); border: 1px solid var(--rule-2); }
+.bench__row {
+  display: grid; grid-template-columns: 68px 1fr auto; gap: var(--s3);
+  align-items: baseline; padding: var(--s3) var(--s4); background: var(--paper);
+}
+.bench__fit { font-family: var(--mono); font-size: 14px; color: var(--brass);
+              font-variant-numeric: tabular-nums; }
+.bench__name { font-size: 17px; }
+.bench__role { font-size: 13px; color: var(--ink-faint); text-align: right; }
+@media (max-width: 560px) {
+  .bench__row { grid-template-columns: 60px 1fr; }
+  .bench__role { grid-column: 2; text-align: left; }
+}
+
+.verdict-tie {
+  margin: var(--s4) 0 0; padding: var(--s3) var(--s4);
+  border-left: 2px solid var(--rule); background: var(--paper-2);
+  font-size: 15px; color: var(--ink-soft); max-width: 62ch;
+}

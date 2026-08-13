@@ -1,4 +1,8 @@
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   root: 'web',
@@ -18,5 +22,13 @@ export default defineConfig({
     outDir: '../dist',
     emptyOutDir: true,
     target: 'es2022',
+    rollupOptions: {
+      // Two instruments, two entry points. The Test of Morality is the app at /;
+      // Tweetosopher keeps its own page rather than being deleted for it.
+      input: {
+        main: resolve(__dirname, 'web/index.html'),
+        tweetosopher: resolve(__dirname, 'web/tweetosopher.html'),
+      },
+    },
   },
 });

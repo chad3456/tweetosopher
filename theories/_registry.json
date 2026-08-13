@@ -1,0 +1,3983 @@
+{
+  "generatedBy": "scripts/build-registry.mjs",
+  "count": 352,
+  "philosophers": 266,
+  "categories": {
+    "theory": 201,
+    "principle": 62,
+    "paradox": 30,
+    "thought-experiment": 35,
+    "term": 24
+  },
+  "batches": 16,
+  "perBatch": 22,
+  "entries": [
+    {
+      "id": "socratic-intellectualism",
+      "title": "Socratic Intellectualism",
+      "category": "theory",
+      "tradition": "classical-greek",
+      "philosophers": [
+        "Socrates",
+        "Plato"
+      ],
+      "era": "c. 399 BCE",
+      "batch": 1
+    },
+    {
+      "id": "the-unexamined-life",
+      "title": "The Unexamined Life",
+      "category": "principle",
+      "tradition": "classical-greek",
+      "philosophers": [
+        "Socrates"
+      ],
+      "era": "c. 399 BCE",
+      "batch": 1
+    },
+    {
+      "id": "socratic-ignorance",
+      "title": "Socratic Ignorance",
+      "category": "principle",
+      "tradition": "classical-greek",
+      "philosophers": [
+        "Socrates"
+      ],
+      "era": "c. 399 BCE",
+      "batch": 1
+    },
+    {
+      "id": "euthyphro-dilemma",
+      "title": "The Euthyphro Dilemma",
+      "category": "paradox",
+      "tradition": "classical-greek",
+      "philosophers": [
+        "Plato",
+        "Socrates"
+      ],
+      "era": "c. 399 BCE",
+      "batch": 1
+    },
+    {
+      "id": "ring-of-gyges",
+      "title": "The Ring of Gyges",
+      "category": "thought-experiment",
+      "tradition": "classical-greek",
+      "philosophers": [
+        "Plato",
+        "Glaucon"
+      ],
+      "era": "c. 375 BCE",
+      "batch": 1
+    },
+    {
+      "id": "form-of-the-good",
+      "title": "The Form of the Good",
+      "category": "theory",
+      "tradition": "platonism",
+      "philosophers": [
+        "Plato"
+      ],
+      "era": "c. 375 BCE",
+      "batch": 1
+    },
+    {
+      "id": "might-makes-right",
+      "title": "Might Makes Right",
+      "category": "theory",
+      "tradition": "sophism",
+      "philosophers": [
+        "Thrasymachus",
+        "Plato"
+      ],
+      "era": "c. 375 BCE",
+      "batch": 1
+    },
+    {
+      "id": "tripartite-soul",
+      "title": "The Tripartite Soul",
+      "category": "theory",
+      "tradition": "platonism",
+      "philosophers": [
+        "Plato"
+      ],
+      "era": "c. 375 BCE",
+      "batch": 1
+    },
+    {
+      "id": "noble-lie",
+      "title": "The Noble Lie",
+      "category": "principle",
+      "tradition": "platonism",
+      "philosophers": [
+        "Plato"
+      ],
+      "era": "c. 375 BCE",
+      "batch": 1
+    },
+    {
+      "id": "golden-mean",
+      "title": "The Golden Mean",
+      "category": "principle",
+      "tradition": "aristotelianism",
+      "philosophers": [
+        "Aristotle"
+      ],
+      "era": "c. 340 BCE",
+      "batch": 1
+    },
+    {
+      "id": "eudaimonia",
+      "title": "Eudaimonia",
+      "category": "theory",
+      "tradition": "aristotelianism",
+      "philosophers": [
+        "Aristotle"
+      ],
+      "era": "c. 340 BCE",
+      "batch": 1
+    },
+    {
+      "id": "phronesis",
+      "title": "Phronesis",
+      "category": "term",
+      "tradition": "aristotelianism",
+      "philosophers": [
+        "Aristotle"
+      ],
+      "era": "c. 340 BCE",
+      "batch": 1
+    },
+    {
+      "id": "akrasia",
+      "title": "Akrasia",
+      "category": "paradox",
+      "tradition": "aristotelianism",
+      "philosophers": [
+        "Aristotle",
+        "Socrates"
+      ],
+      "era": "c. 340 BCE",
+      "batch": 1
+    },
+    {
+      "id": "aristotelian-friendship",
+      "title": "The Three Friendships",
+      "category": "theory",
+      "tradition": "aristotelianism",
+      "philosophers": [
+        "Aristotle"
+      ],
+      "era": "c. 340 BCE",
+      "batch": 1
+    },
+    {
+      "id": "protagorean-relativism",
+      "title": "Man Is the Measure of All Things",
+      "category": "theory",
+      "tradition": "sophism",
+      "philosophers": [
+        "Protagoras"
+      ],
+      "era": "c. 440 BCE",
+      "batch": 1
+    },
+    {
+      "id": "paradox-of-the-court",
+      "title": "The Paradox of the Court",
+      "category": "paradox",
+      "tradition": "sophism",
+      "philosophers": [
+        "Protagoras",
+        "Euathlus"
+      ],
+      "era": "c. 440 BCE",
+      "batch": 1
+    },
+    {
+      "id": "epicurean-hedonism",
+      "title": "Epicurean Hedonism",
+      "category": "theory",
+      "tradition": "epicureanism",
+      "philosophers": [
+        "Epicurus"
+      ],
+      "era": "c. 300 BCE",
+      "batch": 1
+    },
+    {
+      "id": "epicurean-paradox",
+      "title": "The Epicurean Paradox",
+      "category": "paradox",
+      "tradition": "epicureanism",
+      "philosophers": [
+        "Epicurus"
+      ],
+      "era": "c. 300 BCE",
+      "batch": 1
+    },
+    {
+      "id": "cyrenaic-hedonism",
+      "title": "Cyrenaic Hedonism",
+      "category": "theory",
+      "tradition": "cyrenaicism",
+      "philosophers": [
+        "Aristippus"
+      ],
+      "era": "c. 400 BCE",
+      "batch": 1
+    },
+    {
+      "id": "dichotomy-of-control",
+      "title": "The Dichotomy of Control",
+      "category": "principle",
+      "tradition": "stoicism",
+      "philosophers": [
+        "Epictetus"
+      ],
+      "era": "c. 108 CE",
+      "batch": 1
+    },
+    {
+      "id": "memento-mori",
+      "title": "Memento Mori",
+      "category": "principle",
+      "tradition": "stoicism",
+      "philosophers": [
+        "Marcus Aurelius"
+      ],
+      "era": "c. 175 CE",
+      "batch": 1
+    },
+    {
+      "id": "stoic-cosmopolitanism",
+      "title": "Stoic Cosmopolitanism",
+      "category": "theory",
+      "tradition": "stoicism",
+      "philosophers": [
+        "Hierocles",
+        "Marcus Aurelius"
+      ],
+      "era": "c. 150 CE",
+      "batch": 1
+    },
+    {
+      "id": "senecan-anger",
+      "title": "On Anger",
+      "category": "theory",
+      "tradition": "stoicism",
+      "philosophers": [
+        "Seneca"
+      ],
+      "era": "c. 45 CE",
+      "batch": 2
+    },
+    {
+      "id": "cynic-parrhesia",
+      "title": "Cynic Parrhesia",
+      "category": "principle",
+      "tradition": "cynicism",
+      "philosophers": [
+        "Diogenes of Sinope"
+      ],
+      "era": "c. 350 BCE",
+      "batch": 2
+    },
+    {
+      "id": "sorites-paradox",
+      "title": "The Sorites Paradox",
+      "category": "paradox",
+      "tradition": "classical-greek",
+      "philosophers": [
+        "Eubulides of Miletus"
+      ],
+      "era": "c. 350 BCE",
+      "batch": 2
+    },
+    {
+      "id": "heraclitean-flux",
+      "title": "Flux and the Constancy of Character",
+      "category": "theory",
+      "tradition": "presocratic",
+      "philosophers": [
+        "Heraclitus"
+      ],
+      "era": "c. 500 BCE",
+      "batch": 2
+    },
+    {
+      "id": "confucian-ren",
+      "title": "Ren",
+      "category": "term",
+      "tradition": "confucianism",
+      "philosophers": [
+        "Confucius"
+      ],
+      "era": "c. 500 BCE",
+      "batch": 2
+    },
+    {
+      "id": "confucian-li",
+      "title": "Li",
+      "category": "term",
+      "tradition": "confucianism",
+      "philosophers": [
+        "Confucius"
+      ],
+      "era": "c. 500 BCE",
+      "batch": 2
+    },
+    {
+      "id": "silver-rule",
+      "title": "The Silver Rule",
+      "category": "principle",
+      "tradition": "confucianism",
+      "philosophers": [
+        "Confucius"
+      ],
+      "era": "c. 500 BCE",
+      "batch": 2
+    },
+    {
+      "id": "confucian-role-ethics",
+      "title": "Confucian Role Ethics",
+      "category": "theory",
+      "tradition": "confucianism",
+      "philosophers": [
+        "Confucius",
+        "Roger Ames"
+      ],
+      "era": "c. 500 BCE",
+      "batch": 2
+    },
+    {
+      "id": "four-sprouts",
+      "title": "The Four Sprouts",
+      "category": "theory",
+      "tradition": "confucianism",
+      "philosophers": [
+        "Mencius"
+      ],
+      "era": "c. 300 BCE",
+      "batch": 2
+    },
+    {
+      "id": "human-nature-is-bad",
+      "title": "Human Nature Is Bad",
+      "category": "theory",
+      "tradition": "confucianism",
+      "philosophers": [
+        "Xunzi"
+      ],
+      "era": "c. 250 BCE",
+      "batch": 2
+    },
+    {
+      "id": "impartial-care",
+      "title": "Impartial Care",
+      "category": "theory",
+      "tradition": "mohism",
+      "philosophers": [
+        "Mozi"
+      ],
+      "era": "c. 430 BCE",
+      "batch": 2
+    },
+    {
+      "id": "legalist-statecraft",
+      "title": "Legalist Statecraft",
+      "category": "theory",
+      "tradition": "legalism",
+      "philosophers": [
+        "Han Feizi",
+        "Shang Yang"
+      ],
+      "era": "c. 230 BCE",
+      "batch": 2
+    },
+    {
+      "id": "wu-wei",
+      "title": "Wu Wei",
+      "category": "principle",
+      "tradition": "daoism",
+      "philosophers": [
+        "Laozi"
+      ],
+      "era": "c. 400 BCE",
+      "batch": 2
+    },
+    {
+      "id": "butterfly-dream",
+      "title": "The Butterfly Dream",
+      "category": "thought-experiment",
+      "tradition": "daoism",
+      "philosophers": [
+        "Zhuangzi"
+      ],
+      "era": "c. 300 BCE",
+      "batch": 2
+    },
+    {
+      "id": "four-noble-truths",
+      "title": "The Four Noble Truths",
+      "category": "theory",
+      "tradition": "buddhism",
+      "philosophers": [
+        "Siddhartha Gautama"
+      ],
+      "era": "c. 500 BCE",
+      "batch": 2
+    },
+    {
+      "id": "right-action",
+      "title": "Right Action",
+      "category": "principle",
+      "tradition": "buddhism",
+      "philosophers": [
+        "Siddhartha Gautama"
+      ],
+      "era": "c. 500 BCE",
+      "batch": 2
+    },
+    {
+      "id": "bodhisattva-vow",
+      "title": "The Bodhisattva Vow",
+      "category": "principle",
+      "tradition": "mahayana-buddhism",
+      "philosophers": [
+        "Shantideva"
+      ],
+      "era": "c. 700 CE",
+      "batch": 2
+    },
+    {
+      "id": "upaya",
+      "title": "Upaya",
+      "category": "term",
+      "tradition": "mahayana-buddhism",
+      "philosophers": [
+        "Nagarjuna"
+      ],
+      "era": "c. 200 CE",
+      "batch": 2
+    },
+    {
+      "id": "karma",
+      "title": "Karma and Moral Causation",
+      "category": "theory",
+      "tradition": "indian-philosophy",
+      "philosophers": [
+        "Vyasa",
+        "Siddhartha Gautama"
+      ],
+      "era": "c. 800 BCE",
+      "batch": 2
+    },
+    {
+      "id": "ahimsa",
+      "title": "Ahimsa",
+      "category": "principle",
+      "tradition": "jainism",
+      "philosophers": [
+        "Mahavira",
+        "Mohandas Gandhi"
+      ],
+      "era": "c. 500 BCE",
+      "batch": 2
+    },
+    {
+      "id": "anekantavada",
+      "title": "Anekantavada",
+      "category": "theory",
+      "tradition": "jainism",
+      "philosophers": [
+        "Mahavira"
+      ],
+      "era": "c. 500 BCE",
+      "batch": 2
+    },
+    {
+      "id": "dharma",
+      "title": "Dharma and Svadharma",
+      "category": "theory",
+      "tradition": "hinduism",
+      "philosophers": [
+        "Vyasa"
+      ],
+      "era": "c. 400 BCE",
+      "batch": 2
+    },
+    {
+      "id": "nishkama-karma",
+      "title": "Nishkama Karma",
+      "category": "principle",
+      "tradition": "hinduism",
+      "philosophers": [
+        "Krishna",
+        "Vyasa"
+      ],
+      "era": "c. 200 BCE",
+      "batch": 3
+    },
+    {
+      "id": "ubuntu",
+      "title": "Ubuntu",
+      "category": "theory",
+      "tradition": "african-philosophy",
+      "philosophers": [
+        "Desmond Tutu",
+        "Mogobe Ramose"
+      ],
+      "era": "c. 1990",
+      "batch": 3
+    },
+    {
+      "id": "maat",
+      "title": "Ma'at",
+      "category": "theory",
+      "tradition": "egyptian-philosophy",
+      "philosophers": [
+        "Ptahhotep"
+      ],
+      "era": "c. 2400 BCE",
+      "batch": 3
+    },
+    {
+      "id": "maqasid-al-shariah",
+      "title": "Maqasid al-Shari'ah",
+      "category": "theory",
+      "tradition": "islamic-philosophy",
+      "philosophers": [
+        "Al-Shatibi",
+        "Al-Ghazali"
+      ],
+      "era": "c. 1100 CE",
+      "batch": 3
+    },
+    {
+      "id": "pikuach-nefesh",
+      "title": "Pikuach Nefesh",
+      "category": "principle",
+      "tradition": "jewish-philosophy",
+      "philosophers": [
+        "Talmudic tradition"
+      ],
+      "era": "c. 200 CE",
+      "batch": 3
+    },
+    {
+      "id": "tikkun-olam",
+      "title": "Tikkun Olam",
+      "category": "principle",
+      "tradition": "jewish-philosophy",
+      "philosophers": [
+        "Isaac Luria"
+      ],
+      "era": "c. 1570",
+      "batch": 3
+    },
+    {
+      "id": "sufi-adab",
+      "title": "Adab",
+      "category": "term",
+      "tradition": "sufism",
+      "philosophers": [
+        "Rumi",
+        "Al-Hujwiri"
+      ],
+      "era": "c. 1250",
+      "batch": 3
+    },
+    {
+      "id": "asabiyyah",
+      "title": "Asabiyyah",
+      "category": "theory",
+      "tradition": "islamic-philosophy",
+      "philosophers": [
+        "Ibn Khaldun"
+      ],
+      "era": "1377",
+      "batch": 3
+    },
+    {
+      "id": "original-sin",
+      "title": "Original Sin",
+      "category": "theory",
+      "tradition": "christian-philosophy",
+      "philosophers": [
+        "Augustine of Hippo"
+      ],
+      "era": "c. 410 CE",
+      "batch": 3
+    },
+    {
+      "id": "privation-theory-of-evil",
+      "title": "Evil as Privation",
+      "category": "theory",
+      "tradition": "christian-philosophy",
+      "philosophers": [
+        "Augustine of Hippo"
+      ],
+      "era": "c. 410 CE",
+      "batch": 3
+    },
+    {
+      "id": "augustinian-just-war",
+      "title": "The Just War",
+      "category": "theory",
+      "tradition": "christian-philosophy",
+      "philosophers": [
+        "Augustine of Hippo",
+        "Thomas Aquinas"
+      ],
+      "era": "c. 410 CE",
+      "batch": 3
+    },
+    {
+      "id": "natural-law",
+      "title": "Natural Law",
+      "category": "theory",
+      "tradition": "natural-law",
+      "philosophers": [
+        "Thomas Aquinas"
+      ],
+      "era": "c. 1270",
+      "batch": 3
+    },
+    {
+      "id": "doctrine-of-double-effect",
+      "title": "The Doctrine of Double Effect",
+      "category": "principle",
+      "tradition": "natural-law",
+      "philosophers": [
+        "Thomas Aquinas",
+        "Philippa Foot"
+      ],
+      "era": "c. 1270",
+      "batch": 3
+    },
+    {
+      "id": "cardinal-and-theological-virtues",
+      "title": "The Cardinal and Theological Virtues",
+      "category": "theory",
+      "tradition": "natural-law",
+      "philosophers": [
+        "Thomas Aquinas",
+        "Ambrose"
+      ],
+      "era": "c. 1270",
+      "batch": 3
+    },
+    {
+      "id": "divine-command-theory",
+      "title": "Divine Command Theory",
+      "category": "theory",
+      "tradition": "religious-ethics",
+      "philosophers": [
+        "William of Ockham",
+        "Robert Adams"
+      ],
+      "era": "c. 1330",
+      "batch": 3
+    },
+    {
+      "id": "ladder-of-charity",
+      "title": "Maimonides' Ladder of Charity",
+      "category": "principle",
+      "tradition": "jewish-philosophy",
+      "philosophers": [
+        "Moses Maimonides"
+      ],
+      "era": "c. 1180",
+      "batch": 3
+    },
+    {
+      "id": "ghazali-ethics-of-the-heart",
+      "title": "The Ethics of the Heart",
+      "category": "theory",
+      "tradition": "islamic-philosophy",
+      "philosophers": [
+        "Al-Ghazali"
+      ],
+      "era": "c. 1105",
+      "batch": 3
+    },
+    {
+      "id": "reason-and-revelation",
+      "title": "Reason and Revelation",
+      "category": "theory",
+      "tradition": "islamic-philosophy",
+      "philosophers": [
+        "Ibn Rushd (Averroes)"
+      ],
+      "era": "c. 1180",
+      "batch": 3
+    },
+    {
+      "id": "pascals-wager",
+      "title": "Pascal's Wager",
+      "category": "thought-experiment",
+      "tradition": "christian-philosophy",
+      "philosophers": [
+        "Blaise Pascal"
+      ],
+      "era": "1670",
+      "batch": 3
+    },
+    {
+      "id": "problem-of-evil",
+      "title": "The Problem of Evil",
+      "category": "paradox",
+      "tradition": "philosophy-of-religion",
+      "philosophers": [
+        "Epicurus",
+        "Gottfried Leibniz"
+      ],
+      "era": "c. 300 BCE",
+      "batch": 3
+    },
+    {
+      "id": "predestination-and-freedom",
+      "title": "Predestination and Freedom",
+      "category": "paradox",
+      "tradition": "christian-philosophy",
+      "philosophers": [
+        "John Calvin",
+        "Martin Luther"
+      ],
+      "era": "c. 1536",
+      "batch": 3
+    },
+    {
+      "id": "erasmus-luther-debate",
+      "title": "On Free Will and the Bondage of the Will",
+      "category": "theory",
+      "tradition": "christian-philosophy",
+      "philosophers": [
+        "Desiderius Erasmus",
+        "Martin Luther"
+      ],
+      "era": "1524",
+      "batch": 3
+    },
+    {
+      "id": "ockhamist-voluntarism",
+      "title": "Ockhamist Voluntarism",
+      "category": "theory",
+      "tradition": "medieval-philosophy",
+      "philosophers": [
+        "William of Ockham"
+      ],
+      "era": "c. 1330",
+      "batch": 4
+    },
+    {
+      "id": "buridans-ass",
+      "title": "Buridan's Ass",
+      "category": "paradox",
+      "tradition": "medieval-philosophy",
+      "philosophers": [
+        "Jean Buridan"
+      ],
+      "era": "c. 1340",
+      "batch": 4
+    },
+    {
+      "id": "agape",
+      "title": "Agape",
+      "category": "term",
+      "tradition": "christian-philosophy",
+      "philosophers": [
+        "Paul of Tarsus",
+        "Anders Nygren"
+      ],
+      "era": "c. 55 CE",
+      "batch": 4
+    },
+    {
+      "id": "sermon-on-the-mount",
+      "title": "Turn the Other Cheek",
+      "category": "principle",
+      "tradition": "christian-philosophy",
+      "philosophers": [
+        "Jesus of Nazareth"
+      ],
+      "era": "c. 30 CE",
+      "batch": 4
+    },
+    {
+      "id": "golden-rule",
+      "title": "The Golden Rule",
+      "category": "principle",
+      "tradition": "comparative-ethics",
+      "philosophers": [
+        "Jesus of Nazareth",
+        "Confucius",
+        "Hillel"
+      ],
+      "era": "c. 500 BCE",
+      "batch": 4
+    },
+    {
+      "id": "seven-deadly-sins",
+      "title": "The Seven Deadly Sins",
+      "category": "theory",
+      "tradition": "christian-philosophy",
+      "philosophers": [
+        "Evagrius Ponticus",
+        "Gregory the Great"
+      ],
+      "era": "c. 590 CE",
+      "batch": 4
+    },
+    {
+      "id": "casuistry",
+      "title": "Casuistry",
+      "category": "term",
+      "tradition": "christian-philosophy",
+      "philosophers": [
+        "Bartolomé de Medina",
+        "Blaise Pascal"
+      ],
+      "era": "c. 1580",
+      "batch": 4
+    },
+    {
+      "id": "synderesis",
+      "title": "Synderesis",
+      "category": "term",
+      "tradition": "scholasticism",
+      "philosophers": [
+        "Thomas Aquinas",
+        "Jerome"
+      ],
+      "era": "c. 1270",
+      "batch": 4
+    },
+    {
+      "id": "just-price",
+      "title": "The Just Price and the Sin of Usury",
+      "category": "principle",
+      "tradition": "scholasticism",
+      "philosophers": [
+        "Thomas Aquinas"
+      ],
+      "era": "c. 1270",
+      "batch": 4
+    },
+    {
+      "id": "jus-ad-bellum",
+      "title": "Jus ad Bellum",
+      "category": "theory",
+      "tradition": "just-war-theory",
+      "philosophers": [
+        "Francisco de Vitoria",
+        "Hugo Grotius"
+      ],
+      "era": "c. 1539",
+      "batch": 4
+    },
+    {
+      "id": "jus-in-bello",
+      "title": "Jus in Bello",
+      "category": "theory",
+      "tradition": "just-war-theory",
+      "philosophers": [
+        "Hugo Grotius",
+        "Michael Walzer"
+      ],
+      "era": "c. 1625",
+      "batch": 4
+    },
+    {
+      "id": "liberation-theology",
+      "title": "Liberation Theology",
+      "category": "theory",
+      "tradition": "christian-philosophy",
+      "philosophers": [
+        "Gustavo Gutiérrez"
+      ],
+      "era": "1971",
+      "batch": 4
+    },
+    {
+      "id": "machiavellian-virtu",
+      "title": "Virtù and Fortuna",
+      "category": "theory",
+      "tradition": "political-realism",
+      "philosophers": [
+        "Niccolò Machiavelli"
+      ],
+      "era": "1532",
+      "batch": 4
+    },
+    {
+      "id": "feared-or-loved",
+      "title": "Feared or Loved",
+      "category": "principle",
+      "tradition": "political-realism",
+      "philosophers": [
+        "Niccolò Machiavelli"
+      ],
+      "era": "1532",
+      "batch": 4
+    },
+    {
+      "id": "ends-and-means",
+      "title": "The Ends and the Means",
+      "category": "principle",
+      "tradition": "political-realism",
+      "philosophers": [
+        "Niccolò Machiavelli"
+      ],
+      "era": "1532",
+      "batch": 4
+    },
+    {
+      "id": "state-of-nature",
+      "title": "The State of Nature",
+      "category": "thought-experiment",
+      "tradition": "social-contract",
+      "philosophers": [
+        "Thomas Hobbes"
+      ],
+      "era": "1651",
+      "batch": 4
+    },
+    {
+      "id": "psychological-egoism",
+      "title": "Psychological Egoism",
+      "category": "theory",
+      "tradition": "social-contract",
+      "philosophers": [
+        "Thomas Hobbes"
+      ],
+      "era": "1651",
+      "batch": 4
+    },
+    {
+      "id": "natural-rights",
+      "title": "Natural Rights",
+      "category": "theory",
+      "tradition": "social-contract",
+      "philosophers": [
+        "John Locke"
+      ],
+      "era": "1689",
+      "batch": 4
+    },
+    {
+      "id": "lockean-proviso",
+      "title": "The Lockean Proviso",
+      "category": "principle",
+      "tradition": "social-contract",
+      "philosophers": [
+        "John Locke",
+        "Robert Nozick"
+      ],
+      "era": "1689",
+      "batch": 4
+    },
+    {
+      "id": "general-will",
+      "title": "The General Will",
+      "category": "theory",
+      "tradition": "social-contract",
+      "philosophers": [
+        "Jean-Jacques Rousseau"
+      ],
+      "era": "1762",
+      "batch": 4
+    },
+    {
+      "id": "amour-propre",
+      "title": "Amour-propre",
+      "category": "term",
+      "tradition": "social-contract",
+      "philosophers": [
+        "Jean-Jacques Rousseau"
+      ],
+      "era": "1755",
+      "batch": 4
+    },
+    {
+      "id": "conatus",
+      "title": "Conatus",
+      "category": "theory",
+      "tradition": "rationalism",
+      "philosophers": [
+        "Baruch Spinoza"
+      ],
+      "era": "1677",
+      "batch": 4
+    },
+    {
+      "id": "on-cannibals",
+      "title": "On Cannibals",
+      "category": "theory",
+      "tradition": "renaissance-humanism",
+      "philosophers": [
+        "Michel de Montaigne"
+      ],
+      "era": "1580",
+      "batch": 5
+    },
+    {
+      "id": "humes-guillotine",
+      "title": "Hume's Guillotine",
+      "category": "principle",
+      "tradition": "empiricism",
+      "philosophers": [
+        "David Hume"
+      ],
+      "era": "1739",
+      "batch": 5
+    },
+    {
+      "id": "humean-sentimentalism",
+      "title": "Reason, Slave of the Passions",
+      "category": "theory",
+      "tradition": "empiricism",
+      "philosophers": [
+        "David Hume"
+      ],
+      "era": "1739",
+      "batch": 5
+    },
+    {
+      "id": "impartial-spectator",
+      "title": "The Impartial Spectator",
+      "category": "theory",
+      "tradition": "scottish-enlightenment",
+      "philosophers": [
+        "Adam Smith"
+      ],
+      "era": "1759",
+      "batch": 5
+    },
+    {
+      "id": "moral-sentiments",
+      "title": "Sympathy and the Invisible Hand",
+      "category": "theory",
+      "tradition": "scottish-enlightenment",
+      "philosophers": [
+        "Adam Smith"
+      ],
+      "era": "1759",
+      "batch": 5
+    },
+    {
+      "id": "butler-on-conscience",
+      "title": "The Authority of Conscience",
+      "category": "theory",
+      "tradition": "british-moralists",
+      "philosophers": [
+        "Joseph Butler"
+      ],
+      "era": "1726",
+      "batch": 5
+    },
+    {
+      "id": "moral-sense-theory",
+      "title": "Moral Sense Theory",
+      "category": "theory",
+      "tradition": "british-moralists",
+      "philosophers": [
+        "Anthony Ashley-Cooper (Shaftesbury)",
+        "Francis Hutcheson"
+      ],
+      "era": "1711",
+      "batch": 5
+    },
+    {
+      "id": "fable-of-the-bees",
+      "title": "Private Vices, Public Benefits",
+      "category": "paradox",
+      "tradition": "british-moralists",
+      "philosophers": [
+        "Bernard Mandeville"
+      ],
+      "era": "1714",
+      "batch": 5
+    },
+    {
+      "id": "wollstonecraft-moral-equality",
+      "title": "The Moral Equality of Women",
+      "category": "theory",
+      "tradition": "enlightenment",
+      "philosophers": [
+        "Mary Wollstonecraft"
+      ],
+      "era": "1792",
+      "batch": 5
+    },
+    {
+      "id": "godwins-fire-cause",
+      "title": "The Famous Fire Cause",
+      "category": "thought-experiment",
+      "tradition": "utilitarianism",
+      "philosophers": [
+        "William Godwin"
+      ],
+      "era": "1793",
+      "batch": 5
+    },
+    {
+      "id": "voltairean-toleration",
+      "title": "Toleration",
+      "category": "principle",
+      "tradition": "enlightenment",
+      "philosophers": [
+        "Voltaire"
+      ],
+      "era": "1763",
+      "batch": 5
+    },
+    {
+      "id": "spirit-of-the-laws",
+      "title": "The Spirit of the Laws",
+      "category": "theory",
+      "tradition": "enlightenment",
+      "philosophers": [
+        "Montesquieu"
+      ],
+      "era": "1748",
+      "batch": 5
+    },
+    {
+      "id": "best-of-all-possible-worlds",
+      "title": "The Best of All Possible Worlds",
+      "category": "theory",
+      "tradition": "rationalism",
+      "philosophers": [
+        "Gottfried Leibniz"
+      ],
+      "era": "1710",
+      "batch": 5
+    },
+    {
+      "id": "passive-obedience",
+      "title": "Passive Obedience",
+      "category": "theory",
+      "tradition": "british-moralists",
+      "philosophers": [
+        "George Berkeley"
+      ],
+      "era": "1712",
+      "batch": 5
+    },
+    {
+      "id": "common-sense-morality",
+      "title": "Common Sense Morality",
+      "category": "theory",
+      "tradition": "scottish-enlightenment",
+      "philosophers": [
+        "Thomas Reid"
+      ],
+      "era": "1788",
+      "batch": 5
+    },
+    {
+      "id": "theological-utilitarianism",
+      "title": "Theological Utilitarianism",
+      "category": "theory",
+      "tradition": "utilitarianism",
+      "philosophers": [
+        "William Paley"
+      ],
+      "era": "1785",
+      "batch": 5
+    },
+    {
+      "id": "categorical-imperative",
+      "title": "The Categorical Imperative",
+      "category": "principle",
+      "tradition": "kantian-ethics",
+      "philosophers": [
+        "Immanuel Kant"
+      ],
+      "era": "1785",
+      "batch": 5
+    },
+    {
+      "id": "humanity-formula",
+      "title": "The Humanity Formula",
+      "category": "principle",
+      "tradition": "kantian-ethics",
+      "philosophers": [
+        "Immanuel Kant"
+      ],
+      "era": "1785",
+      "batch": 5
+    },
+    {
+      "id": "kingdom-of-ends",
+      "title": "The Kingdom of Ends",
+      "category": "theory",
+      "tradition": "kantian-ethics",
+      "philosophers": [
+        "Immanuel Kant"
+      ],
+      "era": "1785",
+      "batch": 5
+    },
+    {
+      "id": "murderer-at-the-door",
+      "title": "The Murderer at the Door",
+      "category": "thought-experiment",
+      "tradition": "kantian-ethics",
+      "philosophers": [
+        "Immanuel Kant",
+        "Benjamin Constant"
+      ],
+      "era": "1797",
+      "batch": 5
+    },
+    {
+      "id": "good-will-and-duty",
+      "title": "The Good Will",
+      "category": "theory",
+      "tradition": "kantian-ethics",
+      "philosophers": [
+        "Immanuel Kant"
+      ],
+      "era": "1785",
+      "batch": 5
+    },
+    {
+      "id": "radical-evil",
+      "title": "Radical Evil",
+      "category": "theory",
+      "tradition": "kantian-ethics",
+      "philosophers": [
+        "Immanuel Kant"
+      ],
+      "era": "1793",
+      "batch": 5
+    },
+    {
+      "id": "perfect-and-imperfect-duties",
+      "title": "Perfect and Imperfect Duties",
+      "category": "principle",
+      "tradition": "kantian-ethics",
+      "philosophers": [
+        "Immanuel Kant"
+      ],
+      "era": "1785",
+      "batch": 6
+    },
+    {
+      "id": "hypothetical-imperative",
+      "title": "The Hypothetical Imperative",
+      "category": "term",
+      "tradition": "kantian-ethics",
+      "philosophers": [
+        "Immanuel Kant"
+      ],
+      "era": "1785",
+      "batch": 6
+    },
+    {
+      "id": "benthamite-utilitarianism",
+      "title": "The Greatest Happiness Principle",
+      "category": "theory",
+      "tradition": "utilitarianism",
+      "philosophers": [
+        "Jeremy Bentham"
+      ],
+      "era": "1789",
+      "batch": 6
+    },
+    {
+      "id": "felicific-calculus",
+      "title": "The Felicific Calculus",
+      "category": "principle",
+      "tradition": "utilitarianism",
+      "philosophers": [
+        "Jeremy Bentham"
+      ],
+      "era": "1789",
+      "batch": 6
+    },
+    {
+      "id": "panopticon",
+      "title": "The Panopticon",
+      "category": "thought-experiment",
+      "tradition": "utilitarianism",
+      "philosophers": [
+        "Jeremy Bentham",
+        "Michel Foucault"
+      ],
+      "era": "1791",
+      "batch": 6
+    },
+    {
+      "id": "higher-and-lower-pleasures",
+      "title": "Higher and Lower Pleasures",
+      "category": "principle",
+      "tradition": "utilitarianism",
+      "philosophers": [
+        "John Stuart Mill"
+      ],
+      "era": "1863",
+      "batch": 6
+    },
+    {
+      "id": "harm-principle",
+      "title": "The Harm Principle",
+      "category": "principle",
+      "tradition": "liberalism",
+      "philosophers": [
+        "John Stuart Mill"
+      ],
+      "era": "1859",
+      "batch": 6
+    },
+    {
+      "id": "tyranny-of-the-majority",
+      "title": "The Tyranny of the Majority",
+      "category": "theory",
+      "tradition": "liberalism",
+      "philosophers": [
+        "John Stuart Mill",
+        "Alexis de Tocqueville"
+      ],
+      "era": "1859",
+      "batch": 6
+    },
+    {
+      "id": "act-and-rule-utilitarianism",
+      "title": "Act and Rule Utilitarianism",
+      "category": "theory",
+      "tradition": "utilitarianism",
+      "philosophers": [
+        "John Stuart Mill",
+        "J.J.C. Smart"
+      ],
+      "era": "1863",
+      "batch": 6
+    },
+    {
+      "id": "dualism-of-practical-reason",
+      "title": "The Dualism of Practical Reason",
+      "category": "paradox",
+      "tradition": "utilitarianism",
+      "philosophers": [
+        "Henry Sidgwick"
+      ],
+      "era": "1874",
+      "batch": 6
+    },
+    {
+      "id": "negative-utilitarianism",
+      "title": "Negative Utilitarianism",
+      "category": "theory",
+      "tradition": "utilitarianism",
+      "philosophers": [
+        "Karl Popper",
+        "R.N. Smart"
+      ],
+      "era": "1945",
+      "batch": 6
+    },
+    {
+      "id": "preference-utilitarianism",
+      "title": "Preference Utilitarianism",
+      "category": "theory",
+      "tradition": "utilitarianism",
+      "philosophers": [
+        "Peter Singer",
+        "R.M. Hare"
+      ],
+      "era": "1979",
+      "batch": 6
+    },
+    {
+      "id": "two-level-utilitarianism",
+      "title": "Two-Level Utilitarianism",
+      "category": "theory",
+      "tradition": "utilitarianism",
+      "philosophers": [
+        "R.M. Hare"
+      ],
+      "era": "1981",
+      "batch": 6
+    },
+    {
+      "id": "government-house-utilitarianism",
+      "title": "Government House Utilitarianism",
+      "category": "term",
+      "tradition": "utilitarianism",
+      "philosophers": [
+        "Bernard Williams",
+        "Henry Sidgwick"
+      ],
+      "era": "1973",
+      "batch": 6
+    },
+    {
+      "id": "motive-utilitarianism",
+      "title": "Motive Utilitarianism",
+      "category": "theory",
+      "tradition": "utilitarianism",
+      "philosophers": [
+        "Robert Merrihew Adams"
+      ],
+      "era": "1976",
+      "batch": 6
+    },
+    {
+      "id": "satisficing-consequentialism",
+      "title": "Satisficing Consequentialism",
+      "category": "theory",
+      "tradition": "consequentialism",
+      "philosophers": [
+        "Michael Slote"
+      ],
+      "era": "1984",
+      "batch": 6
+    },
+    {
+      "id": "scalar-consequentialism",
+      "title": "Scalar Consequentialism",
+      "category": "theory",
+      "tradition": "consequentialism",
+      "philosophers": [
+        "Alastair Norcross"
+      ],
+      "era": "2006",
+      "batch": 6
+    },
+    {
+      "id": "rule-consequentialism",
+      "title": "Rule Consequentialism",
+      "category": "theory",
+      "tradition": "consequentialism",
+      "philosophers": [
+        "Brad Hooker"
+      ],
+      "era": "2000",
+      "batch": 6
+    },
+    {
+      "id": "demandingness-objection",
+      "title": "The Demandingness Objection",
+      "category": "paradox",
+      "tradition": "consequentialism",
+      "philosophers": [
+        "Bernard Williams",
+        "Susan Wolf"
+      ],
+      "era": "1973",
+      "batch": 6
+    },
+    {
+      "id": "paradox-of-hedonism",
+      "title": "The Paradox of Hedonism",
+      "category": "paradox",
+      "tradition": "utilitarianism",
+      "philosophers": [
+        "Henry Sidgwick",
+        "Joseph Butler"
+      ],
+      "era": "1874",
+      "batch": 6
+    },
+    {
+      "id": "master-slave-dialectic",
+      "title": "The Master–Slave Dialectic",
+      "category": "theory",
+      "tradition": "german-idealism",
+      "philosophers": [
+        "G.W.F. Hegel"
+      ],
+      "era": "1807",
+      "batch": 6
+    },
+    {
+      "id": "sittlichkeit",
+      "title": "Sittlichkeit and Moralität",
+      "category": "theory",
+      "tradition": "german-idealism",
+      "philosophers": [
+        "G.W.F. Hegel"
+      ],
+      "era": "1821",
+      "batch": 6
+    },
+    {
+      "id": "schopenhauer-compassion",
+      "title": "Compassion as the Basis of Morality",
+      "category": "theory",
+      "tradition": "pessimism",
+      "philosophers": [
+        "Arthur Schopenhauer"
+      ],
+      "era": "1840",
+      "batch": 7
+    },
+    {
+      "id": "denial-of-the-will",
+      "title": "Denial of the Will",
+      "category": "theory",
+      "tradition": "pessimism",
+      "philosophers": [
+        "Arthur Schopenhauer"
+      ],
+      "era": "1818",
+      "batch": 7
+    },
+    {
+      "id": "porcupine-dilemma",
+      "title": "The Porcupine Dilemma",
+      "category": "thought-experiment",
+      "tradition": "pessimism",
+      "philosophers": [
+        "Arthur Schopenhauer"
+      ],
+      "era": "1851",
+      "batch": 7
+    },
+    {
+      "id": "teleological-suspension",
+      "title": "The Teleological Suspension of the Ethical",
+      "category": "paradox",
+      "tradition": "existentialism",
+      "philosophers": [
+        "Søren Kierkegaard"
+      ],
+      "era": "1843",
+      "batch": 7
+    },
+    {
+      "id": "leap-of-faith",
+      "title": "The Leap of Faith",
+      "category": "principle",
+      "tradition": "existentialism",
+      "philosophers": [
+        "Søren Kierkegaard"
+      ],
+      "era": "1846",
+      "batch": 7
+    },
+    {
+      "id": "three-stages-of-life",
+      "title": "The Three Stages on Life’s Way",
+      "category": "theory",
+      "tradition": "existentialism",
+      "philosophers": [
+        "Søren Kierkegaard"
+      ],
+      "era": "1845",
+      "batch": 7
+    },
+    {
+      "id": "alienation",
+      "title": "Alienation",
+      "category": "theory",
+      "tradition": "marxism",
+      "philosophers": [
+        "Karl Marx"
+      ],
+      "era": "1844",
+      "batch": 7
+    },
+    {
+      "id": "ideology-and-class-morality",
+      "title": "Ideology and Class Morality",
+      "category": "theory",
+      "tradition": "marxism",
+      "philosophers": [
+        "Karl Marx",
+        "Friedrich Engels"
+      ],
+      "era": "1846",
+      "batch": 7
+    },
+    {
+      "id": "master-and-slave-morality",
+      "title": "Master and Slave Morality",
+      "category": "theory",
+      "tradition": "nietzschean",
+      "philosophers": [
+        "Friedrich Nietzsche"
+      ],
+      "era": "1887",
+      "batch": 7
+    },
+    {
+      "id": "will-to-power",
+      "title": "The Will to Power",
+      "category": "theory",
+      "tradition": "nietzschean",
+      "philosophers": [
+        "Friedrich Nietzsche"
+      ],
+      "era": "1886",
+      "batch": 7
+    },
+    {
+      "id": "eternal-recurrence",
+      "title": "The Eternal Recurrence",
+      "category": "thought-experiment",
+      "tradition": "nietzschean",
+      "philosophers": [
+        "Friedrich Nietzsche"
+      ],
+      "era": "1882",
+      "batch": 7
+    },
+    {
+      "id": "ubermensch",
+      "title": "The Übermensch",
+      "category": "term",
+      "tradition": "nietzschean",
+      "philosophers": [
+        "Friedrich Nietzsche"
+      ],
+      "era": "1883",
+      "batch": 7
+    },
+    {
+      "id": "ressentiment",
+      "title": "Ressentiment",
+      "category": "term",
+      "tradition": "nietzschean",
+      "philosophers": [
+        "Friedrich Nietzsche",
+        "Max Scheler"
+      ],
+      "era": "1887",
+      "batch": 7
+    },
+    {
+      "id": "death-of-god",
+      "title": "The Death of God",
+      "category": "theory",
+      "tradition": "nietzschean",
+      "philosophers": [
+        "Friedrich Nietzsche"
+      ],
+      "era": "1882",
+      "batch": 7
+    },
+    {
+      "id": "genealogy-of-morals",
+      "title": "The Genealogy of Morals",
+      "category": "theory",
+      "tradition": "nietzschean",
+      "philosophers": [
+        "Friedrich Nietzsche"
+      ],
+      "era": "1887",
+      "batch": 7
+    },
+    {
+      "id": "amor-fati",
+      "title": "Amor Fati",
+      "category": "principle",
+      "tradition": "nietzschean",
+      "philosophers": [
+        "Friedrich Nietzsche"
+      ],
+      "era": "1882",
+      "batch": 7
+    },
+    {
+      "id": "everything-is-permitted",
+      "title": "If God Does Not Exist, Everything Is Permitted",
+      "category": "paradox",
+      "tradition": "russian-literature",
+      "philosophers": [
+        "Fyodor Dostoevsky"
+      ],
+      "era": "1880",
+      "batch": 7
+    },
+    {
+      "id": "grand-inquisitor",
+      "title": "The Grand Inquisitor",
+      "category": "thought-experiment",
+      "tradition": "russian-literature",
+      "philosophers": [
+        "Fyodor Dostoevsky"
+      ],
+      "era": "1880",
+      "batch": 7
+    },
+    {
+      "id": "extraordinary-man-theory",
+      "title": "The Extraordinary Man Theory",
+      "category": "theory",
+      "tradition": "russian-literature",
+      "philosophers": [
+        "Fyodor Dostoevsky"
+      ],
+      "era": "1866",
+      "batch": 7
+    },
+    {
+      "id": "underground-man",
+      "title": "The Underground Man",
+      "category": "theory",
+      "tradition": "russian-literature",
+      "philosophers": [
+        "Fyodor Dostoevsky"
+      ],
+      "era": "1864",
+      "batch": 7
+    },
+    {
+      "id": "nonresistance-to-evil",
+      "title": "Nonresistance to Evil",
+      "category": "principle",
+      "tradition": "christian-anarchism",
+      "philosophers": [
+        "Leo Tolstoy"
+      ],
+      "era": "1894",
+      "batch": 7
+    },
+    {
+      "id": "civil-disobedience",
+      "title": "Civil Disobedience",
+      "category": "principle",
+      "tradition": "transcendentalism",
+      "philosophers": [
+        "Henry David Thoreau"
+      ],
+      "era": "1849",
+      "batch": 7
+    },
+    {
+      "id": "self-reliance",
+      "title": "Self-Reliance",
+      "category": "theory",
+      "tradition": "transcendentalism",
+      "philosophers": [
+        "Ralph Waldo Emerson"
+      ],
+      "era": "1841",
+      "batch": 8
+    },
+    {
+      "id": "anomie",
+      "title": "Anomie and the Collective Conscience",
+      "category": "theory",
+      "tradition": "sociology",
+      "philosophers": [
+        "Émile Durkheim"
+      ],
+      "era": "1893",
+      "batch": 8
+    },
+    {
+      "id": "naturalistic-fallacy",
+      "title": "The Naturalistic Fallacy",
+      "category": "principle",
+      "tradition": "metaethics",
+      "philosophers": [
+        "G.E. Moore"
+      ],
+      "era": "1903",
+      "batch": 8
+    },
+    {
+      "id": "open-question-argument",
+      "title": "The Open Question Argument",
+      "category": "principle",
+      "tradition": "metaethics",
+      "philosophers": [
+        "G.E. Moore"
+      ],
+      "era": "1903",
+      "batch": 8
+    },
+    {
+      "id": "prima-facie-duties",
+      "title": "Prima Facie Duties",
+      "category": "theory",
+      "tradition": "intuitionism",
+      "philosophers": [
+        "W.D. Ross"
+      ],
+      "era": "1930",
+      "batch": 8
+    },
+    {
+      "id": "emotivism",
+      "title": "Emotivism",
+      "category": "theory",
+      "tradition": "metaethics",
+      "philosophers": [
+        "A.J. Ayer",
+        "C.L. Stevenson"
+      ],
+      "era": "1936",
+      "batch": 8
+    },
+    {
+      "id": "persuasive-definitions",
+      "title": "Persuasive Definitions",
+      "category": "term",
+      "tradition": "metaethics",
+      "philosophers": [
+        "C.L. Stevenson"
+      ],
+      "era": "1938",
+      "batch": 8
+    },
+    {
+      "id": "universal-prescriptivism",
+      "title": "Universal Prescriptivism",
+      "category": "theory",
+      "tradition": "metaethics",
+      "philosophers": [
+        "R.M. Hare"
+      ],
+      "era": "1952",
+      "batch": 8
+    },
+    {
+      "id": "moral-error-theory",
+      "title": "Moral Error Theory",
+      "category": "theory",
+      "tradition": "metaethics",
+      "philosophers": [
+        "J.L. Mackie"
+      ],
+      "era": "1977",
+      "batch": 8
+    },
+    {
+      "id": "argument-from-queerness",
+      "title": "The Argument from Queerness",
+      "category": "principle",
+      "tradition": "metaethics",
+      "philosophers": [
+        "J.L. Mackie"
+      ],
+      "era": "1977",
+      "batch": 8
+    },
+    {
+      "id": "argument-from-relativity",
+      "title": "The Argument from Relativity",
+      "category": "principle",
+      "tradition": "metaethics",
+      "philosophers": [
+        "J.L. Mackie"
+      ],
+      "era": "1977",
+      "batch": 8
+    },
+    {
+      "id": "modern-moral-philosophy",
+      "title": "Modern Moral Philosophy",
+      "category": "theory",
+      "tradition": "virtue-ethics",
+      "philosophers": [
+        "G.E.M. Anscombe"
+      ],
+      "era": "1958",
+      "batch": 8
+    },
+    {
+      "id": "moral-realism",
+      "title": "Moral Realism",
+      "category": "theory",
+      "tradition": "metaethics",
+      "philosophers": [
+        "Richard Boyd",
+        "David Brink"
+      ],
+      "era": "1988",
+      "batch": 8
+    },
+    {
+      "id": "moral-anti-realism",
+      "title": "Moral Anti-Realism",
+      "category": "theory",
+      "tradition": "metaethics",
+      "philosophers": [
+        "Simon Blackburn",
+        "J.L. Mackie"
+      ],
+      "era": "1977",
+      "batch": 8
+    },
+    {
+      "id": "moral-constructivism",
+      "title": "Moral Constructivism",
+      "category": "theory",
+      "tradition": "metaethics",
+      "philosophers": [
+        "John Rawls",
+        "Christine Korsgaard"
+      ],
+      "era": "1980",
+      "batch": 8
+    },
+    {
+      "id": "quasi-realism",
+      "title": "Quasi-Realism",
+      "category": "theory",
+      "tradition": "metaethics",
+      "philosophers": [
+        "Simon Blackburn"
+      ],
+      "era": "1984",
+      "batch": 8
+    },
+    {
+      "id": "moral-fictionalism",
+      "title": "Moral Fictionalism",
+      "category": "theory",
+      "tradition": "metaethics",
+      "philosophers": [
+        "Richard Joyce"
+      ],
+      "era": "2001",
+      "batch": 8
+    },
+    {
+      "id": "frege-geach-problem",
+      "title": "The Frege–Geach Problem",
+      "category": "paradox",
+      "tradition": "metaethics",
+      "philosophers": [
+        "Peter Geach",
+        "John Searle"
+      ],
+      "era": "1965",
+      "batch": 8
+    },
+    {
+      "id": "moral-twin-earth",
+      "title": "Moral Twin Earth",
+      "category": "thought-experiment",
+      "tradition": "metaethics",
+      "philosophers": [
+        "Terence Horgan",
+        "Mark Timmons"
+      ],
+      "era": "1991",
+      "batch": 8
+    },
+    {
+      "id": "ideal-observer-theory",
+      "title": "Ideal Observer Theory",
+      "category": "theory",
+      "tradition": "metaethics",
+      "philosophers": [
+        "Roderick Firth",
+        "Adam Smith"
+      ],
+      "era": "1952",
+      "batch": 8
+    },
+    {
+      "id": "moral-intuitionism",
+      "title": "Moral Intuitionism",
+      "category": "theory",
+      "tradition": "intuitionism",
+      "philosophers": [
+        "W.D. Ross",
+        "Robert Audi"
+      ],
+      "era": "1930",
+      "batch": 8
+    },
+    {
+      "id": "moral-particularism",
+      "title": "Moral Particularism",
+      "category": "theory",
+      "tradition": "metaethics",
+      "philosophers": [
+        "Jonathan Dancy"
+      ],
+      "era": "1993",
+      "batch": 8
+    },
+    {
+      "id": "moral-naturalism",
+      "title": "Moral Naturalism",
+      "category": "theory",
+      "tradition": "metaethics",
+      "philosophers": [
+        "Richard Boyd",
+        "Philippa Foot"
+      ],
+      "era": "1988",
+      "batch": 9
+    },
+    {
+      "id": "darwinian-dilemma",
+      "title": "The Darwinian Dilemma",
+      "category": "paradox",
+      "tradition": "metaethics",
+      "philosophers": [
+        "Sharon Street"
+      ],
+      "era": "2006",
+      "batch": 9
+    },
+    {
+      "id": "evolutionary-debunking",
+      "title": "Evolutionary Debunking Arguments",
+      "category": "theory",
+      "tradition": "metaethics",
+      "philosophers": [
+        "Sharon Street",
+        "Richard Joyce"
+      ],
+      "era": "2006",
+      "batch": 9
+    },
+    {
+      "id": "lecture-on-ethics",
+      "title": "The Unsayable in Ethics",
+      "category": "theory",
+      "tradition": "analytic-philosophy",
+      "philosophers": [
+        "Ludwig Wittgenstein"
+      ],
+      "era": "1929",
+      "batch": 9
+    },
+    {
+      "id": "pragmatic-ethics",
+      "title": "Moral Deliberation as Inquiry",
+      "category": "theory",
+      "tradition": "pragmatism",
+      "philosophers": [
+        "John Dewey",
+        "William James"
+      ],
+      "era": "1922",
+      "batch": 9
+    },
+    {
+      "id": "conviction-and-responsibility",
+      "title": "The Ethics of Conviction and the Ethics of Responsibility",
+      "category": "theory",
+      "tradition": "sociology",
+      "philosophers": [
+        "Max Weber"
+      ],
+      "era": "1919",
+      "batch": 9
+    },
+    {
+      "id": "veil-of-ignorance",
+      "title": "The Veil of Ignorance",
+      "category": "thought-experiment",
+      "tradition": "contractualism",
+      "philosophers": [
+        "John Rawls"
+      ],
+      "era": "1971",
+      "batch": 9
+    },
+    {
+      "id": "difference-principle",
+      "title": "The Difference Principle",
+      "category": "principle",
+      "tradition": "contractualism",
+      "philosophers": [
+        "John Rawls"
+      ],
+      "era": "1971",
+      "batch": 9
+    },
+    {
+      "id": "reflective-equilibrium",
+      "title": "Reflective Equilibrium",
+      "category": "principle",
+      "tradition": "contractualism",
+      "philosophers": [
+        "John Rawls",
+        "Nelson Goodman"
+      ],
+      "era": "1971",
+      "batch": 9
+    },
+    {
+      "id": "experience-machine",
+      "title": "The Experience Machine",
+      "category": "thought-experiment",
+      "tradition": "libertarianism",
+      "philosophers": [
+        "Robert Nozick"
+      ],
+      "era": "1974",
+      "batch": 9
+    },
+    {
+      "id": "entitlement-theory",
+      "title": "The Entitlement Theory of Justice",
+      "category": "theory",
+      "tradition": "libertarianism",
+      "philosophers": [
+        "Robert Nozick"
+      ],
+      "era": "1974",
+      "batch": 9
+    },
+    {
+      "id": "utility-monster",
+      "title": "The Utility Monster",
+      "category": "thought-experiment",
+      "tradition": "libertarianism",
+      "philosophers": [
+        "Robert Nozick"
+      ],
+      "era": "1974",
+      "batch": 9
+    },
+    {
+      "id": "wilt-chamberlain-argument",
+      "title": "The Wilt Chamberlain Argument",
+      "category": "thought-experiment",
+      "tradition": "libertarianism",
+      "philosophers": [
+        "Robert Nozick"
+      ],
+      "era": "1974",
+      "batch": 9
+    },
+    {
+      "id": "scanlonian-contractualism",
+      "title": "What We Owe to Each Other",
+      "category": "theory",
+      "tradition": "contractualism",
+      "philosophers": [
+        "T.M. Scanlon"
+      ],
+      "era": "1998",
+      "batch": 9
+    },
+    {
+      "id": "morals-by-agreement",
+      "title": "Morals by Agreement",
+      "category": "theory",
+      "tradition": "contractarianism",
+      "philosophers": [
+        "David Gauthier"
+      ],
+      "era": "1986",
+      "batch": 9
+    },
+    {
+      "id": "two-concepts-of-liberty",
+      "title": "Two Concepts of Liberty",
+      "category": "theory",
+      "tradition": "liberalism",
+      "philosophers": [
+        "Isaiah Berlin"
+      ],
+      "era": "1958",
+      "batch": 9
+    },
+    {
+      "id": "value-pluralism",
+      "title": "Value Pluralism",
+      "category": "theory",
+      "tradition": "liberalism",
+      "philosophers": [
+        "Isaiah Berlin"
+      ],
+      "era": "1969",
+      "batch": 9
+    },
+    {
+      "id": "paradox-of-tolerance",
+      "title": "The Paradox of Tolerance",
+      "category": "paradox",
+      "tradition": "liberalism",
+      "philosophers": [
+        "Karl Popper"
+      ],
+      "era": "1945",
+      "batch": 9
+    },
+    {
+      "id": "piecemeal-engineering",
+      "title": "Piecemeal Social Engineering",
+      "category": "principle",
+      "tradition": "liberalism",
+      "philosophers": [
+        "Karl Popper"
+      ],
+      "era": "1945",
+      "batch": 9
+    },
+    {
+      "id": "capabilities-approach",
+      "title": "The Capabilities Approach",
+      "category": "theory",
+      "tradition": "development-ethics",
+      "philosophers": [
+        "Amartya Sen",
+        "Martha Nussbaum"
+      ],
+      "era": "1980",
+      "batch": 9
+    },
+    {
+      "id": "idea-of-justice",
+      "title": "Comparative Justice",
+      "category": "theory",
+      "tradition": "development-ethics",
+      "philosophers": [
+        "Amartya Sen"
+      ],
+      "era": "2009",
+      "batch": 9
+    },
+    {
+      "id": "spheres-of-justice",
+      "title": "Spheres of Justice",
+      "category": "theory",
+      "tradition": "communitarianism",
+      "philosophers": [
+        "Michael Walzer"
+      ],
+      "era": "1983",
+      "batch": 9
+    },
+    {
+      "id": "dirty-hands",
+      "title": "The Problem of Dirty Hands",
+      "category": "paradox",
+      "tradition": "political-ethics",
+      "philosophers": [
+        "Michael Walzer",
+        "Jean-Paul Sartre"
+      ],
+      "era": "1973",
+      "batch": 10
+    },
+    {
+      "id": "supreme-emergency",
+      "title": "Supreme Emergency",
+      "category": "principle",
+      "tradition": "just-war-theory",
+      "philosophers": [
+        "Michael Walzer"
+      ],
+      "era": "1977",
+      "batch": 10
+    },
+    {
+      "id": "relational-equality",
+      "title": "Relational Equality",
+      "category": "theory",
+      "tradition": "egalitarianism",
+      "philosophers": [
+        "Elizabeth Anderson"
+      ],
+      "era": "1999",
+      "batch": 10
+    },
+    {
+      "id": "luck-egalitarianism",
+      "title": "Luck Egalitarianism",
+      "category": "theory",
+      "tradition": "egalitarianism",
+      "philosophers": [
+        "G.A. Cohen",
+        "Ronald Dworkin"
+      ],
+      "era": "1989",
+      "batch": 10
+    },
+    {
+      "id": "sufficientarianism",
+      "title": "Sufficientarianism",
+      "category": "theory",
+      "tradition": "egalitarianism",
+      "philosophers": [
+        "Harry Frankfurt"
+      ],
+      "era": "1987",
+      "batch": 10
+    },
+    {
+      "id": "camping-trip",
+      "title": "The Camping Trip",
+      "category": "thought-experiment",
+      "tradition": "egalitarianism",
+      "philosophers": [
+        "G.A. Cohen"
+      ],
+      "era": "2009",
+      "batch": 10
+    },
+    {
+      "id": "negative-duties-and-global-poverty",
+      "title": "Negative Duties and Global Poverty",
+      "category": "theory",
+      "tradition": "global-justice",
+      "philosophers": [
+        "Thomas Pogge"
+      ],
+      "era": "2002",
+      "batch": 10
+    },
+    {
+      "id": "repugnant-conclusion",
+      "title": "The Repugnant Conclusion",
+      "category": "paradox",
+      "tradition": "population-ethics",
+      "philosophers": [
+        "Derek Parfit"
+      ],
+      "era": "1984",
+      "batch": 10
+    },
+    {
+      "id": "non-identity-problem",
+      "title": "The Non-Identity Problem",
+      "category": "paradox",
+      "tradition": "population-ethics",
+      "philosophers": [
+        "Derek Parfit"
+      ],
+      "era": "1984",
+      "batch": 10
+    },
+    {
+      "id": "mere-addition-paradox",
+      "title": "The Mere Addition Paradox",
+      "category": "paradox",
+      "tradition": "population-ethics",
+      "philosophers": [
+        "Derek Parfit"
+      ],
+      "era": "1984",
+      "batch": 10
+    },
+    {
+      "id": "bad-faith",
+      "title": "Bad Faith",
+      "category": "term",
+      "tradition": "existentialism",
+      "philosophers": [
+        "Jean-Paul Sartre"
+      ],
+      "era": "1943",
+      "batch": 10
+    },
+    {
+      "id": "condemned-to-be-free",
+      "title": "Condemned to Be Free",
+      "category": "principle",
+      "tradition": "existentialism",
+      "philosophers": [
+        "Jean-Paul Sartre"
+      ],
+      "era": "1946",
+      "batch": 10
+    },
+    {
+      "id": "sartres-student",
+      "title": "Sartre's Student",
+      "category": "thought-experiment",
+      "tradition": "existentialism",
+      "philosophers": [
+        "Jean-Paul Sartre"
+      ],
+      "era": "1946",
+      "batch": 10
+    },
+    {
+      "id": "ethics-of-ambiguity",
+      "title": "The Ethics of Ambiguity",
+      "category": "theory",
+      "tradition": "existentialism",
+      "philosophers": [
+        "Simone de Beauvoir"
+      ],
+      "era": "1947",
+      "batch": 10
+    },
+    {
+      "id": "woman-as-other",
+      "title": "Woman as Other",
+      "category": "theory",
+      "tradition": "existentialism",
+      "philosophers": [
+        "Simone de Beauvoir"
+      ],
+      "era": "1949",
+      "batch": 10
+    },
+    {
+      "id": "the-absurd",
+      "title": "The Absurd",
+      "category": "theory",
+      "tradition": "absurdism",
+      "philosophers": [
+        "Albert Camus"
+      ],
+      "era": "1942",
+      "batch": 10
+    },
+    {
+      "id": "myth-of-sisyphus",
+      "title": "One Must Imagine Sisyphus Happy",
+      "category": "principle",
+      "tradition": "absurdism",
+      "philosophers": [
+        "Albert Camus"
+      ],
+      "era": "1942",
+      "batch": 10
+    },
+    {
+      "id": "the-rebel",
+      "title": "The Limits of Revolt",
+      "category": "theory",
+      "tradition": "absurdism",
+      "philosophers": [
+        "Albert Camus"
+      ],
+      "era": "1951",
+      "batch": 10
+    },
+    {
+      "id": "heideggerian-authenticity",
+      "title": "Authenticity and das Man",
+      "category": "theory",
+      "tradition": "phenomenology",
+      "philosophers": [
+        "Martin Heidegger"
+      ],
+      "era": "1927",
+      "batch": 10
+    },
+    {
+      "id": "face-of-the-other",
+      "title": "The Face of the Other",
+      "category": "theory",
+      "tradition": "phenomenology",
+      "philosophers": [
+        "Emmanuel Levinas"
+      ],
+      "era": "1961",
+      "batch": 10
+    },
+    {
+      "id": "i-and-thou",
+      "title": "I and Thou",
+      "category": "theory",
+      "tradition": "dialogical-philosophy",
+      "philosophers": [
+        "Martin Buber"
+      ],
+      "era": "1923",
+      "batch": 10
+    },
+    {
+      "id": "banality-of-evil",
+      "title": "The Banality of Evil",
+      "category": "theory",
+      "tradition": "political-philosophy",
+      "philosophers": [
+        "Hannah Arendt"
+      ],
+      "era": "1963",
+      "batch": 10
+    },
+    {
+      "id": "right-to-have-rights",
+      "title": "The Right to Have Rights",
+      "category": "principle",
+      "tradition": "political-philosophy",
+      "philosophers": [
+        "Hannah Arendt"
+      ],
+      "era": "1951",
+      "batch": 11
+    },
+    {
+      "id": "labor-work-action",
+      "title": "Labor, Work and Action",
+      "category": "theory",
+      "tradition": "political-philosophy",
+      "philosophers": [
+        "Hannah Arendt"
+      ],
+      "era": "1958",
+      "batch": 11
+    },
+    {
+      "id": "imperative-of-responsibility",
+      "title": "The Imperative of Responsibility",
+      "category": "principle",
+      "tradition": "environmental-ethics",
+      "philosophers": [
+        "Hans Jonas"
+      ],
+      "era": "1979",
+      "batch": 11
+    },
+    {
+      "id": "discourse-ethics",
+      "title": "Discourse Ethics",
+      "category": "theory",
+      "tradition": "critical-theory",
+      "philosophers": [
+        "Jürgen Habermas",
+        "Karl-Otto Apel"
+      ],
+      "era": "1983",
+      "batch": 11
+    },
+    {
+      "id": "dialectic-of-enlightenment",
+      "title": "The Dialectic of Enlightenment",
+      "category": "theory",
+      "tradition": "critical-theory",
+      "philosophers": [
+        "Theodor Adorno",
+        "Max Horkheimer"
+      ],
+      "era": "1944",
+      "batch": 11
+    },
+    {
+      "id": "repressive-tolerance",
+      "title": "Repressive Tolerance",
+      "category": "theory",
+      "tradition": "critical-theory",
+      "philosophers": [
+        "Herbert Marcuse"
+      ],
+      "era": "1965",
+      "batch": 11
+    },
+    {
+      "id": "angel-of-history",
+      "title": "The Angel of History",
+      "category": "thought-experiment",
+      "tradition": "critical-theory",
+      "philosophers": [
+        "Walter Benjamin"
+      ],
+      "era": "1940",
+      "batch": 11
+    },
+    {
+      "id": "biopower",
+      "title": "Biopower",
+      "category": "theory",
+      "tradition": "poststructuralism",
+      "philosophers": [
+        "Michel Foucault"
+      ],
+      "era": "1976",
+      "batch": 11
+    },
+    {
+      "id": "disciplinary-power",
+      "title": "Discipline and the Docile Body",
+      "category": "theory",
+      "tradition": "poststructuralism",
+      "philosophers": [
+        "Michel Foucault"
+      ],
+      "era": "1975",
+      "batch": 11
+    },
+    {
+      "id": "care-of-the-self",
+      "title": "The Care of the Self",
+      "category": "theory",
+      "tradition": "poststructuralism",
+      "philosophers": [
+        "Michel Foucault"
+      ],
+      "era": "1984",
+      "batch": 11
+    },
+    {
+      "id": "simulacra",
+      "title": "Simulacra and the Moral Spectacle",
+      "category": "theory",
+      "tradition": "poststructuralism",
+      "philosophers": [
+        "Jean Baudrillard"
+      ],
+      "era": "1981",
+      "batch": 11
+    },
+    {
+      "id": "incredulity-toward-metanarratives",
+      "title": "Incredulity Toward Metanarratives",
+      "category": "theory",
+      "tradition": "postmodernism",
+      "philosophers": [
+        "Jean-François Lyotard"
+      ],
+      "era": "1979",
+      "batch": 11
+    },
+    {
+      "id": "deconstruction-and-justice",
+      "title": "Justice as the Undeconstructible",
+      "category": "theory",
+      "tradition": "poststructuralism",
+      "philosophers": [
+        "Jacques Derrida"
+      ],
+      "era": "1989",
+      "batch": 11
+    },
+    {
+      "id": "fanon-on-violence",
+      "title": "Violence and Decolonisation",
+      "category": "theory",
+      "tradition": "postcolonialism",
+      "philosophers": [
+        "Frantz Fanon"
+      ],
+      "era": "1961",
+      "batch": 11
+    },
+    {
+      "id": "milgram-obedience",
+      "title": "The Milgram Obedience Experiment",
+      "category": "thought-experiment",
+      "tradition": "moral-psychology",
+      "philosophers": [
+        "Stanley Milgram"
+      ],
+      "era": "1963",
+      "batch": 11
+    },
+    {
+      "id": "stanford-prison-experiment",
+      "title": "The Stanford Prison Experiment",
+      "category": "thought-experiment",
+      "tradition": "moral-psychology",
+      "philosophers": [
+        "Philip Zimbardo"
+      ],
+      "era": "1971",
+      "batch": 11
+    },
+    {
+      "id": "asch-conformity",
+      "title": "The Asch Conformity Experiments",
+      "category": "thought-experiment",
+      "tradition": "moral-psychology",
+      "philosophers": [
+        "Solomon Asch"
+      ],
+      "era": "1951",
+      "batch": 11
+    },
+    {
+      "id": "bystander-effect",
+      "title": "The Bystander Effect",
+      "category": "theory",
+      "tradition": "moral-psychology",
+      "philosophers": [
+        "John Darley",
+        "Bibb Latané"
+      ],
+      "era": "1968",
+      "batch": 11
+    },
+    {
+      "id": "kohlberg-stages",
+      "title": "Stages of Moral Development",
+      "category": "theory",
+      "tradition": "moral-psychology",
+      "philosophers": [
+        "Lawrence Kohlberg"
+      ],
+      "era": "1958",
+      "batch": 11
+    },
+    {
+      "id": "ethics-of-care",
+      "title": "In a Different Voice",
+      "category": "theory",
+      "tradition": "care-ethics",
+      "philosophers": [
+        "Carol Gilligan"
+      ],
+      "era": "1982",
+      "batch": 11
+    },
+    {
+      "id": "noddings-caring",
+      "title": "Caring",
+      "category": "theory",
+      "tradition": "care-ethics",
+      "philosophers": [
+        "Nel Noddings"
+      ],
+      "era": "1984",
+      "batch": 11
+    },
+    {
+      "id": "moral-foundations-theory",
+      "title": "Moral Foundations Theory",
+      "category": "theory",
+      "tradition": "moral-psychology",
+      "philosophers": [
+        "Jonathan Haidt",
+        "Jesse Graham"
+      ],
+      "era": "2004",
+      "batch": 11
+    },
+    {
+      "id": "social-intuitionist-model",
+      "title": "The Rider and the Elephant",
+      "category": "theory",
+      "tradition": "moral-psychology",
+      "philosophers": [
+        "Jonathan Haidt"
+      ],
+      "era": "2001",
+      "batch": 12
+    },
+    {
+      "id": "dual-process-morality",
+      "title": "Dual-Process Moral Psychology",
+      "category": "theory",
+      "tradition": "moral-psychology",
+      "philosophers": [
+        "Joshua Greene"
+      ],
+      "era": "2001",
+      "batch": 12
+    },
+    {
+      "id": "against-empathy",
+      "title": "Against Empathy",
+      "category": "theory",
+      "tradition": "moral-psychology",
+      "philosophers": [
+        "Paul Bloom"
+      ],
+      "era": "2016",
+      "batch": 12
+    },
+    {
+      "id": "reciprocal-altruism",
+      "title": "Reciprocal Altruism",
+      "category": "theory",
+      "tradition": "evolutionary-ethics",
+      "philosophers": [
+        "Robert Trivers"
+      ],
+      "era": "1971",
+      "batch": 12
+    },
+    {
+      "id": "kin-selection",
+      "title": "Kin Selection",
+      "category": "theory",
+      "tradition": "evolutionary-ethics",
+      "philosophers": [
+        "W.D. Hamilton"
+      ],
+      "era": "1964",
+      "batch": 12
+    },
+    {
+      "id": "tit-for-tat",
+      "title": "Tit for Tat",
+      "category": "principle",
+      "tradition": "game-theory",
+      "philosophers": [
+        "Robert Axelrod",
+        "Anatol Rapoport"
+      ],
+      "era": "1984",
+      "batch": 12
+    },
+    {
+      "id": "prisoners-dilemma",
+      "title": "The Prisoner's Dilemma",
+      "category": "paradox",
+      "tradition": "game-theory",
+      "philosophers": [
+        "Merrill Flood",
+        "Albert Tucker"
+      ],
+      "era": "1950",
+      "batch": 12
+    },
+    {
+      "id": "tragedy-of-the-commons",
+      "title": "The Tragedy of the Commons",
+      "category": "paradox",
+      "tradition": "game-theory",
+      "philosophers": [
+        "Garrett Hardin",
+        "William Forster Lloyd"
+      ],
+      "era": "1968",
+      "batch": 12
+    },
+    {
+      "id": "ultimatum-game",
+      "title": "The Ultimatum Game",
+      "category": "thought-experiment",
+      "tradition": "game-theory",
+      "philosophers": [
+        "Werner Güth"
+      ],
+      "era": "1982",
+      "batch": 12
+    },
+    {
+      "id": "free-rider-problem",
+      "title": "The Free Rider Problem",
+      "category": "paradox",
+      "tradition": "game-theory",
+      "philosophers": [
+        "Mancur Olson"
+      ],
+      "era": "1965",
+      "batch": 12
+    },
+    {
+      "id": "newcombs-problem",
+      "title": "Newcomb's Problem",
+      "category": "paradox",
+      "tradition": "decision-theory",
+      "philosophers": [
+        "William Newcomb",
+        "Robert Nozick"
+      ],
+      "era": "1969",
+      "batch": 12
+    },
+    {
+      "id": "moral-licensing",
+      "title": "Moral Licensing",
+      "category": "term",
+      "tradition": "moral-psychology",
+      "philosophers": [
+        "Benoît Monin",
+        "Dale Miller"
+      ],
+      "era": "2001",
+      "batch": 12
+    },
+    {
+      "id": "moral-luck",
+      "title": "Moral Luck",
+      "category": "paradox",
+      "tradition": "analytic-ethics",
+      "philosophers": [
+        "Bernard Williams",
+        "Thomas Nagel"
+      ],
+      "era": "1976",
+      "batch": 12
+    },
+    {
+      "id": "agent-regret",
+      "title": "Agent-Regret",
+      "category": "term",
+      "tradition": "analytic-ethics",
+      "philosophers": [
+        "Bernard Williams"
+      ],
+      "era": "1976",
+      "batch": 12
+    },
+    {
+      "id": "one-thought-too-many",
+      "title": "One Thought Too Many",
+      "category": "principle",
+      "tradition": "analytic-ethics",
+      "philosophers": [
+        "Bernard Williams"
+      ],
+      "era": "1981",
+      "batch": 12
+    },
+    {
+      "id": "frankfurt-cases",
+      "title": "Frankfurt Cases",
+      "category": "thought-experiment",
+      "tradition": "free-will",
+      "philosophers": [
+        "Harry Frankfurt"
+      ],
+      "era": "1969",
+      "batch": 12
+    },
+    {
+      "id": "reactive-attitudes",
+      "title": "Freedom and Resentment",
+      "category": "theory",
+      "tradition": "free-will",
+      "philosophers": [
+        "P.F. Strawson"
+      ],
+      "era": "1962",
+      "batch": 12
+    },
+    {
+      "id": "basic-argument",
+      "title": "The Basic Argument",
+      "category": "paradox",
+      "tradition": "free-will",
+      "philosophers": [
+        "Galen Strawson"
+      ],
+      "era": "1994",
+      "batch": 12
+    },
+    {
+      "id": "jim-and-the-indians",
+      "title": "Jim and the Indians",
+      "category": "thought-experiment",
+      "tradition": "analytic-ethics",
+      "philosophers": [
+        "Bernard Williams"
+      ],
+      "era": "1973",
+      "batch": 12
+    },
+    {
+      "id": "drowning-child",
+      "title": "The Drowning Child",
+      "category": "thought-experiment",
+      "tradition": "applied-ethics",
+      "philosophers": [
+        "Peter Singer"
+      ],
+      "era": "1972",
+      "batch": 12
+    },
+    {
+      "id": "speciesism",
+      "title": "Speciesism",
+      "category": "theory",
+      "tradition": "animal-ethics",
+      "philosophers": [
+        "Peter Singer",
+        "Richard Ryder"
+      ],
+      "era": "1975",
+      "batch": 12
+    },
+    {
+      "id": "effective-altruism",
+      "title": "Effective Altruism",
+      "category": "theory",
+      "tradition": "applied-ethics",
+      "philosophers": [
+        "Peter Singer",
+        "William MacAskill"
+      ],
+      "era": "2011",
+      "batch": 12
+    },
+    {
+      "id": "subject-of-a-life",
+      "title": "The Subject-of-a-Life Criterion",
+      "category": "theory",
+      "tradition": "animal-ethics",
+      "philosophers": [
+        "Tom Regan"
+      ],
+      "era": "1983",
+      "batch": 13
+    },
+    {
+      "id": "land-ethic",
+      "title": "The Land Ethic",
+      "category": "theory",
+      "tradition": "environmental-ethics",
+      "philosophers": [
+        "Aldo Leopold"
+      ],
+      "era": "1949",
+      "batch": 13
+    },
+    {
+      "id": "deep-ecology",
+      "title": "Deep Ecology",
+      "category": "theory",
+      "tradition": "environmental-ethics",
+      "philosophers": [
+        "Arne Naess"
+      ],
+      "era": "1973",
+      "batch": 13
+    },
+    {
+      "id": "lifeboat-ethics",
+      "title": "Lifeboat Ethics",
+      "category": "thought-experiment",
+      "tradition": "environmental-ethics",
+      "philosophers": [
+        "Garrett Hardin"
+      ],
+      "era": "1974",
+      "batch": 13
+    },
+    {
+      "id": "procreative-beneficence",
+      "title": "Procreative Beneficence",
+      "category": "principle",
+      "tradition": "bioethics",
+      "philosophers": [
+        "Julian Savulescu"
+      ],
+      "era": "2001",
+      "batch": 13
+    },
+    {
+      "id": "case-against-perfection",
+      "title": "The Case Against Perfection",
+      "category": "theory",
+      "tradition": "bioethics",
+      "philosophers": [
+        "Michael Sandel"
+      ],
+      "era": "2007",
+      "batch": 13
+    },
+    {
+      "id": "wisdom-of-repugnance",
+      "title": "The Wisdom of Repugnance",
+      "category": "principle",
+      "tradition": "bioethics",
+      "philosophers": [
+        "Leon Kass"
+      ],
+      "era": "1997",
+      "batch": 13
+    },
+    {
+      "id": "ticking-time-bomb",
+      "title": "The Ticking Time Bomb",
+      "category": "thought-experiment",
+      "tradition": "applied-ethics",
+      "philosophers": [
+        "Michael Walzer",
+        "Alan Dershowitz"
+      ],
+      "era": "1973",
+      "batch": 13
+    },
+    {
+      "id": "superior-orders",
+      "title": "Superior Orders",
+      "category": "principle",
+      "tradition": "legal-ethics",
+      "philosophers": [
+        "Nuremberg Tribunal"
+      ],
+      "era": "1946",
+      "batch": 13
+    },
+    {
+      "id": "radbruch-formula",
+      "title": "The Radbruch Formula",
+      "category": "principle",
+      "tradition": "legal-philosophy",
+      "philosophers": [
+        "Gustav Radbruch"
+      ],
+      "era": "1946",
+      "batch": 13
+    },
+    {
+      "id": "hart-devlin-debate",
+      "title": "The Hart–Devlin Debate",
+      "category": "theory",
+      "tradition": "legal-philosophy",
+      "philosophers": [
+        "H.L.A. Hart",
+        "Patrick Devlin"
+      ],
+      "era": "1959",
+      "batch": 13
+    },
+    {
+      "id": "hart-fuller-debate",
+      "title": "The Hart–Fuller Debate",
+      "category": "theory",
+      "tradition": "legal-philosophy",
+      "philosophers": [
+        "H.L.A. Hart",
+        "Lon Fuller"
+      ],
+      "era": "1958",
+      "batch": 13
+    },
+    {
+      "id": "retributivism",
+      "title": "Retributivism",
+      "category": "theory",
+      "tradition": "punishment",
+      "philosophers": [
+        "Immanuel Kant",
+        "Michael Moore"
+      ],
+      "era": "1797",
+      "batch": 13
+    },
+    {
+      "id": "restorative-justice",
+      "title": "Restorative Justice",
+      "category": "theory",
+      "tradition": "punishment",
+      "philosophers": [
+        "Howard Zehr"
+      ],
+      "era": "1990",
+      "batch": 13
+    },
+    {
+      "id": "prison-abolition",
+      "title": "Prison Abolition",
+      "category": "theory",
+      "tradition": "punishment",
+      "philosophers": [
+        "Angela Davis"
+      ],
+      "era": "2003",
+      "batch": 13
+    },
+    {
+      "id": "epistemic-injustice",
+      "title": "Epistemic Injustice",
+      "category": "theory",
+      "tradition": "social-epistemology",
+      "philosophers": [
+        "Miranda Fricker"
+      ],
+      "era": "2007",
+      "batch": 13
+    },
+    {
+      "id": "social-connection-model",
+      "title": "The Social Connection Model",
+      "category": "theory",
+      "tradition": "political-philosophy",
+      "philosophers": [
+        "Iris Marion Young"
+      ],
+      "era": "2006",
+      "batch": 13
+    },
+    {
+      "id": "cosmopolitanism",
+      "title": "Cosmopolitanism",
+      "category": "theory",
+      "tradition": "global-ethics",
+      "philosophers": [
+        "Kwame Anthony Appiah"
+      ],
+      "era": "2006",
+      "batch": 13
+    },
+    {
+      "id": "honor-codes",
+      "title": "Honour Codes and Moral Revolutions",
+      "category": "theory",
+      "tradition": "global-ethics",
+      "philosophers": [
+        "Kwame Anthony Appiah"
+      ],
+      "era": "2010",
+      "batch": 13
+    },
+    {
+      "id": "tyranny-of-merit",
+      "title": "The Tyranny of Merit",
+      "category": "theory",
+      "tradition": "communitarianism",
+      "philosophers": [
+        "Michael Sandel"
+      ],
+      "era": "2020",
+      "batch": 13
+    },
+    {
+      "id": "moral-limits-of-markets",
+      "title": "What Money Cannot Buy",
+      "category": "theory",
+      "tradition": "communitarianism",
+      "philosophers": [
+        "Michael Sandel"
+      ],
+      "era": "2012",
+      "batch": 13
+    },
+    {
+      "id": "moral-saints",
+      "title": "Moral Saints",
+      "category": "paradox",
+      "tradition": "analytic-ethics",
+      "philosophers": [
+        "Susan Wolf"
+      ],
+      "era": "1982",
+      "batch": 13
+    },
+    {
+      "id": "sovereignty-of-good",
+      "title": "The Sovereignty of Good",
+      "category": "theory",
+      "tradition": "moral-realism",
+      "philosophers": [
+        "Iris Murdoch"
+      ],
+      "era": "1970",
+      "batch": 14
+    },
+    {
+      "id": "attention-and-affliction",
+      "title": "Attention and Affliction",
+      "category": "theory",
+      "tradition": "christian-mysticism",
+      "philosophers": [
+        "Simone Weil"
+      ],
+      "era": "1942",
+      "batch": 14
+    },
+    {
+      "id": "the-poem-of-force",
+      "title": "The Iliad, or the Poem of Force",
+      "category": "theory",
+      "tradition": "christian-mysticism",
+      "philosophers": [
+        "Simone Weil"
+      ],
+      "era": "1939",
+      "batch": 14
+    },
+    {
+      "id": "living-in-truth",
+      "title": "Living in Truth",
+      "category": "principle",
+      "tradition": "dissident-philosophy",
+      "philosophers": [
+        "Václav Havel"
+      ],
+      "era": "1978",
+      "batch": 14
+    },
+    {
+      "id": "letter-from-birmingham-jail",
+      "title": "Just and Unjust Laws",
+      "category": "principle",
+      "tradition": "civil-rights-philosophy",
+      "philosophers": [
+        "Martin Luther King Jr."
+      ],
+      "era": "1963",
+      "batch": 14
+    },
+    {
+      "id": "satyagraha",
+      "title": "Satyagraha",
+      "category": "theory",
+      "tradition": "nonviolence",
+      "philosophers": [
+        "Mohandas Gandhi"
+      ],
+      "era": "1919",
+      "batch": 14
+    },
+    {
+      "id": "by-any-means-necessary",
+      "title": "By Any Means Necessary",
+      "category": "principle",
+      "tradition": "black-radical-tradition",
+      "philosophers": [
+        "Malcolm X",
+        "Jean-Paul Sartre"
+      ],
+      "era": "1964",
+      "batch": 14
+    },
+    {
+      "id": "love-ethic",
+      "title": "The Love Ethic",
+      "category": "theory",
+      "tradition": "feminist-ethics",
+      "philosophers": [
+        "bell hooks"
+      ],
+      "era": "2000",
+      "batch": 14
+    },
+    {
+      "id": "prophetic-pragmatism",
+      "title": "Prophetic Pragmatism",
+      "category": "theory",
+      "tradition": "pragmatism",
+      "philosophers": [
+        "Cornel West"
+      ],
+      "era": "1989",
+      "batch": 14
+    },
+    {
+      "id": "after-virtue",
+      "title": "After Virtue",
+      "category": "theory",
+      "tradition": "virtue-ethics",
+      "philosophers": [
+        "Alasdair MacIntyre"
+      ],
+      "era": "1981",
+      "batch": 14
+    },
+    {
+      "id": "practices-and-internal-goods",
+      "title": "Practices and Internal Goods",
+      "category": "theory",
+      "tradition": "virtue-ethics",
+      "philosophers": [
+        "Alasdair MacIntyre"
+      ],
+      "era": "1981",
+      "batch": 14
+    },
+    {
+      "id": "sources-of-the-self",
+      "title": "Sources of the Self",
+      "category": "theory",
+      "tradition": "communitarianism",
+      "philosophers": [
+        "Charles Taylor"
+      ],
+      "era": "1989",
+      "batch": 14
+    },
+    {
+      "id": "natural-goodness",
+      "title": "Natural Goodness",
+      "category": "theory",
+      "tradition": "virtue-ethics",
+      "philosophers": [
+        "Philippa Foot"
+      ],
+      "era": "2001",
+      "batch": 14
+    },
+    {
+      "id": "sources-of-normativity",
+      "title": "The Sources of Normativity",
+      "category": "theory",
+      "tradition": "kantian-ethics",
+      "philosophers": [
+        "Christine Korsgaard"
+      ],
+      "era": "1996",
+      "batch": 14
+    },
+    {
+      "id": "fragility-of-goodness",
+      "title": "The Fragility of Goodness",
+      "category": "theory",
+      "tradition": "virtue-ethics",
+      "philosophers": [
+        "Martha Nussbaum"
+      ],
+      "era": "1986",
+      "batch": 14
+    },
+    {
+      "id": "anger-and-forgiveness",
+      "title": "Anger and Forgiveness",
+      "category": "theory",
+      "tradition": "virtue-ethics",
+      "philosophers": [
+        "Martha Nussbaum"
+      ],
+      "era": "2016",
+      "batch": 14
+    },
+    {
+      "id": "moral-landscape",
+      "title": "The Moral Landscape",
+      "category": "theory",
+      "tradition": "moral-naturalism",
+      "philosophers": [
+        "Sam Harris"
+      ],
+      "era": "2010",
+      "batch": 14
+    },
+    {
+      "id": "harris-on-free-will",
+      "title": "Free Will as Illusion",
+      "category": "theory",
+      "tradition": "free-will",
+      "philosophers": [
+        "Sam Harris"
+      ],
+      "era": "2012",
+      "batch": 14
+    },
+    {
+      "id": "hierarchy-and-responsibility",
+      "title": "Hierarchy, Competence and Responsibility",
+      "category": "theory",
+      "tradition": "jungian-ethics",
+      "philosophers": [
+        "Jordan Peterson"
+      ],
+      "era": "2018",
+      "batch": 14
+    },
+    {
+      "id": "chaos-and-order",
+      "title": "Chaos and Order",
+      "category": "theory",
+      "tradition": "jungian-ethics",
+      "philosophers": [
+        "Jordan Peterson",
+        "Carl Jung"
+      ],
+      "era": "1999",
+      "batch": 14
+    },
+    {
+      "id": "speak-the-truth",
+      "title": "Tell the Truth, or at Least Do Not Lie",
+      "category": "principle",
+      "tradition": "jungian-ethics",
+      "philosophers": [
+        "Jordan Peterson"
+      ],
+      "era": "2018",
+      "batch": 14
+    },
+    {
+      "id": "systemic-violence",
+      "title": "Subjective and Systemic Violence",
+      "category": "theory",
+      "tradition": "critical-theory",
+      "philosophers": [
+        "Slavoj Žižek"
+      ],
+      "era": "2008",
+      "batch": 14
+    },
+    {
+      "id": "grievable-life",
+      "title": "Precarity and the Grievable Life",
+      "category": "theory",
+      "tradition": "feminist-ethics",
+      "philosophers": [
+        "Judith Butler"
+      ],
+      "era": "2004",
+      "batch": 15
+    },
+    {
+      "id": "performativity",
+      "title": "Performativity and Moral Identity",
+      "category": "theory",
+      "tradition": "feminist-ethics",
+      "philosophers": [
+        "Judith Butler"
+      ],
+      "era": "1990",
+      "batch": 15
+    },
+    {
+      "id": "burnout-society",
+      "title": "The Burnout Society",
+      "category": "theory",
+      "tradition": "contemporary-critique",
+      "philosophers": [
+        "Byung-Chul Han"
+      ],
+      "era": "2010",
+      "batch": 15
+    },
+    {
+      "id": "transparency-society",
+      "title": "The Transparency Society",
+      "category": "theory",
+      "tradition": "contemporary-critique",
+      "philosophers": [
+        "Byung-Chul Han"
+      ],
+      "era": "2012",
+      "batch": 15
+    },
+    {
+      "id": "paperclip-maximizer",
+      "title": "The Paperclip Maximizer",
+      "category": "thought-experiment",
+      "tradition": "machine-ethics",
+      "philosophers": [
+        "Nick Bostrom"
+      ],
+      "era": "2003",
+      "batch": 15
+    },
+    {
+      "id": "instrumental-convergence",
+      "title": "Instrumental Convergence",
+      "category": "theory",
+      "tradition": "machine-ethics",
+      "philosophers": [
+        "Nick Bostrom",
+        "Steve Omohundro"
+      ],
+      "era": "2008",
+      "batch": 15
+    },
+    {
+      "id": "longtermism",
+      "title": "Longtermism",
+      "category": "theory",
+      "tradition": "applied-ethics",
+      "philosophers": [
+        "William MacAskill",
+        "Toby Ord"
+      ],
+      "era": "2022",
+      "batch": 15
+    },
+    {
+      "id": "the-precipice",
+      "title": "Existential Risk and the Precipice",
+      "category": "theory",
+      "tradition": "applied-ethics",
+      "philosophers": [
+        "Toby Ord"
+      ],
+      "era": "2020",
+      "batch": 15
+    },
+    {
+      "id": "moral-status-of-machines",
+      "title": "The Moral Status of Machines",
+      "category": "theory",
+      "tradition": "machine-ethics",
+      "philosophers": [
+        "Nick Bostrom",
+        "Eliezer Yudkowsky"
+      ],
+      "era": "2011",
+      "batch": 15
+    },
+    {
+      "id": "value-alignment",
+      "title": "The Value Alignment Problem",
+      "category": "theory",
+      "tradition": "machine-ethics",
+      "philosophers": [
+        "Stuart Russell"
+      ],
+      "era": "2019",
+      "batch": 15
+    },
+    {
+      "id": "doing-and-allowing",
+      "title": "The Doctrine of Doing and Allowing",
+      "category": "principle",
+      "tradition": "analytic-ethics",
+      "philosophers": [
+        "Warren Quinn",
+        "Philippa Foot"
+      ],
+      "era": "1989",
+      "batch": 15
+    },
+    {
+      "id": "acts-and-omissions",
+      "title": "Acts and Omissions",
+      "category": "principle",
+      "tradition": "analytic-ethics",
+      "philosophers": [
+        "Jonathan Glover"
+      ],
+      "era": "1977",
+      "batch": 15
+    },
+    {
+      "id": "ought-implies-can",
+      "title": "Ought Implies Can",
+      "category": "principle",
+      "tradition": "kantian-ethics",
+      "philosophers": [
+        "Immanuel Kant"
+      ],
+      "era": "1781",
+      "batch": 15
+    },
+    {
+      "id": "supererogation",
+      "title": "Supererogation",
+      "category": "term",
+      "tradition": "analytic-ethics",
+      "philosophers": [
+        "J.O. Urmson"
+      ],
+      "era": "1958",
+      "batch": 15
+    },
+    {
+      "id": "moral-residue",
+      "title": "Moral Residue",
+      "category": "term",
+      "tradition": "analytic-ethics",
+      "philosophers": [
+        "Bernard Williams",
+        "Ruth Barcan Marcus"
+      ],
+      "era": "1980",
+      "batch": 15
+    },
+    {
+      "id": "threshold-deontology",
+      "title": "Threshold Deontology",
+      "category": "theory",
+      "tradition": "deontology",
+      "philosophers": [
+        "Michael Moore",
+        "Larry Alexander"
+      ],
+      "era": "1997",
+      "batch": 15
+    },
+    {
+      "id": "agent-relative-reasons",
+      "title": "Agent-Relative and Agent-Neutral Reasons",
+      "category": "term",
+      "tradition": "analytic-ethics",
+      "philosophers": [
+        "Thomas Nagel",
+        "Derek Parfit"
+      ],
+      "era": "1986",
+      "batch": 15
+    },
+    {
+      "id": "moral-grandstanding",
+      "title": "Moral Grandstanding",
+      "category": "term",
+      "tradition": "moral-psychology",
+      "philosophers": [
+        "Justin Tosi",
+        "Brandon Warmke"
+      ],
+      "era": "2016",
+      "batch": 15
+    },
+    {
+      "id": "moral-injury",
+      "title": "Moral Injury",
+      "category": "term",
+      "tradition": "moral-psychology",
+      "philosophers": [
+        "Jonathan Shay"
+      ],
+      "era": "1994",
+      "batch": 15
+    },
+    {
+      "id": "collective-responsibility",
+      "title": "Collective Responsibility",
+      "category": "theory",
+      "tradition": "political-philosophy",
+      "philosophers": [
+        "Karl Jaspers",
+        "Joel Feinberg"
+      ],
+      "era": "1947",
+      "batch": 15
+    },
+    {
+      "id": "complicity",
+      "title": "Complicity",
+      "category": "term",
+      "tradition": "political-philosophy",
+      "philosophers": [
+        "Christopher Kutz"
+      ],
+      "era": "2000",
+      "batch": 15
+    },
+    {
+      "id": "moral-testimony",
+      "title": "Moral Testimony and Deference",
+      "category": "paradox",
+      "tradition": "social-epistemology",
+      "philosophers": [
+        "Alison Hills",
+        "Robert Hopkins"
+      ],
+      "era": "2009",
+      "batch": 15
+    },
+    {
+      "id": "ship-of-theseus",
+      "title": "The Ship of Theseus and Moral Identity",
+      "category": "paradox",
+      "tradition": "personal-identity",
+      "philosophers": [
+        "Plutarch",
+        "Thomas Hobbes"
+      ],
+      "era": "c. 100 CE",
+      "batch": 16
+    },
+    {
+      "id": "sophies-choice",
+      "title": "Sophie's Choice",
+      "category": "thought-experiment",
+      "tradition": "applied-ethics",
+      "philosophers": [
+        "William Styron",
+        "Ruth Barcan Marcus"
+      ],
+      "era": "1979",
+      "batch": 16
+    },
+    {
+      "id": "omelas",
+      "title": "The Ones Who Walk Away from Omelas",
+      "category": "thought-experiment",
+      "tradition": "literary-ethics",
+      "philosophers": [
+        "Ursula K. Le Guin",
+        "William James"
+      ],
+      "era": "1973",
+      "batch": 16
+    },
+    {
+      "id": "moral-relativism",
+      "title": "Moral Relativism",
+      "category": "theory",
+      "tradition": "metaethics",
+      "philosophers": [
+        "Gilbert Harman",
+        "Michel de Montaigne"
+      ],
+      "era": "1975",
+      "batch": 16
+    },
+    {
+      "id": "moral-absolutism",
+      "title": "Moral Absolutism",
+      "category": "theory",
+      "tradition": "metaethics",
+      "philosophers": [
+        "G.E.M. Anscombe",
+        "Immanuel Kant"
+      ],
+      "era": "1958",
+      "batch": 16
+    },
+    {
+      "id": "moral-nihilism",
+      "title": "Moral Nihilism",
+      "category": "theory",
+      "tradition": "metaethics",
+      "philosophers": [
+        "Friedrich Nietzsche",
+        "J.L. Mackie"
+      ],
+      "era": "1887",
+      "batch": 16
+    },
+    {
+      "id": "doublethink",
+      "title": "Doublethink",
+      "category": "term",
+      "tradition": "literary-ethics",
+      "philosophers": [
+        "George Orwell"
+      ],
+      "era": "1949",
+      "batch": 16
+    },
+    {
+      "id": "newspeak",
+      "title": "Newspeak and the Corruption of Moral Language",
+      "category": "theory",
+      "tradition": "literary-ethics",
+      "philosophers": [
+        "George Orwell"
+      ],
+      "era": "1949",
+      "batch": 16
+    },
+    {
+      "id": "shooting-an-elephant",
+      "title": "Shooting an Elephant",
+      "category": "thought-experiment",
+      "tradition": "literary-ethics",
+      "philosophers": [
+        "George Orwell"
+      ],
+      "era": "1936",
+      "batch": 16
+    },
+    {
+      "id": "notes-on-nationalism",
+      "title": "Notes on Nationalism",
+      "category": "theory",
+      "tradition": "literary-ethics",
+      "philosophers": [
+        "George Orwell"
+      ],
+      "era": "1945",
+      "batch": 16
+    },
+    {
+      "id": "brave-new-world",
+      "title": "Soma and Manufactured Consent",
+      "category": "thought-experiment",
+      "tradition": "literary-ethics",
+      "philosophers": [
+        "Aldous Huxley"
+      ],
+      "era": "1932",
+      "batch": 16
+    },
+    {
+      "id": "russell-on-ethics",
+      "title": "Ethics Without Absolutes",
+      "category": "theory",
+      "tradition": "analytic-philosophy",
+      "philosophers": [
+        "Bertrand Russell"
+      ],
+      "era": "1935",
+      "batch": 16
+    },
+    {
+      "id": "russells-teapot",
+      "title": "Russell's Teapot",
+      "category": "thought-experiment",
+      "tradition": "analytic-philosophy",
+      "philosophers": [
+        "Bertrand Russell"
+      ],
+      "era": "1952",
+      "batch": 16
+    },
+    {
+      "id": "conscientious-objection",
+      "title": "Conscientious Objection",
+      "category": "principle",
+      "tradition": "analytic-philosophy",
+      "philosophers": [
+        "Bertrand Russell"
+      ],
+      "era": "1916",
+      "batch": 16
+    },
+    {
+      "id": "russell-einstein-manifesto",
+      "title": "The Russell–Einstein Manifesto",
+      "category": "principle",
+      "tradition": "analytic-philosophy",
+      "philosophers": [
+        "Bertrand Russell",
+        "Albert Einstein"
+      ],
+      "era": "1955",
+      "batch": 16
+    },
+    {
+      "id": "superego",
+      "title": "The Superego and Civilisation",
+      "category": "theory",
+      "tradition": "psychoanalysis",
+      "philosophers": [
+        "Sigmund Freud"
+      ],
+      "era": "1930",
+      "batch": 16
+    },
+    {
+      "id": "two-sources-of-morality",
+      "title": "The Two Sources of Morality and Religion",
+      "category": "theory",
+      "tradition": "process-philosophy",
+      "philosophers": [
+        "Henri Bergson"
+      ],
+      "era": "1932",
+      "batch": 16
+    },
+    {
+      "id": "trolley-problem",
+      "title": "The Trolley Problem",
+      "category": "thought-experiment",
+      "tradition": "analytic-ethics",
+      "philosophers": [
+        "Philippa Foot",
+        "Judith Jarvis Thomson"
+      ],
+      "era": "1967",
+      "batch": 16
+    },
+    {
+      "id": "the-violinist",
+      "title": "The Violinist",
+      "category": "thought-experiment",
+      "tradition": "applied-ethics",
+      "philosophers": [
+        "Judith Jarvis Thomson"
+      ],
+      "era": "1971",
+      "batch": 16
+    },
+    {
+      "id": "veil-of-perception",
+      "title": "Ethical Egoism",
+      "category": "theory",
+      "tradition": "egoism",
+      "philosophers": [
+        "Ayn Rand",
+        "Max Stirner"
+      ],
+      "era": "1964",
+      "batch": 16
+    },
+    {
+      "id": "the-virtue-of-selfishness",
+      "title": "Rational Self-Interest",
+      "category": "theory",
+      "tradition": "objectivism",
+      "philosophers": [
+        "Ayn Rand"
+      ],
+      "era": "1964",
+      "batch": 16
+    },
+    {
+      "id": "stirner-the-unique",
+      "title": "The Unique and Its Property",
+      "category": "theory",
+      "tradition": "egoism",
+      "philosophers": [
+        "Max Stirner"
+      ],
+      "era": "1844",
+      "batch": 16
+    }
+  ]
+}
