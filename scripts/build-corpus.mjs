@@ -17,6 +17,8 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { parse } from 'yaml';
+import { THEMES, inTheme } from '../data/themes.mjs';
+import { PHILOSOPHERS } from '../data/philosophers.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIR = join(ROOT, 'theories');
@@ -88,6 +90,20 @@ for (const meta of registry.entries) {
   });
 }
 
+// Themes are computed, not stored, so an entry written tomorrow files itself.
+const themes = THEMES.map((theme) => {
+  const members = entries.filter((e) => inTheme(e, theme));
+  return {
+    id: theme.id,
+    name: theme.name,
+    blurb: theme.blurb,
+    entries: members.map((e) => e.id),
+    questions: members.reduce((n, e) => n + e.questions.length, 0),
+  };
+});
+
+const orphans = entries.filter((e) => !themes.some((t) => t.entries.includes(e.id)));
+
 const questionCount = entries.reduce((n, e) => n + e.questions.length, 0);
 
 const corpus = {
@@ -95,9 +111,10 @@ const corpus = {
   written: entries.length,
   planned: registry.count,
   questions: questionCount,
-  philosophers: [...new Set(entries.flatMap((e) => e.philosophers))].length,
   traditions: [...new Set(entries.map((e) => e.tradition))].length,
   entries,
+  themes,
+  philosophers: PHILOSOPHERS,
 };
 
 const out = join(ROOT, 'web', 'src', 'corpus.generated.json');
@@ -106,6 +123,18 @@ writeFileSync(out, `${JSON.stringify(corpus)}\n`);
 const kb = (readFileSync(out).length / 1024).toFixed(0);
 console.log(
   `${entries.length}/${registry.count} entries · ${questionCount} questions · ` +
-    `${corpus.philosophers} thinkers · ${corpus.traditions} traditions · ${kb} kB`,
+    `${PHILOSOPHERS.length} on the bench · ${corpus.traditions} traditions · ${kb} kB`,
 );
-if (skipped.length) console.log(`${skipped.length} not yet written`);
+if (skipped.length) console.log(`${skipped.length} entries not yet written`);
+
+// A theme with fewer than five questions cannot run a five-question test, so it is
+// reported rather than silently offered and then failing in front of a visitor.
+const TEST_LENGTH = 5;
+const thin = themes.filter((t) => t.questions < TEST_LENGTH);
+console.log(
+  `${themes.length} themes · ${themes.length - thin.length} ready` +
+    (thin.length ? ` · thin: ${thin.map((t) => `${t.id}(${t.questions}q)`).join(', ')}` : ''),
+);
+if (orphans.length) {
+  console.log(`${orphans.length} entries match no theme: ${orphans.slice(0, 8).map((e) => e.id).join(', ')}`);
+}

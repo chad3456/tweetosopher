@@ -70,6 +70,42 @@ export const TRACKS = [
   { id: 'long', label: 'Full sitting', questions: 40, note: 'Every tradition the corpus can reach.' },
 ];
 
+/** How many questions one themed test asks. */
+export const TEST_LENGTH = 5;
+
+/**
+ * The tests offered inside one theme.
+ *
+ * A theme is not one test but a series, each drawing a different five questions from
+ * the same material, so somebody can come back without being asked what they already
+ * answered. The count is derived from how much the theme actually holds rather than
+ * fixed, because promising eight tests over twelve questions would mean serving the
+ * same five in a new order and calling it new.
+ */
+export function testsFor(corpus, themeId, { maxTests = 8 } = {}) {
+  const theme = (corpus.themes ?? []).find((t) => t.id === themeId);
+  if (!theme) return [];
+  const entries = theme.entries.map((id) => corpus.byId.get(id)).filter((e) => e?.questions?.length);
+  const available = entries.reduce((n, e) => n + e.questions.length, 0);
+  if (available < TEST_LENGTH) return [];
+
+  const count = Math.max(1, Math.min(maxTests, Math.floor(available / TEST_LENGTH)));
+  return Array.from({ length: count }, (_, i) => ({
+    id: `${themeId}-${i + 1}`,
+    theme,
+    number: i + 1,
+    of: count,
+    seed: seedFrom(`${themeId}#${i + 1}`),
+  }));
+}
+
+/** The five questions of one themed test. */
+export function buildTest(corpus, test) {
+  const theme = test.theme;
+  const entries = theme.entries.map((id) => corpus.byId.get(id)).filter((e) => e?.questions?.length);
+  return buildSitting({ entries }, TEST_LENGTH, test.seed);
+}
+
 /**
  * @param {object} corpus compiled corpus (needs `entries`)
  * @param {number} count how many questions to ask

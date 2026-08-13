@@ -54,6 +54,71 @@ written. To see only real defects in what exists:
 npm run validate 2>&1 | grep -v "missing — every registry id needs a file"
 ```
 
+
+## Deploying to Vercel
+
+The Test of Morality is fully static — it computes in the browser — so it deploys as a
+static site with nothing to configure. Tweetosopher's live analysis is the only part that
+needs a server, and it ships as one serverless function that the test never calls.
+
+### From the dashboard
+
+1. Push the branch to GitHub.
+2. At **vercel.com/new**, import `chad3456/tweetosopher`.
+3. Vercel reads `vercel.json` and fills everything in — framework Vite, build
+   `npm run build`, output `dist`. Change nothing.
+4. Under **Environment Variables**, add these only if you want Tweetosopher to do live
+   analysis. **The Test of Morality needs none of them and works without any.**
+
+   | name | needed for | notes |
+   | --- | --- | --- |
+   | `ANTHROPIC_API_KEY` | Tweetosopher live analysis | without it, it serves a demo archive |
+   | `X_BEARER_TOKEN` | reading a timeline | app-only token from the X developer portal |
+   | `X_USER_ACCESS_TOKEN` | reading likes | OAuth 2.0 user token with `likes.read` |
+   | `X_DEPTH` | how far back to read | `fast`, `standard` or `deep` |
+
+5. **Deploy.** First build takes about a minute.
+
+### From the CLI
+
+```bash
+npm i -g vercel
+vercel login
+vercel                 # preview deployment, prints a URL
+vercel --prod          # promote to production
+```
+
+Adding env vars from the CLI, if you want them:
+
+```bash
+vercel env add ANTHROPIC_API_KEY production
+vercel env add X_BEARER_TOKEN production
+vercel --prod          # redeploy so the function picks them up
+```
+
+### Verifying the deployment
+
+```bash
+curl -s https://YOUR-DEPLOYMENT.vercel.app/ -o /dev/null -w "%{http_code}\n"          # 200
+curl -s https://YOUR-DEPLOYMENT.vercel.app/tweetosopher.html -o /dev/null -w "%{http_code}\n"
+curl -s https://YOUR-DEPLOYMENT.vercel.app/api/health
+```
+
+`/api/health` reports `"engine":"demo"` until `ANTHROPIC_API_KEY` is set, then `"live"`.
+If the test itself loads and works, the deployment is good — it has no server to fail.
+
+### What is deployed, and what is not
+
+`.vercelignore` keeps `theories/` out of the deployment. That is deliberate and not a
+loss: the corpus is compiled into the bundle by `npm run build`, so every question and
+result ships, while the 350 full markdown essays — which nothing at runtime reads — do
+not need to be uploaded on every deploy.
+
+**A caution.** `vercel.json` sets a one-year immutable cache on `/assets/*`, which is
+safe because Vite fingerprints those filenames. Do not extend that rule to `/(.*)` —
+`index.html` must stay revalidated or visitors will be served a stale page pointing at
+asset names that no longer exist.
+
 ---
 
 # Tweetosopher
