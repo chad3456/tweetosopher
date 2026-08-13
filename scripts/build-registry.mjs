@@ -392,6 +392,31 @@ const ENTRIES = [
   ['veil-of-perception', 'Ethical Egoism', 'theory', 'egoism', 'Ayn Rand|Max Stirner', '1964'],
   ['the-virtue-of-selfishness', 'Rational Self-Interest', 'theory', 'objectivism', 'Ayn Rand', '1964'],
   ['stirner-the-unique', 'The Unique and Its Property', 'theory', 'egoism', 'Max Stirner', '1844'],
+
+  // ── Crowds, protest, and the hypocrisies of both wings ─────────────────────
+  // Deliberately balanced. Several of these are weapons in a live political fight,
+  // and an instrument that supplies ammunition to one side has stopped measuring.
+  // Every left-facing critique here is paired with a right-facing one of equal force.
+  ['russell-herd-instinct', 'Herd Instinct and Collective Excitement', 'theory', 'analytic-philosophy', 'Bertrand Russell', '1949'],
+  ['russell-on-persecution', 'The Pleasure of Moral Indignation', 'theory', 'analytic-philosophy', 'Bertrand Russell', '1950'],
+  ['shigalyovism', 'Shigalyovism', 'theory', 'russian-literature', 'Fyodor Dostoevsky', '1872'],
+  ['the-crystal-palace', 'The Crystal Palace', 'thought-experiment', 'russian-literature', 'Fyodor Dostoevsky', '1864'],
+  ['smerdyakovs-inference', "Smerdyakov's Inference", 'thought-experiment', 'russian-literature', 'Fyodor Dostoevsky', '1880'],
+  ['the-onion', 'The Onion', 'thought-experiment', 'russian-literature', 'Fyodor Dostoevsky', '1880'],
+  ['pillars-of-support', 'The Pillars of Support', 'theory', 'nonviolent-resistance', 'Gene Sharp', '1993'],
+  ['political-jiu-jitsu', 'Political Jiu-Jitsu', 'theory', 'nonviolent-resistance', 'Gene Sharp', '1973'],
+  ['civil-resistance-threshold', 'The Participation Threshold', 'theory', 'nonviolent-resistance', 'Erica Chenoweth|Maria Stephan', '2011'],
+  ['the-public-sphere', 'The Public Sphere', 'theory', 'critical-theory', 'Jürgen Habermas', '1962'],
+  ['ideal-speech-situation', 'The Ideal Speech Situation', 'thought-experiment', 'critical-theory', 'Jürgen Habermas', '1981'],
+  ['preference-falsification', 'Preference Falsification', 'theory', 'political-economy', 'Timur Kuran', '1995'],
+  ['radical-chic', 'Radical Chic', 'term', 'literary-criticism', 'Tom Wolfe', '1970'],
+  ['luxury-beliefs', 'Luxury Beliefs', 'theory', 'contemporary-critique', 'Rob Henderson|Thorstein Veblen', '2019'],
+  ['chestertons-fence', "Chesterton's Fence", 'principle', 'conservatism', 'G.K. Chesterton', '1929'],
+  ['the-knowledge-problem', 'The Knowledge Problem', 'theory', 'austrian-school', 'Friedrich Hayek', '1945'],
+  ['false-consciousness', 'False Consciousness', 'theory', 'marxism', 'György Lukács|Friedrich Engels', '1923'],
+  ['bootleggers-and-baptists', 'Bootleggers and Baptists', 'theory', 'public-choice', 'Bruce Yandle', '1983'],
+  ['the-vanguard-problem', 'The Vanguard Problem', 'paradox', 'marxism', 'Rosa Luxemburg|Vladimir Lenin', '1904'],
+  ['narcissism-of-small-differences', 'The Narcissism of Small Differences', 'term', 'psychoanalysis', 'Sigmund Freud', '1930'],
 ];
 
 // ── checks ──────────────────────────────────────────────────────────────────

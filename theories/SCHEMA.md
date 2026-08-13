@@ -86,12 +86,36 @@ questions:
       - id: a
         label: Act. The death is a side effect, not your means, and five live.
         scores: { consequentialist: 0.8, agency: 0.6, scope: 0.5 }
+        evidence:                          # optional but wanted — see §2.2
+          who: Philippa Foot
+          work: The Problem of Abortion and the Doctrine of the Double Effect
+          year: 1967
+          says: >-
+            Foot took the driver's case to be the easy one precisely because the
+            harm is a side effect of redirecting a threat rather than the means of
+            stopping it, and built the case to isolate that difference.
       - id: b
         label: Act, but the distinction between side effect and means is doing no work.
         scores: { consequentialist: 1.0, agency: 1.0, certainty: -0.4 }
+        evidence:
+          who: Judith Jarvis Thomson
+          work: The Trolley Problem
+          year: 1985
+          says: >-
+            Thomson's loop variant was designed to put this pressure on: the spur
+            returns to the main line, so the one man's body becomes the mechanism
+            rather than a side effect, and the distinction stops tracking anything.
       - id: c
         label: Do not act. You would be causing a death that is not otherwise yours.
         scores: { deontological: 0.9, agency: -0.8, certainty: 0.5 }
+        evidence:
+          who: G.E.M. Anscombe
+          work: Modern Moral Philosophy
+          year: 1958
+          says: >-
+            Anscombe held that some acts are excluded from deliberation entirely,
+            and that a philosopher willing to weigh the killing of an innocent
+            against a benefit has already shown a corrupt mind.
 outcomes:
   - id: intention-matters
     dominant: deontological              # the framework axis this result reads from
@@ -117,6 +141,35 @@ Rules the validator enforces:
   every outcome needs a load-bearing axis, or it is a result nobody can reach. Scores
   below 0.5 are seasoning on an answer that is mostly about something else — they are
   free, and oblige nothing.
+
+### 2.2 Evidence: who actually held this
+
+An option may carry `evidence` — a named thinker who took that position, the work they
+took it in, and a sentence on what they argued. The app shows it back after a sitting,
+so a reader can see that the analysis rests on somebody's actual argument rather than on
+the app's say-so.
+
+```yaml
+evidence:
+  who: Philippa Foot
+  work: The Problem of Abortion and the Doctrine of the Double Effect
+  year: 1967          # optional; omit rather than guess
+  says: >-            # what they argued, in your words
+    One or two sentences. Paraphrase.
+```
+
+Three rules, and they are the whole point of the field:
+
+- **`says` is a paraphrase, not a quotation.** Do not put quotation marks around invented
+  wording. Where an exact phrase genuinely matters and you are certain of it, quote the
+  phrase only — never a fabricated sentence built around it.
+- **The thinker must actually have held roughly this position.** Attaching a famous name
+  to an option because it is nearby is worse than leaving `evidence` off; a citation that
+  misattributes is a lie that looks like scholarship.
+- **`work` must be a real work by that person.** Same rule as §5, and no URLs.
+
+Leave `evidence` out entirely when no thinker cleanly holds the option — a "refuse the
+question" answer often has none. An absent field is honest; a stretched one is not.
 
 ### 2.1 How an outcome is chosen
 

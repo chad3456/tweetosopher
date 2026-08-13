@@ -276,6 +276,7 @@ function finish() {
   mount.replaceChildren();
 
   mount.append(renderVerdictHead(result, matches, sphere));
+  mount.append(renderEvidence(result));
   mount.append(renderBench(matches));
   mount.append(renderPlate(result));
   mount.append(renderDispositions(result));
@@ -353,6 +354,57 @@ function renderVerdictHead(result, matches, sphere) {
       `Matched on ${top.shared.map((k) => result.frameworks.find((f) => f.key === k).label.toLowerCase()).join(', ')} — ` +
       'the axes you leaned on that this thinker also leans on. Nothing else went into it.'));
   }
+  return wrap;
+}
+
+/**
+ * What was actually said, by whom, about each answer the reader gave.
+ *
+ * This is the section that makes the verdict checkable. Everything else here is the
+ * app's own arithmetic; this is the app showing its working against somebody else's
+ * argument — the reader can look the work up and disagree with the attribution.
+ *
+ * It reports only what the corpus carries. Options nobody cleanly holds have no
+ * evidence, and are shown as answered-without-a-champion rather than being quietly
+ * dropped, so the section cannot flatter the analysis by hiding its own gaps.
+ */
+function renderEvidence(result) {
+  const wrap = section('Who has argued what you answered');
+
+  const withEvidence = result.resolved.filter((r) => r.option.evidence);
+  if (!withEvidence.length) {
+    wrap.append(el('p', 'sec-note',
+      'None of the answers you gave carry a named advocate in the corpus yet. That is a '
+      + 'gap in the entries rather than a comment on your answers.'));
+    return wrap;
+  }
+
+  const list = el('div', 'evidence');
+  for (const { entry, question, option } of withEvidence) {
+    const card = el('div', 'ev');
+    card.append(el('p', 'ev__q', entry.title));
+    card.append(el('p', 'ev__a', `You answered: ${option.label}`));
+
+    const e = option.evidence;
+    const head = el('p', 'ev__who');
+    head.append(
+      Object.assign(el('strong'), { textContent: e.who }),
+      el('span', 'ev__work', ` · ${e.work}${e.year ? `, ${e.year}` : ''}`),
+    );
+    card.append(head);
+    card.append(el('p', 'ev__says', e.says));
+    list.append(card);
+  }
+  wrap.append(list);
+
+  const missing = result.resolved.length - withEvidence.length;
+  wrap.append(el('p', 'sec-note',
+    `${withEvidence.length} of your ${result.resolved.length} answers `
+    + `${withEvidence.length === 1 ? 'has' : 'have'} a named thinker who argued something `
+    + 'close to it, cited to the work.'
+    + (missing ? ` The other ${missing} took positions the corpus does not yet attribute to anyone.` : '')
+    + ' These are paraphrases of the argument, not quotations, and the citation is there so '
+    + 'you can check whether the attribution is fair.'));
   return wrap;
 }
 

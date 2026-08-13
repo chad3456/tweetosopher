@@ -550,3 +550,21 @@ button[disabled] { opacity: .4; cursor: not-allowed; }
   border-left: 2px solid var(--rule); background: var(--paper-2);
   font-size: 15px; color: var(--ink-soft); max-width: 62ch;
 }
+
+/* ── Evidence ───────────────────────────────────────────────────────────── */
+
+.evidence { display: grid; gap: var(--s3); }
+
+.ev {
+  border: 1px solid var(--rule); background: var(--paper-2);
+  padding: var(--s4); display: grid; gap: var(--s2);
+}
+.ev__q {
+  margin: 0; font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-faint);
+}
+.ev__a { margin: 0; font-size: 16px; color: var(--ink-soft); font-style: italic; }
+.ev__who { margin: var(--s2) 0 0; font-size: 17px; padding-top: var(--s2);
+           border-top: 1px solid var(--rule-2); }
+.ev__work { color: var(--brass); font-size: 15px; font-style: italic; }
+.ev__says { margin: 0; font-size: 16px; }

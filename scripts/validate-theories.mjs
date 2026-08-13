@@ -171,6 +171,30 @@ for (const entry of wanted) {
           }
         }
         if (!frameworks) fail(file, `${ow} scores no framework axis, so it cannot select an outcome`);
+
+        // Evidence is optional — an option nobody cleanly holds should not have one —
+        // but a present one is a citation, so it is held to the citation rules.
+        if ('evidence' in o) {
+          const e = o.evidence;
+          if (!e || typeof e !== 'object') fail(file, `${ow} evidence must be a mapping`);
+          else {
+            if (!e.who) fail(file, `${ow} evidence needs "who"`);
+            if (!e.work) fail(file, `${ow} evidence needs "work" — the book or paper`);
+            if (!e.says || String(e.says).trim().length < 40) {
+              fail(file, `${ow} evidence "says" is missing or too short to be a claim`);
+            }
+            if (/https?:\/\//.test(JSON.stringify(e))) {
+              fail(file, `${ow} evidence contains a URL — cite the work instead`);
+            }
+            // A fabricated quotation is the one failure a reader cannot detect, so
+            // `says` is required to be paraphrase. A short quoted phrase is fine; a
+            // whole quoted sentence is almost certainly invented wording.
+            const quoted = String(e.says).match(/[""][^""]{60,}[""]/);
+            if (quoted) {
+              fail(file, `${ow} evidence "says" contains a long quotation — paraphrase instead (SCHEMA §2.2)`);
+            }
+          }
+        }
       });
     });
   }

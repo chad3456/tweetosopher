@@ -78,6 +78,9 @@ for (const meta of registry.entries) {
         id: o.id,
         label: String(o.label).replace(/\s+/g, ' ').trim(),
         scores: o.scores,
+        ...(o.evidence
+          ? { evidence: { ...o.evidence, says: String(o.evidence.says).replace(/\s+/g, ' ').trim() } }
+          : {}),
       })),
     })),
     outcomes: fm.outcomes.map((o) => ({

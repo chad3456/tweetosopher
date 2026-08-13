@@ -1,16 +1,16 @@
 {
   "generatedBy": "scripts/build-registry.mjs",
-  "count": 352,
-  "philosophers": 266,
+  "count": 372,
+  "philosophers": 279,
   "categories": {
-    "theory": 201,
-    "principle": 62,
-    "paradox": 30,
-    "thought-experiment": 35,
-    "term": 24
+    "theory": 213,
+    "principle": 63,
+    "paradox": 31,
+    "thought-experiment": 39,
+    "term": 26
   },
   "batches": 16,
-  "perBatch": 22,
+  "perBatch": 24,
   "entries": [
     {
       "id": "socratic-intellectualism",
@@ -270,7 +270,7 @@
         "Seneca"
       ],
       "era": "c. 45 CE",
-      "batch": 2
+      "batch": 1
     },
     {
       "id": "cynic-parrhesia",
@@ -281,7 +281,7 @@
         "Diogenes of Sinope"
       ],
       "era": "c. 350 BCE",
-      "batch": 2
+      "batch": 1
     },
     {
       "id": "sorites-paradox",
@@ -517,7 +517,7 @@
         "Vyasa"
       ],
       "era": "c. 200 BCE",
-      "batch": 3
+      "batch": 2
     },
     {
       "id": "ubuntu",
@@ -529,7 +529,7 @@
         "Mogobe Ramose"
       ],
       "era": "c. 1990",
-      "batch": 3
+      "batch": 2
     },
     {
       "id": "maat",
@@ -540,7 +540,7 @@
         "Ptahhotep"
       ],
       "era": "c. 2400 BCE",
-      "batch": 3
+      "batch": 2
     },
     {
       "id": "maqasid-al-shariah",
@@ -552,7 +552,7 @@
         "Al-Ghazali"
       ],
       "era": "c. 1100 CE",
-      "batch": 3
+      "batch": 2
     },
     {
       "id": "pikuach-nefesh",
@@ -769,7 +769,7 @@
         "William of Ockham"
       ],
       "era": "c. 1330",
-      "batch": 4
+      "batch": 3
     },
     {
       "id": "buridans-ass",
@@ -780,7 +780,7 @@
         "Jean Buridan"
       ],
       "era": "c. 1340",
-      "batch": 4
+      "batch": 3
     },
     {
       "id": "agape",
@@ -792,7 +792,7 @@
         "Anders Nygren"
       ],
       "era": "c. 55 CE",
-      "batch": 4
+      "batch": 3
     },
     {
       "id": "sermon-on-the-mount",
@@ -803,7 +803,7 @@
         "Jesus of Nazareth"
       ],
       "era": "c. 30 CE",
-      "batch": 4
+      "batch": 3
     },
     {
       "id": "golden-rule",
@@ -816,7 +816,7 @@
         "Hillel"
       ],
       "era": "c. 500 BCE",
-      "batch": 4
+      "batch": 3
     },
     {
       "id": "seven-deadly-sins",
@@ -828,7 +828,7 @@
         "Gregory the Great"
       ],
       "era": "c. 590 CE",
-      "batch": 4
+      "batch": 3
     },
     {
       "id": "casuistry",
@@ -1020,7 +1020,7 @@
         "Michel de Montaigne"
       ],
       "era": "1580",
-      "batch": 5
+      "batch": 4
     },
     {
       "id": "humes-guillotine",
@@ -1031,7 +1031,7 @@
         "David Hume"
       ],
       "era": "1739",
-      "batch": 5
+      "batch": 4
     },
     {
       "id": "humean-sentimentalism",
@@ -1042,7 +1042,7 @@
         "David Hume"
       ],
       "era": "1739",
-      "batch": 5
+      "batch": 4
     },
     {
       "id": "impartial-spectator",
@@ -1053,7 +1053,7 @@
         "Adam Smith"
       ],
       "era": "1759",
-      "batch": 5
+      "batch": 4
     },
     {
       "id": "moral-sentiments",
@@ -1064,7 +1064,7 @@
         "Adam Smith"
       ],
       "era": "1759",
-      "batch": 5
+      "batch": 4
     },
     {
       "id": "butler-on-conscience",
@@ -1075,7 +1075,7 @@
         "Joseph Butler"
       ],
       "era": "1726",
-      "batch": 5
+      "batch": 4
     },
     {
       "id": "moral-sense-theory",
@@ -1087,7 +1087,7 @@
         "Francis Hutcheson"
       ],
       "era": "1711",
-      "batch": 5
+      "batch": 4
     },
     {
       "id": "fable-of-the-bees",
@@ -1098,7 +1098,7 @@
         "Bernard Mandeville"
       ],
       "era": "1714",
-      "batch": 5
+      "batch": 4
     },
     {
       "id": "wollstonecraft-moral-equality",
@@ -1264,7 +1264,7 @@
         "Immanuel Kant"
       ],
       "era": "1785",
-      "batch": 6
+      "batch": 5
     },
     {
       "id": "hypothetical-imperative",
@@ -1275,7 +1275,7 @@
         "Immanuel Kant"
       ],
       "era": "1785",
-      "batch": 6
+      "batch": 5
     },
     {
       "id": "benthamite-utilitarianism",
@@ -1286,7 +1286,7 @@
         "Jeremy Bentham"
       ],
       "era": "1789",
-      "batch": 6
+      "batch": 5
     },
     {
       "id": "felicific-calculus",
@@ -1297,7 +1297,7 @@
         "Jeremy Bentham"
       ],
       "era": "1789",
-      "batch": 6
+      "batch": 5
     },
     {
       "id": "panopticon",
@@ -1309,7 +1309,7 @@
         "Michel Foucault"
       ],
       "era": "1791",
-      "batch": 6
+      "batch": 5
     },
     {
       "id": "higher-and-lower-pleasures",
@@ -1320,7 +1320,7 @@
         "John Stuart Mill"
       ],
       "era": "1863",
-      "batch": 6
+      "batch": 5
     },
     {
       "id": "harm-principle",
@@ -1331,7 +1331,7 @@
         "John Stuart Mill"
       ],
       "era": "1859",
-      "batch": 6
+      "batch": 5
     },
     {
       "id": "tyranny-of-the-majority",
@@ -1343,7 +1343,7 @@
         "Alexis de Tocqueville"
       ],
       "era": "1859",
-      "batch": 6
+      "batch": 5
     },
     {
       "id": "act-and-rule-utilitarianism",
@@ -1355,7 +1355,7 @@
         "J.J.C. Smart"
       ],
       "era": "1863",
-      "batch": 6
+      "batch": 5
     },
     {
       "id": "dualism-of-practical-reason",
@@ -1366,7 +1366,7 @@
         "Henry Sidgwick"
       ],
       "era": "1874",
-      "batch": 6
+      "batch": 5
     },
     {
       "id": "negative-utilitarianism",
@@ -1514,7 +1514,7 @@
         "Arthur Schopenhauer"
       ],
       "era": "1840",
-      "batch": 7
+      "batch": 6
     },
     {
       "id": "denial-of-the-will",
@@ -1525,7 +1525,7 @@
         "Arthur Schopenhauer"
       ],
       "era": "1818",
-      "batch": 7
+      "batch": 6
     },
     {
       "id": "porcupine-dilemma",
@@ -1536,7 +1536,7 @@
         "Arthur Schopenhauer"
       ],
       "era": "1851",
-      "batch": 7
+      "batch": 6
     },
     {
       "id": "teleological-suspension",
@@ -1547,7 +1547,7 @@
         "Søren Kierkegaard"
       ],
       "era": "1843",
-      "batch": 7
+      "batch": 6
     },
     {
       "id": "leap-of-faith",
@@ -1558,7 +1558,7 @@
         "Søren Kierkegaard"
       ],
       "era": "1846",
-      "batch": 7
+      "batch": 6
     },
     {
       "id": "three-stages-of-life",
@@ -1569,7 +1569,7 @@
         "Søren Kierkegaard"
       ],
       "era": "1845",
-      "batch": 7
+      "batch": 6
     },
     {
       "id": "alienation",
@@ -1580,7 +1580,7 @@
         "Karl Marx"
       ],
       "era": "1844",
-      "batch": 7
+      "batch": 6
     },
     {
       "id": "ideology-and-class-morality",
@@ -1592,7 +1592,7 @@
         "Friedrich Engels"
       ],
       "era": "1846",
-      "batch": 7
+      "batch": 6
     },
     {
       "id": "master-and-slave-morality",
@@ -1603,7 +1603,7 @@
         "Friedrich Nietzsche"
       ],
       "era": "1887",
-      "batch": 7
+      "batch": 6
     },
     {
       "id": "will-to-power",
@@ -1614,7 +1614,7 @@
         "Friedrich Nietzsche"
       ],
       "era": "1886",
-      "batch": 7
+      "batch": 6
     },
     {
       "id": "eternal-recurrence",
@@ -1625,7 +1625,7 @@
         "Friedrich Nietzsche"
       ],
       "era": "1882",
-      "batch": 7
+      "batch": 6
     },
     {
       "id": "ubermensch",
@@ -1636,7 +1636,7 @@
         "Friedrich Nietzsche"
       ],
       "era": "1883",
-      "batch": 7
+      "batch": 6
     },
     {
       "id": "ressentiment",
@@ -1758,7 +1758,7 @@
         "Ralph Waldo Emerson"
       ],
       "era": "1841",
-      "batch": 8
+      "batch": 7
     },
     {
       "id": "anomie",
@@ -1769,7 +1769,7 @@
         "Émile Durkheim"
       ],
       "era": "1893",
-      "batch": 8
+      "batch": 7
     },
     {
       "id": "naturalistic-fallacy",
@@ -1780,7 +1780,7 @@
         "G.E. Moore"
       ],
       "era": "1903",
-      "batch": 8
+      "batch": 7
     },
     {
       "id": "open-question-argument",
@@ -1791,7 +1791,7 @@
         "G.E. Moore"
       ],
       "era": "1903",
-      "batch": 8
+      "batch": 7
     },
     {
       "id": "prima-facie-duties",
@@ -1802,7 +1802,7 @@
         "W.D. Ross"
       ],
       "era": "1930",
-      "batch": 8
+      "batch": 7
     },
     {
       "id": "emotivism",
@@ -1814,7 +1814,7 @@
         "C.L. Stevenson"
       ],
       "era": "1936",
-      "batch": 8
+      "batch": 7
     },
     {
       "id": "persuasive-definitions",
@@ -1825,7 +1825,7 @@
         "C.L. Stevenson"
       ],
       "era": "1938",
-      "batch": 8
+      "batch": 7
     },
     {
       "id": "universal-prescriptivism",
@@ -1836,7 +1836,7 @@
         "R.M. Hare"
       ],
       "era": "1952",
-      "batch": 8
+      "batch": 7
     },
     {
       "id": "moral-error-theory",
@@ -1847,7 +1847,7 @@
         "J.L. Mackie"
       ],
       "era": "1977",
-      "batch": 8
+      "batch": 7
     },
     {
       "id": "argument-from-queerness",
@@ -1858,7 +1858,7 @@
         "J.L. Mackie"
       ],
       "era": "1977",
-      "batch": 8
+      "batch": 7
     },
     {
       "id": "argument-from-relativity",
@@ -1869,7 +1869,7 @@
         "J.L. Mackie"
       ],
       "era": "1977",
-      "batch": 8
+      "batch": 7
     },
     {
       "id": "modern-moral-philosophy",
@@ -1880,7 +1880,7 @@
         "G.E.M. Anscombe"
       ],
       "era": "1958",
-      "batch": 8
+      "batch": 7
     },
     {
       "id": "moral-realism",
@@ -1892,7 +1892,7 @@
         "David Brink"
       ],
       "era": "1988",
-      "batch": 8
+      "batch": 7
     },
     {
       "id": "moral-anti-realism",
@@ -1904,7 +1904,7 @@
         "J.L. Mackie"
       ],
       "era": "1977",
-      "batch": 8
+      "batch": 7
     },
     {
       "id": "moral-constructivism",
@@ -2009,7 +2009,7 @@
         "Philippa Foot"
       ],
       "era": "1988",
-      "batch": 9
+      "batch": 8
     },
     {
       "id": "darwinian-dilemma",
@@ -2020,7 +2020,7 @@
         "Sharon Street"
       ],
       "era": "2006",
-      "batch": 9
+      "batch": 8
     },
     {
       "id": "evolutionary-debunking",
@@ -2032,7 +2032,7 @@
         "Richard Joyce"
       ],
       "era": "2006",
-      "batch": 9
+      "batch": 8
     },
     {
       "id": "lecture-on-ethics",
@@ -2043,7 +2043,7 @@
         "Ludwig Wittgenstein"
       ],
       "era": "1929",
-      "batch": 9
+      "batch": 8
     },
     {
       "id": "pragmatic-ethics",
@@ -2055,7 +2055,7 @@
         "William James"
       ],
       "era": "1922",
-      "batch": 9
+      "batch": 8
     },
     {
       "id": "conviction-and-responsibility",
@@ -2066,7 +2066,7 @@
         "Max Weber"
       ],
       "era": "1919",
-      "batch": 9
+      "batch": 8
     },
     {
       "id": "veil-of-ignorance",
@@ -2077,7 +2077,7 @@
         "John Rawls"
       ],
       "era": "1971",
-      "batch": 9
+      "batch": 8
     },
     {
       "id": "difference-principle",
@@ -2088,7 +2088,7 @@
         "John Rawls"
       ],
       "era": "1971",
-      "batch": 9
+      "batch": 8
     },
     {
       "id": "reflective-equilibrium",
@@ -2100,7 +2100,7 @@
         "Nelson Goodman"
       ],
       "era": "1971",
-      "batch": 9
+      "batch": 8
     },
     {
       "id": "experience-machine",
@@ -2111,7 +2111,7 @@
         "Robert Nozick"
       ],
       "era": "1974",
-      "batch": 9
+      "batch": 8
     },
     {
       "id": "entitlement-theory",
@@ -2122,7 +2122,7 @@
         "Robert Nozick"
       ],
       "era": "1974",
-      "batch": 9
+      "batch": 8
     },
     {
       "id": "utility-monster",
@@ -2133,7 +2133,7 @@
         "Robert Nozick"
       ],
       "era": "1974",
-      "batch": 9
+      "batch": 8
     },
     {
       "id": "wilt-chamberlain-argument",
@@ -2144,7 +2144,7 @@
         "Robert Nozick"
       ],
       "era": "1974",
-      "batch": 9
+      "batch": 8
     },
     {
       "id": "scanlonian-contractualism",
@@ -2155,7 +2155,7 @@
         "T.M. Scanlon"
       ],
       "era": "1998",
-      "batch": 9
+      "batch": 8
     },
     {
       "id": "morals-by-agreement",
@@ -2166,7 +2166,7 @@
         "David Gauthier"
       ],
       "era": "1986",
-      "batch": 9
+      "batch": 8
     },
     {
       "id": "two-concepts-of-liberty",
@@ -2177,7 +2177,7 @@
         "Isaiah Berlin"
       ],
       "era": "1958",
-      "batch": 9
+      "batch": 8
     },
     {
       "id": "value-pluralism",
@@ -2256,7 +2256,7 @@
         "Jean-Paul Sartre"
       ],
       "era": "1973",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "supreme-emergency",
@@ -2267,7 +2267,7 @@
         "Michael Walzer"
       ],
       "era": "1977",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "relational-equality",
@@ -2278,7 +2278,7 @@
         "Elizabeth Anderson"
       ],
       "era": "1999",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "luck-egalitarianism",
@@ -2290,7 +2290,7 @@
         "Ronald Dworkin"
       ],
       "era": "1989",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "sufficientarianism",
@@ -2301,7 +2301,7 @@
         "Harry Frankfurt"
       ],
       "era": "1987",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "camping-trip",
@@ -2312,7 +2312,7 @@
         "G.A. Cohen"
       ],
       "era": "2009",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "negative-duties-and-global-poverty",
@@ -2323,7 +2323,7 @@
         "Thomas Pogge"
       ],
       "era": "2002",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "repugnant-conclusion",
@@ -2334,7 +2334,7 @@
         "Derek Parfit"
       ],
       "era": "1984",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "non-identity-problem",
@@ -2345,7 +2345,7 @@
         "Derek Parfit"
       ],
       "era": "1984",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "mere-addition-paradox",
@@ -2356,7 +2356,7 @@
         "Derek Parfit"
       ],
       "era": "1984",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "bad-faith",
@@ -2367,7 +2367,7 @@
         "Jean-Paul Sartre"
       ],
       "era": "1943",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "condemned-to-be-free",
@@ -2378,7 +2378,7 @@
         "Jean-Paul Sartre"
       ],
       "era": "1946",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "sartres-student",
@@ -2389,7 +2389,7 @@
         "Jean-Paul Sartre"
       ],
       "era": "1946",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "ethics-of-ambiguity",
@@ -2400,7 +2400,7 @@
         "Simone de Beauvoir"
       ],
       "era": "1947",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "woman-as-other",
@@ -2411,7 +2411,7 @@
         "Simone de Beauvoir"
       ],
       "era": "1949",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "the-absurd",
@@ -2422,7 +2422,7 @@
         "Albert Camus"
       ],
       "era": "1942",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "myth-of-sisyphus",
@@ -2433,7 +2433,7 @@
         "Albert Camus"
       ],
       "era": "1942",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "the-rebel",
@@ -2444,7 +2444,7 @@
         "Albert Camus"
       ],
       "era": "1951",
-      "batch": 10
+      "batch": 9
     },
     {
       "id": "heideggerian-authenticity",
@@ -2499,7 +2499,7 @@
         "Hannah Arendt"
       ],
       "era": "1951",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "labor-work-action",
@@ -2510,7 +2510,7 @@
         "Hannah Arendt"
       ],
       "era": "1958",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "imperative-of-responsibility",
@@ -2521,7 +2521,7 @@
         "Hans Jonas"
       ],
       "era": "1979",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "discourse-ethics",
@@ -2533,7 +2533,7 @@
         "Karl-Otto Apel"
       ],
       "era": "1983",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "dialectic-of-enlightenment",
@@ -2545,7 +2545,7 @@
         "Max Horkheimer"
       ],
       "era": "1944",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "repressive-tolerance",
@@ -2556,7 +2556,7 @@
         "Herbert Marcuse"
       ],
       "era": "1965",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "angel-of-history",
@@ -2567,7 +2567,7 @@
         "Walter Benjamin"
       ],
       "era": "1940",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "biopower",
@@ -2578,7 +2578,7 @@
         "Michel Foucault"
       ],
       "era": "1976",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "disciplinary-power",
@@ -2589,7 +2589,7 @@
         "Michel Foucault"
       ],
       "era": "1975",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "care-of-the-self",
@@ -2600,7 +2600,7 @@
         "Michel Foucault"
       ],
       "era": "1984",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "simulacra",
@@ -2611,7 +2611,7 @@
         "Jean Baudrillard"
       ],
       "era": "1981",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "incredulity-toward-metanarratives",
@@ -2622,7 +2622,7 @@
         "Jean-François Lyotard"
       ],
       "era": "1979",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "deconstruction-and-justice",
@@ -2633,7 +2633,7 @@
         "Jacques Derrida"
       ],
       "era": "1989",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "fanon-on-violence",
@@ -2644,7 +2644,7 @@
         "Frantz Fanon"
       ],
       "era": "1961",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "milgram-obedience",
@@ -2655,7 +2655,7 @@
         "Stanley Milgram"
       ],
       "era": "1963",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "stanford-prison-experiment",
@@ -2666,7 +2666,7 @@
         "Philip Zimbardo"
       ],
       "era": "1971",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "asch-conformity",
@@ -2677,7 +2677,7 @@
         "Solomon Asch"
       ],
       "era": "1951",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "bystander-effect",
@@ -2689,7 +2689,7 @@
         "Bibb Latané"
       ],
       "era": "1968",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "kohlberg-stages",
@@ -2700,7 +2700,7 @@
         "Lawrence Kohlberg"
       ],
       "era": "1958",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "ethics-of-care",
@@ -2711,7 +2711,7 @@
         "Carol Gilligan"
       ],
       "era": "1982",
-      "batch": 11
+      "batch": 10
     },
     {
       "id": "noddings-caring",
@@ -2745,7 +2745,7 @@
         "Jonathan Haidt"
       ],
       "era": "2001",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "dual-process-morality",
@@ -2756,7 +2756,7 @@
         "Joshua Greene"
       ],
       "era": "2001",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "against-empathy",
@@ -2767,7 +2767,7 @@
         "Paul Bloom"
       ],
       "era": "2016",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "reciprocal-altruism",
@@ -2778,7 +2778,7 @@
         "Robert Trivers"
       ],
       "era": "1971",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "kin-selection",
@@ -2789,7 +2789,7 @@
         "W.D. Hamilton"
       ],
       "era": "1964",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "tit-for-tat",
@@ -2801,7 +2801,7 @@
         "Anatol Rapoport"
       ],
       "era": "1984",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "prisoners-dilemma",
@@ -2813,7 +2813,7 @@
         "Albert Tucker"
       ],
       "era": "1950",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "tragedy-of-the-commons",
@@ -2825,7 +2825,7 @@
         "William Forster Lloyd"
       ],
       "era": "1968",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "ultimatum-game",
@@ -2836,7 +2836,7 @@
         "Werner Güth"
       ],
       "era": "1982",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "free-rider-problem",
@@ -2847,7 +2847,7 @@
         "Mancur Olson"
       ],
       "era": "1965",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "newcombs-problem",
@@ -2859,7 +2859,7 @@
         "Robert Nozick"
       ],
       "era": "1969",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "moral-licensing",
@@ -2871,7 +2871,7 @@
         "Dale Miller"
       ],
       "era": "2001",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "moral-luck",
@@ -2883,7 +2883,7 @@
         "Thomas Nagel"
       ],
       "era": "1976",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "agent-regret",
@@ -2894,7 +2894,7 @@
         "Bernard Williams"
       ],
       "era": "1976",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "one-thought-too-many",
@@ -2905,7 +2905,7 @@
         "Bernard Williams"
       ],
       "era": "1981",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "frankfurt-cases",
@@ -2916,7 +2916,7 @@
         "Harry Frankfurt"
       ],
       "era": "1969",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "reactive-attitudes",
@@ -2927,7 +2927,7 @@
         "P.F. Strawson"
       ],
       "era": "1962",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "basic-argument",
@@ -2938,7 +2938,7 @@
         "Galen Strawson"
       ],
       "era": "1994",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "jim-and-the-indians",
@@ -2949,7 +2949,7 @@
         "Bernard Williams"
       ],
       "era": "1973",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "drowning-child",
@@ -2960,7 +2960,7 @@
         "Peter Singer"
       ],
       "era": "1972",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "speciesism",
@@ -2972,7 +2972,7 @@
         "Richard Ryder"
       ],
       "era": "1975",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "effective-altruism",
@@ -2984,7 +2984,7 @@
         "William MacAskill"
       ],
       "era": "2011",
-      "batch": 12
+      "batch": 11
     },
     {
       "id": "subject-of-a-life",
@@ -2995,7 +2995,7 @@
         "Tom Regan"
       ],
       "era": "1983",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "land-ethic",
@@ -3006,7 +3006,7 @@
         "Aldo Leopold"
       ],
       "era": "1949",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "deep-ecology",
@@ -3017,7 +3017,7 @@
         "Arne Naess"
       ],
       "era": "1973",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "lifeboat-ethics",
@@ -3028,7 +3028,7 @@
         "Garrett Hardin"
       ],
       "era": "1974",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "procreative-beneficence",
@@ -3039,7 +3039,7 @@
         "Julian Savulescu"
       ],
       "era": "2001",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "case-against-perfection",
@@ -3050,7 +3050,7 @@
         "Michael Sandel"
       ],
       "era": "2007",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "wisdom-of-repugnance",
@@ -3061,7 +3061,7 @@
         "Leon Kass"
       ],
       "era": "1997",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "ticking-time-bomb",
@@ -3073,7 +3073,7 @@
         "Alan Dershowitz"
       ],
       "era": "1973",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "superior-orders",
@@ -3084,7 +3084,7 @@
         "Nuremberg Tribunal"
       ],
       "era": "1946",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "radbruch-formula",
@@ -3095,7 +3095,7 @@
         "Gustav Radbruch"
       ],
       "era": "1946",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "hart-devlin-debate",
@@ -3107,7 +3107,7 @@
         "Patrick Devlin"
       ],
       "era": "1959",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "hart-fuller-debate",
@@ -3119,7 +3119,7 @@
         "Lon Fuller"
       ],
       "era": "1958",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "retributivism",
@@ -3131,7 +3131,7 @@
         "Michael Moore"
       ],
       "era": "1797",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "restorative-justice",
@@ -3142,7 +3142,7 @@
         "Howard Zehr"
       ],
       "era": "1990",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "prison-abolition",
@@ -3153,7 +3153,7 @@
         "Angela Davis"
       ],
       "era": "2003",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "epistemic-injustice",
@@ -3164,7 +3164,7 @@
         "Miranda Fricker"
       ],
       "era": "2007",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "social-connection-model",
@@ -3175,7 +3175,7 @@
         "Iris Marion Young"
       ],
       "era": "2006",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "cosmopolitanism",
@@ -3186,7 +3186,7 @@
         "Kwame Anthony Appiah"
       ],
       "era": "2006",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "honor-codes",
@@ -3197,7 +3197,7 @@
         "Kwame Anthony Appiah"
       ],
       "era": "2010",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "tyranny-of-merit",
@@ -3208,7 +3208,7 @@
         "Michael Sandel"
       ],
       "era": "2020",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "moral-limits-of-markets",
@@ -3219,7 +3219,7 @@
         "Michael Sandel"
       ],
       "era": "2012",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "moral-saints",
@@ -3230,7 +3230,7 @@
         "Susan Wolf"
       ],
       "era": "1982",
-      "batch": 13
+      "batch": 12
     },
     {
       "id": "sovereignty-of-good",
@@ -3241,7 +3241,7 @@
         "Iris Murdoch"
       ],
       "era": "1970",
-      "batch": 14
+      "batch": 12
     },
     {
       "id": "attention-and-affliction",
@@ -3252,7 +3252,7 @@
         "Simone Weil"
       ],
       "era": "1942",
-      "batch": 14
+      "batch": 12
     },
     {
       "id": "the-poem-of-force",
@@ -3263,7 +3263,7 @@
         "Simone Weil"
       ],
       "era": "1939",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "living-in-truth",
@@ -3274,7 +3274,7 @@
         "Václav Havel"
       ],
       "era": "1978",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "letter-from-birmingham-jail",
@@ -3285,7 +3285,7 @@
         "Martin Luther King Jr."
       ],
       "era": "1963",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "satyagraha",
@@ -3296,7 +3296,7 @@
         "Mohandas Gandhi"
       ],
       "era": "1919",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "by-any-means-necessary",
@@ -3308,7 +3308,7 @@
         "Jean-Paul Sartre"
       ],
       "era": "1964",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "love-ethic",
@@ -3319,7 +3319,7 @@
         "bell hooks"
       ],
       "era": "2000",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "prophetic-pragmatism",
@@ -3330,7 +3330,7 @@
         "Cornel West"
       ],
       "era": "1989",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "after-virtue",
@@ -3341,7 +3341,7 @@
         "Alasdair MacIntyre"
       ],
       "era": "1981",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "practices-and-internal-goods",
@@ -3352,7 +3352,7 @@
         "Alasdair MacIntyre"
       ],
       "era": "1981",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "sources-of-the-self",
@@ -3363,7 +3363,7 @@
         "Charles Taylor"
       ],
       "era": "1989",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "natural-goodness",
@@ -3374,7 +3374,7 @@
         "Philippa Foot"
       ],
       "era": "2001",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "sources-of-normativity",
@@ -3385,7 +3385,7 @@
         "Christine Korsgaard"
       ],
       "era": "1996",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "fragility-of-goodness",
@@ -3396,7 +3396,7 @@
         "Martha Nussbaum"
       ],
       "era": "1986",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "anger-and-forgiveness",
@@ -3407,7 +3407,7 @@
         "Martha Nussbaum"
       ],
       "era": "2016",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "moral-landscape",
@@ -3418,7 +3418,7 @@
         "Sam Harris"
       ],
       "era": "2010",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "harris-on-free-will",
@@ -3429,7 +3429,7 @@
         "Sam Harris"
       ],
       "era": "2012",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "hierarchy-and-responsibility",
@@ -3440,7 +3440,7 @@
         "Jordan Peterson"
       ],
       "era": "2018",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "chaos-and-order",
@@ -3452,7 +3452,7 @@
         "Carl Jung"
       ],
       "era": "1999",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "speak-the-truth",
@@ -3463,7 +3463,7 @@
         "Jordan Peterson"
       ],
       "era": "2018",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "systemic-violence",
@@ -3474,7 +3474,7 @@
         "Slavoj Žižek"
       ],
       "era": "2008",
-      "batch": 14
+      "batch": 13
     },
     {
       "id": "grievable-life",
@@ -3485,7 +3485,7 @@
         "Judith Butler"
       ],
       "era": "2004",
-      "batch": 15
+      "batch": 13
     },
     {
       "id": "performativity",
@@ -3496,7 +3496,7 @@
         "Judith Butler"
       ],
       "era": "1990",
-      "batch": 15
+      "batch": 13
     },
     {
       "id": "burnout-society",
@@ -3507,7 +3507,7 @@
         "Byung-Chul Han"
       ],
       "era": "2010",
-      "batch": 15
+      "batch": 13
     },
     {
       "id": "transparency-society",
@@ -3518,7 +3518,7 @@
         "Byung-Chul Han"
       ],
       "era": "2012",
-      "batch": 15
+      "batch": 13
     },
     {
       "id": "paperclip-maximizer",
@@ -3529,7 +3529,7 @@
         "Nick Bostrom"
       ],
       "era": "2003",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "instrumental-convergence",
@@ -3541,7 +3541,7 @@
         "Steve Omohundro"
       ],
       "era": "2008",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "longtermism",
@@ -3553,7 +3553,7 @@
         "Toby Ord"
       ],
       "era": "2022",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "the-precipice",
@@ -3564,7 +3564,7 @@
         "Toby Ord"
       ],
       "era": "2020",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "moral-status-of-machines",
@@ -3576,7 +3576,7 @@
         "Eliezer Yudkowsky"
       ],
       "era": "2011",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "value-alignment",
@@ -3587,7 +3587,7 @@
         "Stuart Russell"
       ],
       "era": "2019",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "doing-and-allowing",
@@ -3599,7 +3599,7 @@
         "Philippa Foot"
       ],
       "era": "1989",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "acts-and-omissions",
@@ -3610,7 +3610,7 @@
         "Jonathan Glover"
       ],
       "era": "1977",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "ought-implies-can",
@@ -3621,7 +3621,7 @@
         "Immanuel Kant"
       ],
       "era": "1781",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "supererogation",
@@ -3632,7 +3632,7 @@
         "J.O. Urmson"
       ],
       "era": "1958",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "moral-residue",
@@ -3644,7 +3644,7 @@
         "Ruth Barcan Marcus"
       ],
       "era": "1980",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "threshold-deontology",
@@ -3656,7 +3656,7 @@
         "Larry Alexander"
       ],
       "era": "1997",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "agent-relative-reasons",
@@ -3668,7 +3668,7 @@
         "Derek Parfit"
       ],
       "era": "1986",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "moral-grandstanding",
@@ -3680,7 +3680,7 @@
         "Brandon Warmke"
       ],
       "era": "2016",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "moral-injury",
@@ -3691,7 +3691,7 @@
         "Jonathan Shay"
       ],
       "era": "1994",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "collective-responsibility",
@@ -3703,7 +3703,7 @@
         "Joel Feinberg"
       ],
       "era": "1947",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "complicity",
@@ -3714,7 +3714,7 @@
         "Christopher Kutz"
       ],
       "era": "2000",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "moral-testimony",
@@ -3726,7 +3726,7 @@
         "Robert Hopkins"
       ],
       "era": "2009",
-      "batch": 15
+      "batch": 14
     },
     {
       "id": "ship-of-theseus",
@@ -3738,7 +3738,7 @@
         "Thomas Hobbes"
       ],
       "era": "c. 100 CE",
-      "batch": 16
+      "batch": 14
     },
     {
       "id": "sophies-choice",
@@ -3750,7 +3750,7 @@
         "Ruth Barcan Marcus"
       ],
       "era": "1979",
-      "batch": 16
+      "batch": 14
     },
     {
       "id": "omelas",
@@ -3762,7 +3762,7 @@
         "William James"
       ],
       "era": "1973",
-      "batch": 16
+      "batch": 14
     },
     {
       "id": "moral-relativism",
@@ -3774,7 +3774,7 @@
         "Michel de Montaigne"
       ],
       "era": "1975",
-      "batch": 16
+      "batch": 14
     },
     {
       "id": "moral-absolutism",
@@ -3786,7 +3786,7 @@
         "Immanuel Kant"
       ],
       "era": "1958",
-      "batch": 16
+      "batch": 14
     },
     {
       "id": "moral-nihilism",
@@ -3798,7 +3798,7 @@
         "J.L. Mackie"
       ],
       "era": "1887",
-      "batch": 16
+      "batch": 14
     },
     {
       "id": "doublethink",
@@ -3809,7 +3809,7 @@
         "George Orwell"
       ],
       "era": "1949",
-      "batch": 16
+      "batch": 15
     },
     {
       "id": "newspeak",
@@ -3820,7 +3820,7 @@
         "George Orwell"
       ],
       "era": "1949",
-      "batch": 16
+      "batch": 15
     },
     {
       "id": "shooting-an-elephant",
@@ -3831,7 +3831,7 @@
         "George Orwell"
       ],
       "era": "1936",
-      "batch": 16
+      "batch": 15
     },
     {
       "id": "notes-on-nationalism",
@@ -3842,7 +3842,7 @@
         "George Orwell"
       ],
       "era": "1945",
-      "batch": 16
+      "batch": 15
     },
     {
       "id": "brave-new-world",
@@ -3853,7 +3853,7 @@
         "Aldous Huxley"
       ],
       "era": "1932",
-      "batch": 16
+      "batch": 15
     },
     {
       "id": "russell-on-ethics",
@@ -3864,7 +3864,7 @@
         "Bertrand Russell"
       ],
       "era": "1935",
-      "batch": 16
+      "batch": 15
     },
     {
       "id": "russells-teapot",
@@ -3875,7 +3875,7 @@
         "Bertrand Russell"
       ],
       "era": "1952",
-      "batch": 16
+      "batch": 15
     },
     {
       "id": "conscientious-objection",
@@ -3886,7 +3886,7 @@
         "Bertrand Russell"
       ],
       "era": "1916",
-      "batch": 16
+      "batch": 15
     },
     {
       "id": "russell-einstein-manifesto",
@@ -3898,7 +3898,7 @@
         "Albert Einstein"
       ],
       "era": "1955",
-      "batch": 16
+      "batch": 15
     },
     {
       "id": "superego",
@@ -3909,7 +3909,7 @@
         "Sigmund Freud"
       ],
       "era": "1930",
-      "batch": 16
+      "batch": 15
     },
     {
       "id": "two-sources-of-morality",
@@ -3920,7 +3920,7 @@
         "Henri Bergson"
       ],
       "era": "1932",
-      "batch": 16
+      "batch": 15
     },
     {
       "id": "trolley-problem",
@@ -3932,7 +3932,7 @@
         "Judith Jarvis Thomson"
       ],
       "era": "1967",
-      "batch": 16
+      "batch": 15
     },
     {
       "id": "the-violinist",
@@ -3943,7 +3943,7 @@
         "Judith Jarvis Thomson"
       ],
       "era": "1971",
-      "batch": 16
+      "batch": 15
     },
     {
       "id": "veil-of-perception",
@@ -3955,7 +3955,7 @@
         "Max Stirner"
       ],
       "era": "1964",
-      "batch": 16
+      "batch": 15
     },
     {
       "id": "the-virtue-of-selfishness",
@@ -3966,7 +3966,7 @@
         "Ayn Rand"
       ],
       "era": "1964",
-      "batch": 16
+      "batch": 15
     },
     {
       "id": "stirner-the-unique",
@@ -3977,6 +3977,230 @@
         "Max Stirner"
       ],
       "era": "1844",
+      "batch": 15
+    },
+    {
+      "id": "russell-herd-instinct",
+      "title": "Herd Instinct and Collective Excitement",
+      "category": "theory",
+      "tradition": "analytic-philosophy",
+      "philosophers": [
+        "Bertrand Russell"
+      ],
+      "era": "1949",
+      "batch": 15
+    },
+    {
+      "id": "russell-on-persecution",
+      "title": "The Pleasure of Moral Indignation",
+      "category": "theory",
+      "tradition": "analytic-philosophy",
+      "philosophers": [
+        "Bertrand Russell"
+      ],
+      "era": "1950",
+      "batch": 15
+    },
+    {
+      "id": "shigalyovism",
+      "title": "Shigalyovism",
+      "category": "theory",
+      "tradition": "russian-literature",
+      "philosophers": [
+        "Fyodor Dostoevsky"
+      ],
+      "era": "1872",
+      "batch": 15
+    },
+    {
+      "id": "the-crystal-palace",
+      "title": "The Crystal Palace",
+      "category": "thought-experiment",
+      "tradition": "russian-literature",
+      "philosophers": [
+        "Fyodor Dostoevsky"
+      ],
+      "era": "1864",
+      "batch": 15
+    },
+    {
+      "id": "smerdyakovs-inference",
+      "title": "Smerdyakov's Inference",
+      "category": "thought-experiment",
+      "tradition": "russian-literature",
+      "philosophers": [
+        "Fyodor Dostoevsky"
+      ],
+      "era": "1880",
+      "batch": 15
+    },
+    {
+      "id": "the-onion",
+      "title": "The Onion",
+      "category": "thought-experiment",
+      "tradition": "russian-literature",
+      "philosophers": [
+        "Fyodor Dostoevsky"
+      ],
+      "era": "1880",
+      "batch": 15
+    },
+    {
+      "id": "pillars-of-support",
+      "title": "The Pillars of Support",
+      "category": "theory",
+      "tradition": "nonviolent-resistance",
+      "philosophers": [
+        "Gene Sharp"
+      ],
+      "era": "1993",
+      "batch": 15
+    },
+    {
+      "id": "political-jiu-jitsu",
+      "title": "Political Jiu-Jitsu",
+      "category": "theory",
+      "tradition": "nonviolent-resistance",
+      "philosophers": [
+        "Gene Sharp"
+      ],
+      "era": "1973",
+      "batch": 15
+    },
+    {
+      "id": "civil-resistance-threshold",
+      "title": "The Participation Threshold",
+      "category": "theory",
+      "tradition": "nonviolent-resistance",
+      "philosophers": [
+        "Erica Chenoweth",
+        "Maria Stephan"
+      ],
+      "era": "2011",
+      "batch": 16
+    },
+    {
+      "id": "the-public-sphere",
+      "title": "The Public Sphere",
+      "category": "theory",
+      "tradition": "critical-theory",
+      "philosophers": [
+        "Jürgen Habermas"
+      ],
+      "era": "1962",
+      "batch": 16
+    },
+    {
+      "id": "ideal-speech-situation",
+      "title": "The Ideal Speech Situation",
+      "category": "thought-experiment",
+      "tradition": "critical-theory",
+      "philosophers": [
+        "Jürgen Habermas"
+      ],
+      "era": "1981",
+      "batch": 16
+    },
+    {
+      "id": "preference-falsification",
+      "title": "Preference Falsification",
+      "category": "theory",
+      "tradition": "political-economy",
+      "philosophers": [
+        "Timur Kuran"
+      ],
+      "era": "1995",
+      "batch": 16
+    },
+    {
+      "id": "radical-chic",
+      "title": "Radical Chic",
+      "category": "term",
+      "tradition": "literary-criticism",
+      "philosophers": [
+        "Tom Wolfe"
+      ],
+      "era": "1970",
+      "batch": 16
+    },
+    {
+      "id": "luxury-beliefs",
+      "title": "Luxury Beliefs",
+      "category": "theory",
+      "tradition": "contemporary-critique",
+      "philosophers": [
+        "Rob Henderson",
+        "Thorstein Veblen"
+      ],
+      "era": "2019",
+      "batch": 16
+    },
+    {
+      "id": "chestertons-fence",
+      "title": "Chesterton's Fence",
+      "category": "principle",
+      "tradition": "conservatism",
+      "philosophers": [
+        "G.K. Chesterton"
+      ],
+      "era": "1929",
+      "batch": 16
+    },
+    {
+      "id": "the-knowledge-problem",
+      "title": "The Knowledge Problem",
+      "category": "theory",
+      "tradition": "austrian-school",
+      "philosophers": [
+        "Friedrich Hayek"
+      ],
+      "era": "1945",
+      "batch": 16
+    },
+    {
+      "id": "false-consciousness",
+      "title": "False Consciousness",
+      "category": "theory",
+      "tradition": "marxism",
+      "philosophers": [
+        "György Lukács",
+        "Friedrich Engels"
+      ],
+      "era": "1923",
+      "batch": 16
+    },
+    {
+      "id": "bootleggers-and-baptists",
+      "title": "Bootleggers and Baptists",
+      "category": "theory",
+      "tradition": "public-choice",
+      "philosophers": [
+        "Bruce Yandle"
+      ],
+      "era": "1983",
+      "batch": 16
+    },
+    {
+      "id": "the-vanguard-problem",
+      "title": "The Vanguard Problem",
+      "category": "paradox",
+      "tradition": "marxism",
+      "philosophers": [
+        "Rosa Luxemburg",
+        "Vladimir Lenin"
+      ],
+      "era": "1904",
+      "batch": 16
+    },
+    {
+      "id": "narcissism-of-small-differences",
+      "title": "The Narcissism of Small Differences",
+      "category": "term",
+      "tradition": "psychoanalysis",
+      "philosophers": [
+        "Sigmund Freud"
+      ],
+      "era": "1930",
       "batch": 16
     }
   ]
