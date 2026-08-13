@@ -21,7 +21,11 @@ const strongest = (axis) => (q) =>
 
 test('the compiled corpus is well formed', () => {
   assert.ok(corpus.entries.length > 0, 'corpus has entries');
-  assert.equal(corpus.planned, 352);
+  // The floor, not the exact figure. Pinning the roster size means every entry added
+  // breaks a test that has nothing to do with the addition — which is how a suite
+  // trains people to ignore it. 250 is the threshold the corpus is required to clear.
+  assert.ok(corpus.planned >= 250, `registry plans ${corpus.planned} entries, floor is 250`);
+  assert.ok(corpus.written <= corpus.planned, 'cannot have written more than planned');
   for (const entry of corpus.entries) {
     assert.ok(entry.questions.length >= 3, `${entry.id} has 3+ questions`);
     assert.ok(entry.outcomes.length >= 2, `${entry.id} has 2+ outcomes`);
