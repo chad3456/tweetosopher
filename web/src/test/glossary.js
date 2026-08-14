@@ -15,6 +15,9 @@ const el = (tag, cls, text) => {
   return node;
 };
 
+import { scoreOutrage, byAxis, AXIS_LABEL, SIDE_LABEL, MIN_PAIRS } from './outrage.js';
+import { gapChart, fieldChart, axisChart, gapTable, gapLegend } from './charts.js';
+
 const STATUS_ORDER = ['robust', 'mixed', 'contested', 'failed', '—'];
 const STATUS_LABEL = { robust: 'Robust', mixed: 'Mixed', contested: 'Contested', failed: 'Failed', '—': 'Not empirical' };
 
@@ -409,13 +412,40 @@ export function renderFallacies(mount, corpus) {
   draw();
 }
 
+
 // ── Selective Outrage ──────────────────────────────────────────────────────
 
+/**
+ * Builds the sitting: every case asked twice, once per actor, in the interleaved
+ * order the data file specifies. The separation between the two halves of a pair is
+ * the whole basis of the measurement, so the order is authored and tested rather than
+ * shuffled at runtime — a random shuffle will happily put a pair back to back.
+ */
 export function buildOutrage(corpus) {
-  return (corpus.outrage ?? []).map((item) => ({
-    item,
-    arm: item.arms[Math.floor(Math.random() * item.arms.length)],
-  }));
+  const items = corpus.outrage ?? [];
+  const order = corpus.outrageOrder ?? [];
+  return order
+    .filter(([i]) => items[i])
+    .map(([i, armIdx]) => ({ item: items[i], arm: items[i].arms[armIdx] }));
+}
+
+/** The forecast, asked once before the cases. */
+export function renderOutragePrediction(mount, prediction, onAnswer) {
+  mount.replaceChildren();
+  mount.append(el('p', 'rail__meta', 'Before you begin'));
+  mount.append(el('h2', 'question__prompt', prediction.ask));
+  mount.append(el('p', 'sec-lede',
+    'This is scored against what you actually do. It is the only part of the result that is '
+    + 'about self-knowledge rather than about politics.'));
+  const options = el('div', 'options');
+  prediction.options.forEach((opt, i) => {
+    const b = el('button', 'option');
+    b.type = 'button';
+    b.append(el('span', 'option__mark', String(i + 1)), el('span', 'option__body', opt.label));
+    b.addEventListener('click', () => onAnswer(opt));
+    options.append(b);
+  });
+  mount.append(options);
 }
 
 export function renderOutrageQuestion(mount, step, index, total, scale, onAnswer) {
@@ -436,44 +466,155 @@ export function renderOutrageQuestion(mount, step, index, total, scale, onAnswer
   mount.append(options);
 }
 
-export function renderOutrageResult(mount, steps, answers, scale) {
+/**
+ * The result.
+ *
+ * Structured so that the claim arrives after the evidence that licenses it: the charts
+ * first, then the tag, then the caveat that belongs to that tag, then the individual
+ * cases. A tag stated before the reader has seen their own gaps is a horoscope.
+ */
+export function renderOutrageResult(mount, steps, answers, corpus, predicted) {
   mount.replaceChildren();
+  const items = corpus.outrage ?? [];
+  const scale = corpus.outrageScale ?? [];
+  const tags = corpus.outrageTags ?? [];
+
+  // Answers arrive positionally; key them by case and arm so scoring can pair them.
+  const keyed = {};
+  steps.forEach((step, i) => {
+    const v = answers[i]?.value;
+    if (v != null) keyed[`${step.item.id}.${step.arm.id}`] = v;
+  });
+
+  const result = scoreOutrage(items, keyed, tags, predicted);
 
   const head = el('div', 'verdict');
-  head.append(el('p', 'verdict-label', 'What was varied'));
-  head.append(el('h2', 'verdict-name', 'Selective Outrage'));
+  head.append(el('p', 'verdict-label', 'Selective Outrage'));
+  head.append(el('h2', 'verdict-name', 'You judged each act twice'));
   head.append(el('p', 'verdict-voice',
-    'Every case you read exists in two versions, identical except for who did it. You were shown '
-    + 'one at random. Here is the other, and what the difference is for.'));
+    'Every case appeared in two versions, identical except for who did it, separated so the '
+    + 'second arrived without the first still in mind. The distance between your two ratings is '
+    + 'the measurement. It is yours — the same person, the same act, two actors.'));
   mount.append(head);
 
+  if (result.complete < MIN_PAIRS) {
+    mount.append(el('p', 'sec-note',
+      `Only ${result.complete} of ${result.total} pairs were completed, which is too few to say `
+      + 'anything. The test needs both halves of at least six cases before it will offer a verdict, '
+      + 'and inventing one from fewer is what this whole section exists to argue against.'));
+    return;
+  }
+
+  // ── the evidence ─────────────────────────────────────────────────────────
+  const charts = el('div', 'result-charts');
+
+  const gaps = el('section', 'result-chart');
+  gaps.append(el('h3', 'result-chart__title', 'Your two ratings, case by case'));
+  gaps.append(el('p', 'result-chart__note',
+    'Each row is one act. The two dots are your ratings of the two actors; the bar between them '
+    + 'is how much the actor mattered. A row with the dots on top of each other is a row where '
+    + 'you judged the act.'));
+  // The actors differ from row to row, so the legend names the position in the pair
+  // rather than a person. Hovering a dot names the actual one; the table lists them all.
+  gaps.append(gapLegend([
+    ['a', 'The first version of each act'],
+    ['b', 'The second version'],
+  ]));
+  gaps.append(gapChart(result.pairs, scale));
+  gaps.append(gapTable(result.pairs, scale));
+  charts.append(gaps);
+
+  const byWhat = byAxis(result.pairs);
+  if (byWhat.length > 1) {
+    const ax = el('section', 'result-chart');
+    ax.append(el('h3', 'result-chart__title', 'What moved you'));
+    ax.append(el('p', 'result-chart__note',
+      'The cases vary four different things. This is where your gaps were largest, which says '
+      + 'more about you than the total does — being moved by how close someone is to you and '
+      + 'being moved by which side they are on are different failings with different defences.'));
+    ax.append(axisChart(byWhat, AXIS_LABEL));
+    charts.append(ax);
+  }
+
+  const field = el('section', 'result-chart');
+  field.append(el('h3', 'result-chart__title', 'Where that puts you'));
+  field.append(el('p', 'result-chart__note',
+    'Two independent axes: how harsh you were, and how much the actor changed it. The regions '
+    + 'are the results this test can return. Yours is the one you landed in — and the others are '
+    + 'shown so you can see exactly what you would have had to do to get them.'));
+  field.append(fieldChart(result, tags));
+  charts.append(field);
+  mount.append(charts);
+
+  // ── the claim ────────────────────────────────────────────────────────────
+  if (result.tag) {
+    const box = el('div', `outcome-tag outcome-tag--${result.tag.id}`);
+    box.append(el('p', 'outcome-tag__label', 'On this test, on this occasion'));
+    box.append(el('h3', 'outcome-tag__name', result.tag.name));
+    box.append(el('p', 'outcome-tag__numbers',
+      `Mean severity ${result.severity.toFixed(1)} of 5 · mean gap ${result.selectivity.toFixed(2)} `
+      + `scale points · ${result.moved} of ${result.complete} pairs moved by half a point or more`));
+    box.append(el('p', 'outcome-tag__blurb', result.tag.blurb));
+    if (result.direction) {
+      box.append(el('p', 'outcome-tag__dir',
+        `The gaps point one way: on ${result.direction.votes} of the cases that name a side, the `
+        + `one you let off was ${SIDE_LABEL[result.direction.side] ?? result.direction.side}.`));
+    }
+    box.append(el('p', 'outcome-tag__caveat', result.tag.caveat));
+    mount.append(box);
+  }
+
+  if (result.forecast) {
+    const f = result.forecast;
+    const said = {
+      accurate: 'You predicted your own inconsistency about right, which is rarer than it sounds — '
+        + 'most people underestimate it, and the third-person effect in the glossary is the reason.',
+      under: 'You predicted fewer differences than you produced. That is the ordinary result, and it '
+        + 'is the same asymmetry that has people rating advertising as effective on others and not '
+        + 'on themselves.',
+      over: 'You predicted more differences than you produced — you were harder on yourself than the '
+        + 'evidence warranted, or you saw the design coming and corrected for it.',
+    }[f.verdict];
+    const p = el('div', 'outcome-forecast');
+    p.append(el('h3', 'outcome-forecast__title', 'Against your own forecast'));
+    p.append(el('p', 'outcome-forecast__body',
+      `You expected about ${f.predicted.toFixed(0)} of ${result.complete} to differ. `
+      + `${result.moved} did. ${said}`));
+    mount.append(p);
+  }
+
+  if (result.widest?.real) {
+    const w = result.widest;
+    const box = el('div', 'outcome-widest');
+    box.append(el('h3', 'outcome-widest__title', 'The one to explain'));
+    box.append(el('p', 'outcome-widest__body',
+      `Your largest gap was ${w.gap} points, on the act where someone ${w.item.act}. `
+      + `You rated ${w.item.arms[0].actor.toLowerCase()} at ${w.a} and `
+      + `${w.item.arms[1].actor.toLowerCase()} at ${w.b}. What varied was: ${w.item.varies.toLowerCase()}. `
+      + 'There may be a good reason. The test is whether you can state it as a principle that you '
+      + 'would also accept applied against you.'));
+    mount.append(box);
+  }
+
+  // ── the cases ────────────────────────────────────────────────────────────
   const list = el('div', 'audit-reveals');
-  steps.forEach((step, i) => {
-    const { item, arm } = step;
-    const other = item.arms.find((a) => a.id !== arm.id);
-    const given = scale.find((s) => s.value === answers[i]?.value);
-
+  for (const p of [...result.pairs].sort((a, b) => b.gap - a.gap)) {
     const card = el('div', 'reveal');
-    card.append(el('p', 'reveal__what', item.varies));
-    card.append(el('p', 'reveal__answer', `${arm.actor} ${item.act}.`));
-    card.append(el('p', 'reveal__verdict', `You said: ${given?.label ?? '—'}`));
-    card.append(el('p', 'reveal__arm', `The other version: ${other.actor}`));
-    card.append(el('p', 'reveal__says', item.reveal));
+    card.append(el('p', 'reveal__what', p.item.varies));
+    card.append(el('p', 'reveal__answer', `Someone ${p.item.act}.`));
+    card.append(el('p', 'reveal__verdict',
+      `${p.item.arms[0].actor}: ${p.a} · ${p.item.arms[1].actor}: ${p.b}`
+      + (p.real ? ` · gap ${p.gap}` : ' · no gap')));
+    card.append(el('p', 'reveal__says', p.item.reveal));
     list.append(card);
-  });
+  }
   mount.append(list);
-
-  const answered = answers.filter(Boolean).map((a) => a.value);
-  const mean = answered.length ? answered.reduce((x, y) => x + y, 0) / answered.length : 0;
-  const spread = answered.length ? Math.max(...answered) - Math.min(...answered) : 0;
 
   const foot = el('div', 'result-foot');
   foot.append(el('p', 'sec-note',
-    `Your mean severity was ${mean.toFixed(1)} of 5, across a range of ${spread} points. `
-    + 'Those two figures are all this can honestly tell you about yourself, and neither is a '
-    + 'measure of bias: you saw one version of each case, so nothing here shows how you would '
-    + 'have rated the other. A test claiming otherwise on eight items would be inventing a '
-    + 'result. What it can do is put the pair in front of you and let you ask whether the swap '
-    + 'would have moved you — and that question is the whole instrument.'));
+    'What this cannot do, stated plainly: you saw both versions, so consistency was the visible '
+    + 'demand and your measured gaps are almost certainly smaller than they would be in the wild. '
+    + 'Ten pairs is also a short instrument. Treat a large gap as real evidence and a small one as '
+    + 'weak evidence, because that is the direction the design biases in.'));
   mount.append(foot);
 }

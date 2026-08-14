@@ -753,3 +753,127 @@ button[disabled] { opacity: .4; cursor: not-allowed; }
   letter-spacing: .14em; text-transform: uppercase; color: var(--pos);
 }
 .fl-not__text { margin: 0; font-size: 15px; color: var(--ink-soft); max-width: 70ch; }
+
+/* ── Charts ─────────────────────────────────────────────────────────────── */
+
+/* A diverging pair, blue ↔ red, selected per mode rather than flipped. The site's own
+   --pos/--neg were tried first and failed the checks hard — ΔE 2.4 under deuteranopia,
+   10.7 even with full colour vision — which is the kind of collapse that only shows up
+   if you measure it. These steps pass lightness, chroma, CVD separation, the
+   normal-vision floor and contrast on this page's own surfaces in both modes. */
+:root {
+  --dv-a: #2a78d6;
+  --dv-b: #e34948;
+  --dv-0: #9aa1ad;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) { --dv-a: #3987e5; --dv-b: #e66767; --dv-0: #6b7280; }
+}
+:root[data-theme='dark'] { --dv-a: #3987e5; --dv-b: #e66767; --dv-0: #6b7280; }
+
+.result-charts { display: grid; gap: var(--s6); margin: var(--s5) 0; }
+.result-chart { display: grid; gap: var(--s3); }
+.result-chart__title { margin: 0; font-size: 20px; font-weight: 500; }
+.result-chart__note {
+  margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-faint); max-width: 62ch;
+}
+
+.chart { margin: 0; position: relative; }
+/* Wide charts scroll inside their own box; the page never scrolls sideways. */
+.chart__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart__cap { font-size: 13px; color: var(--ink-faint); margin-top: var(--s2); }
+
+.chart__grid { stroke: var(--rule-2); stroke-width: 1; }
+.chart__axis { fill: var(--ink-faint); font-family: var(--mono); font-size: 10px; letter-spacing: .08em; }
+.chart__row { fill: var(--ink-soft); font-size: 13px; }
+.chart__val { fill: var(--ink-faint); font-family: var(--mono); font-size: 11px; }
+
+/* The connector shows a distance, not an identity, so it is neutral. The two hues are
+   spent once, on the dots. */
+.chart__link { stroke: var(--dv-0); stroke-width: 3; stroke-linecap: round; }
+
+/* A 2px surface ring so the two markers stay distinct where a gap is near zero and
+   they overlap. */
+.chart__mark { stroke: var(--paper); stroke-width: 2; }
+.chart__mark--a { fill: var(--dv-a); }
+.chart__mark--b { fill: var(--dv-b); }
+.chart__hit { fill: transparent; }
+.chart__markg { cursor: default; }
+.chart__markg:focus { outline: none; }
+.chart__markg:focus-visible .chart__mark { stroke: var(--brass); stroke-width: 3; }
+
+.chart__bar { fill: var(--dv-a); }
+
+.chart__region { fill: var(--paper-2); stroke: var(--rule-2); stroke-width: 1; }
+.chart__region.is-on { fill: var(--paper-3); stroke: var(--brass); stroke-width: 1.5; }
+.chart__region-label { fill: var(--ink-faint); font-family: var(--mono); font-size: 9px;
+                       letter-spacing: .1em; text-transform: uppercase; }
+.chart__region-label.is-on { fill: var(--brass); }
+.chart__you { fill: var(--ink); }
+.chart__you-ring { fill: none; stroke: var(--paper); stroke-width: 3; }
+.chart__you-label { fill: var(--ink); font-family: var(--mono); font-size: 10px;
+                    letter-spacing: .1em; text-transform: uppercase; }
+
+.chart__legend { display: flex; gap: var(--s4); flex-wrap: wrap; font-size: 13px; color: var(--ink-soft); }
+.chart__legend-item { display: inline-flex; align-items: center; gap: var(--s2); }
+.chart__swatch { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.chart__swatch--a { background: var(--dv-a); }
+.chart__swatch--b { background: var(--dv-b); }
+
+.chart__tip {
+  position: absolute; transform: translate(-50%, calc(-100% - 10px));
+  background: var(--ink); color: var(--paper);
+  padding: var(--s2) var(--s3); max-width: 30ch; pointer-events: none; z-index: 5;
+  display: grid; gap: 2px; font-size: 13px; line-height: 1.45;
+}
+.chart__tip strong { font-weight: 600; }
+.chart__tip em { font-style: normal; opacity: .75; font-family: var(--mono); font-size: 11px; }
+
+/* The table view is not a fallback — it is the second route to the same numbers, and
+   it is what makes the contrast relief on small marks legitimate. */
+.chart__table { margin-top: var(--s3); font-size: 14px; }
+.chart__table summary { cursor: pointer; color: var(--ink-faint); font-family: var(--mono);
+                        font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+.chart__table table { border-collapse: collapse; margin-top: var(--s3); width: 100%; }
+.chart__table th, .chart__table td {
+  text-align: left; padding: 6px var(--s3); border-bottom: 1px solid var(--rule-2);
+  vertical-align: top;
+}
+.chart__table th { font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
+                   text-transform: uppercase; color: var(--ink-faint); }
+
+/* ── The outrage verdict ────────────────────────────────────────────────── */
+
+.outcome-tag {
+  margin: var(--s5) 0; padding: var(--s5); background: var(--paper-2);
+  border-left: 3px solid var(--brass); display: grid; gap: var(--s3); max-width: 58rem;
+}
+.outcome-tag__label { margin: 0; font-family: var(--mono); font-size: 10px;
+                      letter-spacing: .16em; text-transform: uppercase; color: var(--ink-faint); }
+.outcome-tag__name { margin: 0; font-family: var(--serif); font-size: clamp(28px, 5vw, 40px);
+                     font-weight: 400; line-height: 1.1; }
+.outcome-tag__numbers { margin: 0; font-family: var(--mono); font-size: 11px;
+                        letter-spacing: .06em; color: var(--ink-faint); }
+.outcome-tag__blurb { margin: 0; font-size: 18px; line-height: 1.6; max-width: 60ch; }
+.outcome-tag__dir { margin: 0; font-size: 16px; line-height: 1.6; color: var(--ink-soft); max-width: 60ch; }
+.outcome-tag__caveat {
+  margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-faint); max-width: 60ch;
+  border-top: 1px solid var(--rule-2); padding-top: var(--s3);
+}
+
+.outcome-forecast, .outcome-widest {
+  margin: var(--s4) 0; padding-left: var(--s4); border-left: 2px solid var(--rule);
+  display: grid; gap: var(--s2); max-width: 58rem;
+}
+.outcome-forecast__title, .outcome-widest__title {
+  margin: 0; font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ink-faint); font-weight: 400;
+}
+.outcome-forecast__body, .outcome-widest__body {
+  margin: 0; font-size: 16px; line-height: 1.65; color: var(--ink-soft); max-width: 62ch;
+}
+
+/* A conditional region is shown only when it is the reader's own result. The dashed
+   edge says it is not decided by position on this plane — a reader with the same two
+   coordinates and no repeating direction lands in the region behind it. */
+.chart__region.is-conditional { fill: none; stroke-dasharray: 5 4; }

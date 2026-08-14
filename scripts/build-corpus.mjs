@@ -23,7 +23,7 @@ import { GLOSSARY, GLOSSARY_STATUS } from '../data/glossary.mjs';
 import { PROBES } from '../data/glossary-probes.mjs';
 import { AUDIT } from '../data/bias-audit.mjs';
 import { FALLACIES, FALLACY_FAMILIES } from '../data/fallacies.mjs';
-import { OUTRAGE_ITEMS, OUTRAGE_SCALE } from '../data/outrage-test.mjs';
+import { OUTRAGE_ITEMS, OUTRAGE_SCALE, OUTRAGE_TAGS, OUTRAGE_PREDICTION, INTERLEAVE } from '../data/outrage-test.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIR = join(ROOT, 'theories');
@@ -153,6 +153,9 @@ const corpus = {
   fallacyFamilies: FALLACY_FAMILIES,
   outrage: OUTRAGE_ITEMS,
   outrageScale: OUTRAGE_SCALE,
+  outrageTags: OUTRAGE_TAGS,
+  outragePrediction: OUTRAGE_PREDICTION,
+  outrageOrder: INTERLEAVE,
 };
 
 const out = join(ROOT, 'web', 'src', 'corpus.generated.json');
@@ -175,7 +178,7 @@ console.log(
 );
 console.log(
   `glossary: ${GLOSSARY.length} · fallacies: ${FALLACIES.length} · `
-  + `audit: ${AUDIT.length} items · outrage: ${OUTRAGE_ITEMS.length} pairs`,
+  + `audit: ${AUDIT.length} items · outrage: ${OUTRAGE_ITEMS.length} pairs (${INTERLEAVE.length} questions)`,
 );
 const kinds = glossary.reduce((acc, e) => ({ ...acc, [e.probe.kind]: (acc[e.probe.kind] ?? 0) + 1 }), {});
 console.log(

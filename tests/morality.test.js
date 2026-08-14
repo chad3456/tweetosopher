@@ -237,17 +237,23 @@ test('every fallacy names what it is confused with', () => {
 
 test('every outrage case varies exactly one thing and offers two arms', () => {
   const items = raw.outrage ?? [];
-  assert.ok(items.length >= 6, `only ${items.length} outrage cases`);
+  assert.ok(items.length >= 8, `only ${items.length} outrage cases`);
   for (const item of items) {
     assert.equal(item.arms.length, 2, `${item.id} must have exactly two arms`);
     assert.ok(item.varies?.length > 10, `${item.id} must name what varies`);
     assert.ok(item.act?.length > 20, `${item.id} needs an act`);
     assert.ok(item.reveal?.length > 100, `${item.id} reveal is too thin`);
+    assert.ok(item.axis, `${item.id} needs an axis so the result can group it`);
     // The act must be identical across arms — only the actor changes. If an arm
     // carried its own act the test would be measuring two different things.
     for (const arm of item.arms) {
       assert.ok(arm.actor?.length > 5, `${item.id}/${arm.id} needs an actor`);
       assert.ok(!('act' in arm), `${item.id}/${arm.id} must not vary the act`);
+    }
+    if (item.favours) {
+      for (const arm of item.arms) {
+        assert.ok(item.favours[arm.id], `${item.id}/${arm.id} has no side named in favours`);
+      }
     }
   }
 });
@@ -262,6 +268,132 @@ test('the outrage test is politically two-directional', () => {
   const text = JSON.stringify(items).toLowerCase();
   for (const side of ['climate', 'farmers', 'immigration', 'governing party', 'opposition']) {
     assert.ok(text.includes(side), `expected a case touching "${side}"`);
+  }
+  // Neither side may be the one that is always let off. Count which side each
+  // `favours` map assigns to each arm: left and right must both appear on both
+  // arms across the set, or the direction detector can only ever point one way.
+  const sides = { a: [], b: [] };
+  for (const item of items) {
+    if (!item.favours) continue;
+    sides.a.push(item.favours[item.arms[0].id]);
+    sides.b.push(item.favours[item.arms[1].id]);
+  }
+  assert.ok(sides.a.length >= 3, 'at least three cases should name political sides');
+  assert.ok(new Set(sides.a).size > 1, 'the first arm must not always be the same side');
+  assert.ok(new Set(sides.b).size > 1, 'the second arm must not always be the same side');
+});
+
+test('the sitting asks both arms of every case, separated by at least five questions', () => {
+  const items = raw.outrage ?? [];
+  const order = raw.outrageOrder ?? [];
+  assert.equal(order.length, items.length * 2, 'every case must be asked twice');
+
+  const seen = new Map();
+  order.forEach(([itemIdx, armIdx], position) => {
+    assert.ok(items[itemIdx], `order references case ${itemIdx}, which does not exist`);
+    assert.ok(armIdx === 0 || armIdx === 1, `order references arm ${armIdx}`);
+    const key = `${itemIdx}.${armIdx}`;
+    assert.ok(!seen.has(key), `${key} asked twice`);
+    seen.set(key, position);
+  });
+
+  // Separation is the whole basis of the measurement. A pair asked back to back is
+  // a consistency quiz the reader can see coming, and the gap it records is not the
+  // gap the test is trying to observe.
+  for (let i = 0; i < items.length; i++) {
+    const first = seen.get(`${i}.0`);
+    const second = seen.get(`${i}.1`);
+    assert.ok(first != null && second != null, `case ${i} is not asked in both arms`);
+    assert.ok(
+      Math.abs(first - second) >= 5,
+      `case ${items[i].id} has its arms ${Math.abs(first - second)} apart; needs 5+`,
+    );
+  }
+});
+
+test('the outrage tags are earned from the numbers, not handed out', async () => {
+  const { scoreOutrage } = await import('../web/src/test/outrage.js');
+  const items = raw.outrage ?? [];
+  const tags = raw.outrageTags ?? [];
+  assert.ok(tags.length >= 4, `only ${tags.length} tags`);
+
+  const answerAllPairs = (fn) => {
+    const out = {};
+    items.forEach((item, i) => {
+      const [a, b] = fn(item, i);
+      out[`${item.id}.${item.arms[0].id}`] = a;
+      out[`${item.id}.${item.arms[1].id}`] = b;
+    });
+    return out;
+  };
+
+  // Too little data must produce no tag at all rather than a hedged one.
+  const thin = { [`${items[0].id}.${items[0].arms[0].id}`]: 4 };
+  assert.equal(scoreOutrage(items, thin, tags).tag, null, 'a single rating must not earn a tag');
+
+  // Identical ratings throughout: zero selectivity, and the tag must say so.
+  const same = scoreOutrage(items, answerAllPairs(() => [3, 3]), tags);
+  assert.equal(same.selectivity, 0);
+  assert.equal(same.tag.id, 'consistent');
+  assert.equal(same.direction, null, 'no gaps means no direction');
+
+  // Harsh and even.
+  const police = scoreOutrage(items, answerAllPairs(() => [5, 5]), tags);
+  assert.equal(police.tag.id, 'moral-police');
+
+  // Lenient and even.
+  const soft = scoreOutrage(items, answerAllPairs(() => [1, 1]), tags);
+  assert.equal(soft.tag.id, 'permissive');
+
+  // Large gaps that do NOT repeat a political direction must not be called partisan
+  // or hypocritical — scattered inconsistency is noise, and the words mean something.
+  // This fixture alternates the direction of the gap, so the sides it lets off do not
+  // add up to a lean. An earlier margin rule called it partisan on a 2-versus-1 split.
+  const scattered = scoreOutrage(items, answerAllPairs((item, i) => (i % 2 ? [5, 1] : [1, 5])), tags);
+  assert.ok(scattered.selectivity > 0.75, 'this fixture should be highly selective');
+  assert.ok(
+    !['partisan', 'hypocrite'].includes(scattered.tag.id),
+    `scattered gaps earned "${scattered.tag.id}" without a direction`,
+  );
+});
+
+test('a repeated political direction is required before a political tag is given', async () => {
+  const { scoreOutrage } = await import('../web/src/test/outrage.js');
+  const items = raw.outrage ?? [];
+  const tags = raw.outrageTags ?? [];
+
+  // Be harsh everywhere, but let one named side off on every case that names sides.
+  const answers = {};
+  for (const item of items) {
+    const [a, b] = item.arms;
+    if (item.favours?.[a.id] === 'left' || item.favours?.[a.id] === 'government') {
+      answers[`${item.id}.${a.id}`] = 2;
+      answers[`${item.id}.${b.id}`] = 5;
+    } else if (item.favours) {
+      answers[`${item.id}.${a.id}`] = 5;
+      answers[`${item.id}.${b.id}`] = 2;
+    } else {
+      answers[`${item.id}.${a.id}`] = 5;
+      answers[`${item.id}.${b.id}`] = 5;
+    }
+  }
+  const out = scoreOutrage(items, answers, tags);
+  assert.ok(out.direction, 'a repeated lean should be detected');
+  assert.ok(out.direction.votes >= 2, 'a direction needs at least two votes');
+  assert.equal(out.tag.id, 'hypocrite', `harsh + directional should be hypocrite, got ${out.tag.id}`);
+  assert.ok(out.widest.gap >= 3, 'the widest gap should be reported');
+});
+
+test('every outrage tag states the measurement that earns it', () => {
+  for (const tag of raw.outrageTags ?? []) {
+    assert.ok(tag.when, `${tag.id} has no numeric region`);
+    const ranges = [tag.when.selectivity, tag.when.severity].filter(Boolean);
+    assert.ok(ranges.length >= 1, `${tag.id} must constrain at least one axis`);
+    for (const [lo, hi] of ranges) assert.ok(hi > lo, `${tag.id} has an empty range`);
+    assert.ok(tag.blurb?.length > 100, `${tag.id} blurb is too thin`);
+    // Every tag carries its own limit. A verdict with no caveat is a horoscope, and
+    // the caveats here are load-bearing: the reader saw both arms.
+    assert.ok(tag.caveat?.length > 80, `${tag.id} has no caveat`);
   }
 });
 

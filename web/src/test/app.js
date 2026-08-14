@@ -15,6 +15,7 @@ import { matchPhilosophers, sphereFor, tiedWith } from './match.js';
 import {
   renderGlossary, buildAudit, renderAuditQuestion, renderAuditResult,
   renderFallacies, buildOutrage, renderOutrageQuestion, renderOutrageResult,
+  renderOutragePrediction,
 } from './glossary.js';
 import { mountSwing } from './swing.js';
 
@@ -677,20 +678,36 @@ function renderAuditStep() {
 
 // ── Selective Outrage ──────────────────────────────────────────────────────
 
-const outrage = { steps: [], answers: [], at: 0 };
+// `at === -1` is the forecast, asked before the cases. It is part of the instrument
+// rather than a preamble: the difference between it and the measured result is the only
+// thing here that speaks to self-knowledge rather than to politics.
+const outrage = { steps: [], answers: [], at: -1, predicted: null };
 
 function beginOutrage() {
   outrage.steps = buildOutrage(corpus);
   outrage.answers = [];
-  outrage.at = 0;
+  outrage.at = -1;
+  outrage.predicted = null;
   showStage('#stage-outrage');
   renderOutrageStep();
 }
 
 function renderOutrageStep() {
+  if (outrage.at < 0) {
+    $('#outrage-progress').style.width = '0%';
+    renderOutragePrediction($('#outrage-question'), corpus.outragePrediction, (opt) => {
+      outrage.predicted = opt.expect;
+      outrage.at = 0;
+      renderOutrageStep();
+    });
+    window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+    return;
+  }
   if (outrage.at >= outrage.steps.length) {
     showStage('#stage-outrage-result');
-    renderOutrageResult($('#stage-outrage-result'), outrage.steps, outrage.answers, corpus.outrageScale);
+    renderOutrageResult(
+      $('#stage-outrage-result'), outrage.steps, outrage.answers, corpus, outrage.predicted,
+    );
     const foot = el('div', 'result-foot');
     const back = el('button', 'primary', 'Back to the site');
     back.type = 'button';
@@ -718,7 +735,8 @@ $('#begin-audit').addEventListener('click', beginAudit);
 renderGlossary($('#glossary-mount'), corpus);
 renderFallacies($('#fallacies-mount'), corpus);
 $('#outrage-note').textContent =
-  `${corpus.outrage.length} cases. Nothing is sent anywhere.`;
+  `${corpus.outrage.length} acts, judged twice each — ${corpus.outrageOrder.length} questions. `
+  + 'Nothing is sent anywhere.';
 $('#audit-note').textContent =
   `${corpus.audit.length} items, a few minutes. Nothing is sent anywhere.`;
 
