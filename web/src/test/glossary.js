@@ -253,3 +253,142 @@ export function renderAuditResult(mount, steps, answers) {
     + 'nine items is doing something the evidence does not support.'));
   mount.append(foot);
 }
+
+// ── Fallacies ──────────────────────────────────────────────────────────────
+
+/**
+ * The `notFallacy` field is given equal weight to the definition, deliberately.
+ * These names are used mainly as weapons — "ad hominem" thrown at any criticism of
+ * a speaker — and a list that teaches only the label arms people to misuse it. The
+ * misuse is now commoner than the fallacy.
+ */
+export function renderFallacies(mount, corpus) {
+  const items = corpus.fallacies ?? [];
+  const families = corpus.fallacyFamilies ?? {};
+  mount.replaceChildren();
+
+  const state = { family: 'all' };
+  const row = el('div', 'gl-filters');
+  const buttons = [];
+  const add = (value, label) => {
+    const b = el('button', 'gl-chip');
+    b.type = 'button';
+    b.textContent = label;
+    b.addEventListener('click', () => { state.family = value; draw(); });
+    buttons.push([b, value]);
+    row.append(b);
+  };
+  add('all', `All ${items.length}`);
+  for (const f of Object.keys(families)) add(f, f);
+  mount.append(row);
+
+  const note = el('p', 'gl-legend');
+  note.textContent =
+    'Each entry carries what it is most often confused with. That field matters more than the '
+    + 'definition: these names are mostly used as weapons, and the misuse is now commoner than '
+    + 'the fallacy. Attacking someone\'s credibility is not ad hominem when their testimony is '
+    + 'the evidence.';
+  mount.append(note);
+
+  const list = el('div', 'gl-list');
+  mount.append(list);
+
+  function draw() {
+    for (const [b, v] of buttons) b.setAttribute('aria-pressed', String(state.family === v));
+    const shown = state.family === 'all' ? items : items.filter((f) => f.family === state.family);
+    list.replaceChildren();
+    if (state.family !== 'all') {
+      const d = el('p', 'gl-count', families[state.family]);
+      list.append(d);
+    }
+    for (const f of shown) {
+      const item = el('details', 'gl-item');
+      const summary = el('summary');
+      const head = el('span', 'gl-head');
+      head.append(el('span', 'gl-name', f.name), el('span', 'gl-status gl-status--na', f.family));
+      summary.append(head, el('span', 'gl-def', f.definition));
+      item.append(summary);
+
+      const body = el('div', 'gl-body');
+      body.append(el('p', 'gl-case', f.example));
+      const not = el('div', 'fl-not');
+      not.append(
+        el('p', 'fl-not__label', 'Not a fallacy when'),
+        el('p', 'fl-not__text', f.notFallacy),
+      );
+      body.append(not);
+      item.append(body);
+      list.append(item);
+    }
+  }
+  draw();
+}
+
+// ── Selective Outrage ──────────────────────────────────────────────────────
+
+export function buildOutrage(corpus) {
+  return (corpus.outrage ?? []).map((item) => ({
+    item,
+    arm: item.arms[Math.floor(Math.random() * item.arms.length)],
+  }));
+}
+
+export function renderOutrageQuestion(mount, step, index, total, scale, onAnswer) {
+  const { item, arm } = step;
+  mount.replaceChildren();
+  mount.append(el('p', 'rail__meta', `Case ${index + 1} of ${total}`));
+  mount.append(el('h2', 'question__prompt', `${arm.actor} ${item.act}.`));
+  mount.append(el('p', 'sec-lede', 'How wrong is that?'));
+
+  const options = el('div', 'options');
+  for (const point of scale) {
+    const b = el('button', 'option');
+    b.type = 'button';
+    b.append(el('span', 'option__mark', String(point.value)), el('span', 'option__body', point.label));
+    b.addEventListener('click', () => onAnswer({ value: point.value }));
+    options.append(b);
+  }
+  mount.append(options);
+}
+
+export function renderOutrageResult(mount, steps, answers, scale) {
+  mount.replaceChildren();
+
+  const head = el('div', 'verdict');
+  head.append(el('p', 'verdict-label', 'What was varied'));
+  head.append(el('h2', 'verdict-name', 'Selective Outrage'));
+  head.append(el('p', 'verdict-voice',
+    'Every case you read exists in two versions, identical except for who did it. You were shown '
+    + 'one at random. Here is the other, and what the difference is for.'));
+  mount.append(head);
+
+  const list = el('div', 'audit-reveals');
+  steps.forEach((step, i) => {
+    const { item, arm } = step;
+    const other = item.arms.find((a) => a.id !== arm.id);
+    const given = scale.find((s) => s.value === answers[i]?.value);
+
+    const card = el('div', 'reveal');
+    card.append(el('p', 'reveal__what', item.varies));
+    card.append(el('p', 'reveal__answer', `${arm.actor} ${item.act}.`));
+    card.append(el('p', 'reveal__verdict', `You said: ${given?.label ?? '—'}`));
+    card.append(el('p', 'reveal__arm', `The other version: ${other.actor}`));
+    card.append(el('p', 'reveal__says', item.reveal));
+    list.append(card);
+  });
+  mount.append(list);
+
+  const answered = answers.filter(Boolean).map((a) => a.value);
+  const mean = answered.length ? answered.reduce((x, y) => x + y, 0) / answered.length : 0;
+  const spread = answered.length ? Math.max(...answered) - Math.min(...answered) : 0;
+
+  const foot = el('div', 'result-foot');
+  foot.append(el('p', 'sec-note',
+    `Your mean severity was ${mean.toFixed(1)} of 5, across a range of ${spread} points. `
+    + 'Those two figures are all this can honestly tell you about yourself, and neither is a '
+    + 'measure of bias: you saw one version of each case, so nothing here shows how you would '
+    + 'have rated the other. A test claiming otherwise on eight items would be inventing a '
+    + 'result. What it can do is put the pair in front of you and let you ask whether the swap '
+    + 'would have moved you — and that question is the whole instrument.'));
+  mount.append(foot);
+}

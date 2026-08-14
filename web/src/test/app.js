@@ -12,7 +12,10 @@ import { voronoiTreemap } from '../voronoi.js';
 import { score, verdicts, nameFor } from './scoring.js';
 import { buildSitting, capacity, seedFrom, TRACKS, TEST_LENGTH, testsFor, buildTest } from './select.js';
 import { matchPhilosophers, sphereFor, tiedWith } from './match.js';
-import { renderGlossary, buildAudit, renderAuditQuestion, renderAuditResult } from './glossary.js';
+import {
+  renderGlossary, buildAudit, renderAuditQuestion, renderAuditResult,
+  renderFallacies, buildOutrage, renderOutrageQuestion, renderOutrageResult,
+} from './glossary.js';
 
 const corpus = { ...corpusData, byId: new Map(corpusData.entries.map((e) => [e.id, e])) };
 
@@ -187,8 +190,9 @@ function openPicker(theme) {
 
 // ── The sitting ────────────────────────────────────────────────────────────
 
-const STAGES = ['#stage-picker', '#stage-sitting', '#stage-result', '#stage-audit', '#stage-audit-result'];
-const FRONT = ['#hero', '#about', '#themes', '#long', '#glossary', '#audit'];
+const STAGES = ['#stage-picker', '#stage-sitting', '#stage-result', '#stage-audit',
+  '#stage-audit-result', '#stage-outrage', '#stage-outrage-result'];
+const FRONT = ['#hero', '#about', '#themes', '#long', '#glossary', '#audit', '#fallacies', '#outrage'];
 
 function showStage(id) {
   for (const s of STAGES) $(s).hidden = s !== id;
@@ -670,9 +674,50 @@ function renderAuditStep() {
 
 // ── Wiring ─────────────────────────────────────────────────────────────────
 
+// ── Selective Outrage ──────────────────────────────────────────────────────
+
+const outrage = { steps: [], answers: [], at: 0 };
+
+function beginOutrage() {
+  outrage.steps = buildOutrage(corpus);
+  outrage.answers = [];
+  outrage.at = 0;
+  showStage('#stage-outrage');
+  renderOutrageStep();
+}
+
+function renderOutrageStep() {
+  if (outrage.at >= outrage.steps.length) {
+    showStage('#stage-outrage-result');
+    renderOutrageResult($('#stage-outrage-result'), outrage.steps, outrage.answers, corpus.outrageScale);
+    const foot = el('div', 'result-foot');
+    const back = el('button', 'primary', 'Back to the site');
+    back.type = 'button';
+    back.addEventListener('click', () => {
+      showStage(null);
+      $('#outrage').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+    });
+    foot.append(back);
+    $('#stage-outrage-result').append(foot);
+    window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+    return;
+  }
+  $('#outrage-progress').style.width = `${(outrage.at / outrage.steps.length) * 100}%`;
+  renderOutrageQuestion(
+    $('#outrage-question'), outrage.steps[outrage.at], outrage.at,
+    outrage.steps.length, corpus.outrageScale,
+    (answer) => { outrage.answers[outrage.at] = answer; outrage.at += 1; renderOutrageStep(); },
+  );
+  window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+}
+
+$('#begin-outrage').addEventListener('click', beginOutrage);
 $('#begin-audit').addEventListener('click', beginAudit);
 
 renderGlossary($('#glossary-mount'), corpus);
+renderFallacies($('#fallacies-mount'), corpus);
+$('#outrage-note').textContent =
+  `${corpus.outrage.length} cases. Nothing is sent anywhere.`;
 $('#audit-note').textContent =
   `${corpus.audit.length} items, a few minutes. Nothing is sent anywhere.`;
 

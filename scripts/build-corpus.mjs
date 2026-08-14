@@ -21,6 +21,8 @@ import { THEMES, inTheme } from '../data/themes.mjs';
 import { PHILOSOPHERS } from '../data/philosophers.mjs';
 import { GLOSSARY, GLOSSARY_STATUS } from '../data/glossary.mjs';
 import { AUDIT } from '../data/bias-audit.mjs';
+import { FALLACIES, FALLACY_FAMILIES } from '../data/fallacies.mjs';
+import { OUTRAGE_ITEMS, OUTRAGE_SCALE } from '../data/outrage-test.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIR = join(ROOT, 'theories');
@@ -123,6 +125,10 @@ const corpus = {
   glossary: GLOSSARY,
   glossaryStatus: GLOSSARY_STATUS,
   audit: AUDIT,
+  fallacies: FALLACIES,
+  fallacyFamilies: FALLACY_FAMILIES,
+  outrage: OUTRAGE_ITEMS,
+  outrageScale: OUTRAGE_SCALE,
 };
 
 const out = join(ROOT, 'web', 'src', 'corpus.generated.json');
@@ -143,7 +149,10 @@ console.log(
   `${themes.length} themes · ${themes.length - thin.length} ready` +
     (thin.length ? ` · thin: ${thin.map((t) => `${t.id}(${t.questions}q)`).join(', ')}` : ''),
 );
-console.log(`glossary: ${GLOSSARY.length} entries · audit: ${AUDIT.length} items`);
+console.log(
+  `glossary: ${GLOSSARY.length} · fallacies: ${FALLACIES.length} · `
+  + `audit: ${AUDIT.length} items · outrage: ${OUTRAGE_ITEMS.length} pairs`,
+);
 if (orphans.length) {
   console.log(`${orphans.length} entries match no theme: ${orphans.slice(0, 8).map((e) => e.id).join(', ')}`);
 }

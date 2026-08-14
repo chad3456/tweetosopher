@@ -216,3 +216,51 @@ test('only items with a defined correct answer can be graded', () => {
       `${item.id} is between-subjects and must not claim a correct answer`);
   }
 });
+
+// ── Fallacies and Selective Outrage ────────────────────────────────────────
+
+test('every fallacy names what it is confused with', () => {
+  const f = raw.fallacies ?? [];
+  assert.ok(f.length >= 30, `only ${f.length} fallacies`);
+  const ids = new Set();
+  for (const item of f) {
+    assert.ok(!ids.has(item.id), `duplicate fallacy ${item.id}`);
+    ids.add(item.id);
+    assert.ok(item.definition?.length > 20, `${item.id} needs a definition`);
+    assert.ok(item.example?.length > 30, `${item.id} needs an example`);
+    // The field that stops the list becoming a weapon. Without it a reader learns
+    // the label and not the boundary, and the misuse is commoner than the fallacy.
+    assert.ok(item.notFallacy?.length > 60, `${item.id} must say when it is NOT a fallacy`);
+    assert.ok(raw.fallacyFamilies[item.family], `${item.id} has unknown family ${item.family}`);
+  }
+});
+
+test('every outrage case varies exactly one thing and offers two arms', () => {
+  const items = raw.outrage ?? [];
+  assert.ok(items.length >= 6, `only ${items.length} outrage cases`);
+  for (const item of items) {
+    assert.equal(item.arms.length, 2, `${item.id} must have exactly two arms`);
+    assert.ok(item.varies?.length > 10, `${item.id} must name what varies`);
+    assert.ok(item.act?.length > 20, `${item.id} needs an act`);
+    assert.ok(item.reveal?.length > 100, `${item.id} reveal is too thin`);
+    // The act must be identical across arms — only the actor changes. If an arm
+    // carried its own act the test would be measuring two different things.
+    for (const arm of item.arms) {
+      assert.ok(arm.actor?.length > 5, `${item.id}/${arm.id} needs an actor`);
+      assert.ok(!('act' in arm), `${item.id}/${arm.id} must not vary the act`);
+    }
+  }
+});
+
+test('the outrage test is politically two-directional', () => {
+  const items = raw.outrage ?? [];
+  // An instrument that only ever embarrasses one side is a partisan tool with a
+  // scale on it. At minimum the arms must not all point the same way, so this
+  // checks that the varied dimensions are not a single repeated axis.
+  const dimensions = new Set(items.map((i) => i.varies.toLowerCase()));
+  assert.equal(dimensions.size, items.length, 'each case should vary a different thing');
+  const text = JSON.stringify(items).toLowerCase();
+  for (const side of ['climate', 'farmers', 'immigration', 'governing party', 'opposition']) {
+    assert.ok(text.includes(side), `expected a case touching "${side}"`);
+  }
+});

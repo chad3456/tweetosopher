@@ -27,7 +27,7 @@
  * tuple = [id, name, category, source, definition, case, status]
  */
 
-const CATEGORIES = new Set(['bias', 'heuristic', 'effect', 'principle', 'paradox', 'study', 'law']);
+const CATEGORIES = new Set(['bias', 'heuristic', 'effect', 'principle', 'paradox', 'study', 'law', 'term', 'theory', 'fallacy']);
 const STATUSES = new Set(['robust', 'mixed', 'contested', 'failed', '—']);
 
 const ROWS = [
@@ -514,6 +514,52 @@ const ROWS = [
     'People accept vague, general personality descriptions as specifically accurate about themselves.',
     'Forer gave students an identical horoscope-style profile assembled from a newsstand astrology book; they rated it as highly accurate about them personally. The standing warning about every personality test, including the one you are using.',
     'robust'],
+  // ── The feed: what platforms do to moral judgement ───────────────────────
+  // The most contested literature in the glossary, so the statuses do real work.
+  ['moral-contagion', 'Moral-Emotional Contagion', 'study', 'Brady, Wills, Jost, Tucker & Van Bavel, 2017',
+    'Messages containing moral-emotional language spread further within political groups than neutral ones.',
+    'Their analysis of political tweets found each additional moral-emotional word raised diffusion within a group, while doing little to cross between groups. It is a mechanism for why outrage travels and nuance does not, without requiring anyone to be acting in bad faith.',
+    'robust'],
+  ['outrage-cost', 'The Falling Cost of Outrage', 'theory', 'M.J. Crockett, 2017',
+    'Digital platforms reduce the personal cost of expressing moral outrage while raising its reward, changing how much gets expressed.',
+    "Crockett's argument is structural rather than accusatory: offline, condemning someone risked retaliation and took effort; online it is a tap and may bring approval. The same person expresses more outrage without having become more outraged.",
+    'mixed'],
+  ['moral-grandstanding-scale', 'Moral Grandstanding', 'study', 'Grubbs, Warmke, Tosi, James & Campbell, 2019',
+    'Using moral talk to promote oneself — measured as an individual difference, and associated with status-seeking and conflict.',
+    'The researchers built a scale and found grandstanding scores predicted political conflict and, notably, appeared across the political spectrum rather than on one side. Self-report measures of a socially undesirable trait carry obvious limits.',
+    'mixed'],
+  ['twenge-igen', 'The Smartphone Generation Hypothesis', 'theory', 'Jean Twenge, 2017',
+    'That the arrival of smartphones around 2012 drove a sharp rise in adolescent depression, anxiety and self-harm, particularly among girls.',
+    'The trend data are real and steep in several countries. Whether phones caused it is genuinely disputed: Przybylski and Orben found the average association between screen use and wellbeing is tiny — comparable to eating potatoes — while Twenge and Haidt argue the effect concentrates in heavy social-media use by girls and that the timing is too sharp to be coincidence. Both camps are reading largely the same datasets.',
+    'contested'],
+  ['haidt-anxious-generation', 'The Great Rewiring', 'theory', 'Jonathan Haidt, 2024',
+    "That a play-based childhood was replaced by a phone-based one, with measurable harm, and that the fix is collective rather than individual.",
+    'Haidt assembles international trend data and proposes four norms including no smartphones before high school. Candice Odgers and others reviewed the book critically, arguing the correlational evidence cannot bear the causal claim and that the focus may divert attention from poverty and services. The disagreement is about causation, not about whether the trends exist.',
+    'contested'],
+  ['filter-bubble', 'The Filter Bubble', 'theory', 'Eli Pariser, 2011',
+    'That algorithmic personalisation isolates people in self-confirming information environments.',
+    'The intuitive version has not held up well. Several studies find social media users encounter more cross-cutting content than offline peers, and Bail\'s experiment found that paying partisans to follow opposing accounts increased polarisation rather than reducing it. The sorting is real; the mechanism is not the one the metaphor suggests.',
+    'contested'],
+  ['bail-backfire', 'The Exposure Experiment', 'study', 'Christopher Bail et al., 2018',
+    'Paying partisans to follow opposing views for a month made them more extreme, not less.',
+    'Republicans became substantially more conservative; Democrats slightly more liberal. The finding cuts against the standing assumption that contact reduces polarisation, and suggests exposure without context reads as attack.',
+    'robust'],
+  ['context-collapse', 'Context Collapse', 'term', 'Marwick & boyd, 2011',
+    'A single utterance reaching audiences with incompatible norms, none of which it was written for.',
+    'A remark that is ordinary among colleagues, read by strangers, family and employers at once. It explains a large share of online moral conflict without anyone having said anything unusual.',
+    '—'],
+  ['virtue-signalling-term', 'Virtue Signalling', 'term', 'popularised by James Bartholomew, 2015',
+    'Public moral expression read as being about the speaker\'s standing rather than the issue.',
+    'Signalling theory says costly signals are informative and cheap ones are not — so the useful question is what the statement cost the person making it. As deployed, the term is usually unfalsifiable: it explains any moral speech by anyone disagreed with, and its own use is itself a status move.',
+    '—'],
+  ['selective-outrage', 'Selective Outrage', 'bias', 'related to Ditto et al., 2019',
+    'Condemning an act more when the person doing it belongs to the other side.',
+    'Ditto and colleagues\' meta-analysis found partisan bias in evaluating identical evidence was substantial and roughly symmetrical across left and right — which is the finding both sides consistently expect to come out in their favour.',
+    'robust'],
+  ['parasocial', 'Parasocial Interaction', 'effect', 'Horton & Wohl, 1956',
+    'A one-sided sense of relationship with a media figure who does not know you exist.',
+    'Named for television decades before social platforms, and far stronger now that the figure appears to reply. It is why an influencer\'s moral lapse feels like a personal betrayal, and why audiences defend them past the evidence.',
+    'robust'],
   ['barnum-vs-instrument', 'Barnum Statements', 'principle', 'named for P.T. Barnum; Meehl, 1956',
     'Statements broad enough to fit almost anyone, which feel personal because the reader supplies the specifics.',
     'The reason a result is only informative if it could have come out differently. A test that flatters everyone has measured nothing, whatever its respondents report.',
@@ -521,7 +567,7 @@ const ROWS = [
 ];
 
 export const GLOSSARY = ROWS.map(([id, name, category, source, definition, example, status]) => {
-  if (!CATEGORIES.has(category) && category !== 'theory' && category !== 'contested') {
+  if (!CATEGORIES.has(category) && category !== 'contested') {
     throw new Error(`${id}: unknown category "${category}"`);
   }
   if (!STATUSES.has(status)) throw new Error(`${id}: unknown status "${status}"`);

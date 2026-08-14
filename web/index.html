@@ -27,6 +27,8 @@
       <a href="#themes" data-tab="themes">The tests</a>
       <a href="#glossary" data-tab="glossary">Glossary</a>
       <a href="#audit" data-tab="audit">Bias Audit</a>
+      <a href="#fallacies" data-tab="fallacies">Fallacies</a>
+      <a href="#outrage" data-tab="outrage">Selective Outrage</a>
     </nav>
 
     <!-- ── Hero ──────────────────────────────────────────────────────────── -->
@@ -173,6 +175,39 @@
           <p class="note" id="audit-note"></p>
         </div>
       </section>
+
+      <!-- ── Fallacies ───────────────────────────────────────────────────── -->
+      <section class="sec" id="fallacies">
+        <div class="sec-head"><h2>Fallacies</h2><div class="line"></div></div>
+        <p class="sec-lede">
+          The standard taxonomy, with one addition: what each name is most often confused
+          with. That field matters more than the definition, because these labels are mostly
+          deployed as weapons and the misuse is now commoner than the fallacy.
+        </p>
+        <div id="fallacies-mount"></div>
+      </section>
+
+      <!-- ── Selective Outrage ───────────────────────────────────────────── -->
+      <section class="sec" id="outrage">
+        <div class="sec-head"><h2>Selective Outrage</h2><div class="line"></div></div>
+        <p class="sec-lede">
+          Eight cases. Each exists in two versions, identical except for who did it, and you
+          are shown one at random. At the end you see the other. It is a test about the
+          reader rather than about anybody online — rating strangers as insincere would be
+          the same moral grandstanding the corpus documents, at no cost to the rater.
+        </p>
+        <div class="desk-foot">
+          <button class="primary" id="begin-outrage" type="button">Take the test</button>
+          <p class="note" id="outrage-note"></p>
+        </div>
+      </section>
+
+      <section class="stage" id="stage-outrage" hidden>
+        <div class="rail"><div class="rail__bar"><i id="outrage-progress"></i></div></div>
+        <article class="question" id="outrage-question" aria-live="polite"></article>
+      </section>
+
+      <section class="stage" id="stage-outrage-result" hidden></section>
 
       <!-- ── Audit run ───────────────────────────────────────────────────── -->
       <section class="stage" id="stage-audit" hidden>
