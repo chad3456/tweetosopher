@@ -18,6 +18,7 @@ import {
   renderOutragePrediction,
 } from './glossary.js';
 import { mountSwing } from './swing.js';
+import { renderDiagram } from './diagram.js';
 
 const corpus = { ...corpusData, byId: new Map(corpusData.entries.map((e) => [e.id, e])) };
 
@@ -611,6 +612,13 @@ function renderCases(cases) {
       el('span', 'case__who', `${v.entry.philosophers[0]} · ${v.entry.era}`),
     );
     card.append(head, el('p', 'case__band', v.outcome.label), el('p', 'case__text', v.outcome.text));
+    // The diagram goes after the verdict, not before. A reader who has just been told
+    // where they landed has a reason to look at the mechanism; one who has not is
+    // looking at an illustration.
+    for (const panel of [corpus.diagrams?.[v.entry.id] ?? []].flat()) {
+      const fig = renderDiagram(panel);
+      if (fig) card.append(fig);
+    }
     if (v.contested && v.runnerUp) {
       card.append(el('p', 'case__flag', `Close — you were nearly "${v.runnerUp.label}" on this one`));
     }

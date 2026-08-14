@@ -23,6 +23,8 @@ import { GLOSSARY, GLOSSARY_STATUS } from '../data/glossary.mjs';
 import { PROBES } from '../data/glossary-probes.mjs';
 import { AUDIT } from '../data/bias-audit.mjs';
 import { FALLACIES, FALLACY_FAMILIES } from '../data/fallacies.mjs';
+import { FALLACY_MODERN } from '../data/fallacy-modern.mjs';
+import { DIAGRAMS } from '../data/diagrams.mjs';
 import { OUTRAGE_ITEMS, OUTRAGE_SCALE, OUTRAGE_TAGS, OUTRAGE_PREDICTION, INTERLEAVE } from '../data/outrage-test.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -137,6 +139,32 @@ const glossary = GLOSSARY.map((entry) => {
   return { ...entry, probe };
 });
 
+// Every fallacy carries a modern reading, joined the same way and enforced the same
+// way as the glossary probes. A reference that stops at the Latin teaches recognition
+// and not use, which is how a reader ends up naming moves instead of answering them.
+const missingModern = FALLACIES.filter((f) => !FALLACY_MODERN[f.id]).map((f) => f.id);
+const orphanModern = Object.keys(FALLACY_MODERN).filter((id) => !FALLACIES.some((f) => f.id === id));
+if (missingModern.length) throw new Error(`fallacies with no modern reading: ${missingModern.join(', ')}`);
+if (orphanModern.length) throw new Error(`modern readings with no fallacy: ${orphanModern.join(', ')}`);
+const fallacies = FALLACIES.map((f) => ({ ...f, modern: FALLACY_MODERN[f.id] }));
+
+// Diagrams are keyed by entry id across two namespaces — theory entries and glossary
+// entries — because they share a renderer. Coverage is deliberately partial: a diagram
+// belongs to an argument with a shape, and most entries do not have one. What is not
+// allowed is a picture pointing at nothing, so an unresolvable key fails the build.
+const diagramTargets = new Set([...entries.map((e) => e.id), ...GLOSSARY.map((g) => g.id)]);
+const strayDiagrams = Object.keys(DIAGRAMS).filter((id) => !diagramTargets.has(id));
+if (strayDiagrams.length) {
+  throw new Error(`diagrams with no entry: ${strayDiagrams.join(', ')}`);
+}
+// A value may be one spec or a series of them, because some arguments only make their
+// point in contrast — the trolley is not really about the trolley.
+for (const [id, d] of Object.entries(DIAGRAMS)) {
+  for (const panel of [d].flat()) {
+    if (!panel.alt || !panel.caption) throw new Error(`diagram ${id} needs both alt and caption`);
+  }
+}
+
 const corpus = {
   generatedBy: 'scripts/build-corpus.mjs',
   written: entries.length,
@@ -149,7 +177,8 @@ const corpus = {
   glossary,
   glossaryStatus: GLOSSARY_STATUS,
   audit: AUDIT,
-  fallacies: FALLACIES,
+  fallacies,
+  diagrams: DIAGRAMS,
   fallacyFamilies: FALLACY_FAMILIES,
   outrage: OUTRAGE_ITEMS,
   outrageScale: OUTRAGE_SCALE,
@@ -179,6 +208,13 @@ console.log(
 console.log(
   `glossary: ${GLOSSARY.length} · fallacies: ${FALLACIES.length} · `
   + `audit: ${AUDIT.length} items · outrage: ${OUTRAGE_ITEMS.length} pairs (${INTERLEAVE.length} questions)`,
+);
+const drawnTheory = Object.keys(DIAGRAMS).filter((id) => entries.some((e) => e.id === id)).length;
+const drawnGlossary = Object.keys(DIAGRAMS).length - drawnTheory;
+const panels = Object.values(DIAGRAMS).reduce((n, d) => n + [d].flat().length, 0);
+console.log(
+  `diagrams: ${Object.keys(DIAGRAMS).length} entries, ${panels} panels · ${drawnTheory} on `
+  + `theory entries (of ${entries.length}) · ${drawnGlossary} on glossary (of ${GLOSSARY.length})`,
 );
 const kinds = glossary.reduce((acc, e) => ({ ...acc, [e.probe.kind]: (acc[e.probe.kind] ?? 0) + 1 }), {});
 console.log(

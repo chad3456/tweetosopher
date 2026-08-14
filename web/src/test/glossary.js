@@ -17,6 +17,7 @@ const el = (tag, cls, text) => {
 
 import { scoreOutrage, byAxis, AXIS_LABEL, SIDE_LABEL, MIN_PAIRS } from './outrage.js';
 import { gapChart, fieldChart, axisChart, gapTable, gapLegend } from './charts.js';
+import { renderDiagram } from './diagram.js';
 
 const STATUS_ORDER = ['robust', 'mixed', 'contested', 'failed', '—'];
 const STATUS_LABEL = { robust: 'Robust', mixed: 'Mixed', contested: 'Contested', failed: 'Failed', '—': 'Not empirical' };
@@ -84,6 +85,7 @@ function renderProbe(probe) {
 
 export function renderGlossary(mount, corpus) {
   const entries = corpus.glossary ?? [];
+  const diagrams = corpus.diagrams ?? {};
   const state = { q: '', status: 'all', category: 'all', kind: 'all' };
 
   mount.replaceChildren();
@@ -211,6 +213,12 @@ export function renderGlossary(mount, corpus) {
       const body = el('div', 'gl-body');
       body.append(el('p', 'gl-source', `${g.source} · ${g.category}`));
       body.append(el('p', 'gl-case', g.example));
+      // Between the example and the probe: after the reader knows what the effect is,
+      // before they are asked to commit to an answer about it.
+      for (const panel of [diagrams[g.id] ?? []].flat()) {
+        const fig = renderDiagram(panel);
+        if (fig) body.append(fig);
+      }
       if (g.probe) body.append(renderProbe(g.probe));
       item.append(body);
       list.append(item);
@@ -375,7 +383,9 @@ export function renderFallacies(mount, corpus) {
     'Each entry carries what it is most often confused with. That field matters more than the '
     + 'definition: these names are mostly used as weapons, and the misuse is now commoner than '
     + 'the fallacy. Attacking someone\'s credibility is not ad hominem when their testimony is '
-    + 'the evidence.';
+    + 'the evidence. Each also says where the move actually lives now — most of these were '
+    + 'named for a debating hall, and scale, metrics and the quote-tweet have changed what '
+    + 'they cost to make and who they are made for.';
   mount.append(note);
 
   const list = el('div', 'gl-list');
@@ -405,6 +415,15 @@ export function renderFallacies(mount, corpus) {
         el('p', 'fl-not__text', f.notFallacy),
       );
       body.append(not);
+      if (f.modern) {
+        const mod = el('div', 'fl-modern');
+        mod.append(
+          el('p', 'fl-modern__label', 'Where it lives now'),
+          el('p', 'fl-modern__text', f.modern.now),
+          el('p', 'fl-modern__test', f.modern.test),
+        );
+        body.append(mod);
+      }
       item.append(body);
       list.append(item);
     }

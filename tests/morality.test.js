@@ -491,3 +491,49 @@ test('the hero animation honours prefers-reduced-motion and a missing canvas', a
     globalThis.IntersectionObserver = prior.IntersectionObserver;
   }
 });
+
+test('every fallacy carries a modern reading with a usable test', () => {
+  const items = raw.fallacies ?? [];
+  assert.ok(items.length >= 30, `only ${items.length} fallacies`);
+  for (const f of items) {
+    assert.ok(f.modern, `${f.id} has no modern reading — the Latin alone teaches recognition, not use`);
+    assert.ok(f.modern.now?.length > 120, `${f.id} modern reading is too thin`);
+    assert.ok(f.modern.test?.length > 60, `${f.id} needs a test the reader can actually apply`);
+    // The reading must say something the definition does not. If it merely restates
+    // the entry, it is filler with a heading on it.
+    assert.notEqual(f.modern.now.trim(), f.definition.trim(), `${f.id} modern reading restates the definition`);
+  }
+});
+
+test('every diagram points at a real entry and states its own point', () => {
+  const diagrams = raw.diagrams ?? {};
+  const ids = new Set([...raw.entries.map((e) => e.id), ...raw.glossary.map((g) => g.id)]);
+  const kinds = new Set(['track', 'scale', 'sets', 'grid', 'flow', 'curve', 'bars']);
+  assert.ok(Object.keys(diagrams).length >= 10, 'expected a real set of diagrams');
+
+  for (const [id, spec] of Object.entries(diagrams)) {
+    assert.ok(ids.has(id), `diagram "${id}" points at nothing`);
+    for (const panel of [spec].flat()) {
+      assert.ok(kinds.has(panel.kind), `${id} uses unknown diagram kind ${panel.kind}`);
+      // Both are required and they do different jobs: alt describes the picture for a
+      // reader who cannot see it, caption states the argument for a reader who can see
+      // it and might take the wrong thing from it.
+      assert.ok(panel.alt?.length > 40, `${id} needs a real alt description`);
+      assert.ok(panel.caption?.length > 80, `${id} caption must state the point, not name the picture`);
+      assert.notEqual(panel.alt.trim(), panel.caption.trim(), `${id} alt and caption are the same text`);
+    }
+  }
+});
+
+test('the trolley problem is drawn, and drawn against its own variants', () => {
+  // Named explicitly because it was the worked example the diagram vocabulary was
+  // built for, and because the contrast is the lesson: the same arithmetic, three
+  // cases, three different intuitions.
+  const panels = [raw.diagrams?.['trolley-problem'] ?? []].flat();
+  assert.ok(panels.length >= 3, `the trolley problem has ${panels.length} panels; the variants are the point`);
+  assert.equal(panels[0].kind, 'track');
+  assert.equal(panels[0].main.n, 5);
+  assert.equal(panels[0].branch.n, 1);
+  // The second panel must not offer a lever — that is exactly what distinguishes it.
+  assert.ok(/no lever/i.test(panels[1].switch), 'the footbridge panel must not present a lever');
+});

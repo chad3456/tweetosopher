@@ -877,3 +877,68 @@ button[disabled] { opacity: .4; cursor: not-allowed; }
    edge says it is not decided by position on this plane — a reader with the same two
    coordinates and no repeating direction lands in the region behind it. */
 .chart__region.is-conditional { fill: none; stroke-dasharray: 5 4; }
+
+/* The modern reading sits below the "not a fallacy when" note, because the order is
+   argued: what it is, what it is not, and only then where you will meet it. */
+.fl-modern {
+  border-left: 2px solid var(--brass-soft); padding-left: var(--s4);
+  display: grid; gap: var(--s2); max-width: 70ch; margin-top: var(--s3);
+}
+.fl-modern__label {
+  margin: 0; font-family: var(--mono); font-size: 9px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--brass);
+}
+.fl-modern__text { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-soft); }
+.fl-modern__test {
+  margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink-faint); font-style: italic;
+}
+
+/* ── Visual explainers ──────────────────────────────────────────────────── */
+
+.dg { margin: var(--s4) 0 0; max-width: 34rem; }
+.dg-svg { display: block; width: 100%; height: auto; }
+.dg__cap {
+  margin-top: var(--s2); font-size: 14px; line-height: 1.6;
+  color: var(--ink-faint); max-width: 60ch;
+}
+
+/* Rails: the live route solid, the road not taken dashed and faint. Showing both
+   futures at once is the entire content of the picture. */
+.dg-rail { fill: none; stroke: var(--ink-soft); stroke-width: 2.5; }
+.dg-rail.is-off { stroke: var(--rule); stroke-width: 2; stroke-dasharray: 6 5; }
+.dg-car { fill: var(--brass); }
+.dg-switch { fill: var(--paper); stroke: var(--brass); stroke-width: 2.5; }
+.dg-person { fill: var(--ink-soft); }
+
+.dg-stand { fill: var(--rule); }
+.dg-stand-line { stroke: var(--rule); stroke-width: 2; }
+.dg-beam { stroke: var(--ink-soft); stroke-width: 3; stroke-linecap: round; }
+.dg-pan { fill: var(--paper-2); stroke: var(--rule); stroke-width: 1.5; }
+
+.dg-set { fill: none; stroke: var(--ink-soft); stroke-width: 2; }
+.dg-set--inner { fill: var(--paper-2); stroke: var(--brass); }
+.dg-lead { stroke: var(--rule); stroke-width: 1; }
+
+.dg-cell { fill: var(--paper-2); stroke: var(--rule-2); stroke-width: 1; }
+.dg-cell.is-on { fill: var(--paper-3); stroke: var(--brass); stroke-width: 1.5; }
+.dg-cell-text { fill: var(--ink-soft); font-size: 12px; }
+.dg-cell-text.is-on { fill: var(--ink); }
+
+.dg-node { fill: var(--paper-2); stroke: var(--rule); stroke-width: 1; }
+.dg-node-text { fill: var(--ink-soft); font-size: 11px; }
+.dg-arrow { fill: none; stroke: var(--ink-soft); stroke-width: 1.5; }
+.dg-arrow--back { stroke: var(--brass); stroke-dasharray: 5 4; }
+.dg-head { fill: var(--ink-soft); }
+.dg-head--back { fill: var(--brass); }
+
+.dg-axis { stroke: var(--rule); stroke-width: 1; }
+.dg-axis--mid { stroke-dasharray: 4 4; }
+.dg-curve { fill: none; stroke: var(--brass); stroke-width: 2.5; }
+.dg-dot { fill: var(--ink); stroke: var(--paper); stroke-width: 2; }
+
+.dg-bar { fill: var(--bar); }
+.dg-bar.is-accent { fill: var(--brass); }
+
+.dg-label { fill: var(--ink-soft); font-size: 12px; }
+.dg-label--in { fill: var(--ink); font-size: 11px; }
+.dg-count { fill: var(--ink-faint); font-family: var(--mono); font-size: 10px; letter-spacing: .06em; }
