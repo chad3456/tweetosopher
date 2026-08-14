@@ -19,6 +19,8 @@ import { dirname, join } from 'node:path';
 import { parse } from 'yaml';
 import { THEMES, inTheme } from '../data/themes.mjs';
 import { PHILOSOPHERS } from '../data/philosophers.mjs';
+import { GLOSSARY, GLOSSARY_STATUS } from '../data/glossary.mjs';
+import { AUDIT } from '../data/bias-audit.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIR = join(ROOT, 'theories');
@@ -118,6 +120,9 @@ const corpus = {
   entries,
   themes,
   philosophers: PHILOSOPHERS,
+  glossary: GLOSSARY,
+  glossaryStatus: GLOSSARY_STATUS,
+  audit: AUDIT,
 };
 
 const out = join(ROOT, 'web', 'src', 'corpus.generated.json');
@@ -138,6 +143,7 @@ console.log(
   `${themes.length} themes · ${themes.length - thin.length} ready` +
     (thin.length ? ` · thin: ${thin.map((t) => `${t.id}(${t.questions}q)`).join(', ')}` : ''),
 );
+console.log(`glossary: ${GLOSSARY.length} entries · audit: ${AUDIT.length} items`);
 if (orphans.length) {
   console.log(`${orphans.length} entries match no theme: ${orphans.slice(0, 8).map((e) => e.id).join(', ')}`);
 }

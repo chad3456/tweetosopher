@@ -158,3 +158,61 @@ test('asking for more questions than exist returns everything, without looping f
   const keys = sitting.map((s) => `${s.entry.id}/${s.question.id}`);
   assert.equal(new Set(keys).size, keys.length, 'still no repeats at full draw');
 });
+
+// ── Glossary and Bias Audit ────────────────────────────────────────────────
+
+test('the glossary clears 100 entries and every one declares a replication status', () => {
+  const g = raw.glossary ?? [];
+  assert.ok(g.length >= 100, `glossary has ${g.length} entries, floor is 100`);
+  const allowed = new Set(['robust', 'mixed', 'contested', 'failed', '—']);
+  const ids = new Set();
+  for (const e of g) {
+    assert.ok(!ids.has(e.id), `duplicate glossary id ${e.id}`);
+    ids.add(e.id);
+    assert.ok(allowed.has(e.status), `${e.id} has unknown status "${e.status}"`);
+    assert.ok(e.definition?.length > 20, `${e.id} needs a real definition`);
+    assert.ok(e.example?.length > 40, `${e.id} needs a case`);
+    assert.ok(e.source?.length > 3, `${e.id} needs a source`);
+  }
+});
+
+test('findings that failed replication are present and labelled, not quietly dropped', () => {
+  const g = raw.glossary ?? [];
+  // The whole point of the status field. If these ever get deleted or relabelled
+  // upward, the list has become the thing it was written to correct.
+  for (const id of ['ego-depletion', 'power-posing', 'elderly-priming', 'backfire-effect']) {
+    const entry = g.find((e) => e.id === id);
+    assert.ok(entry, `${id} should be in the glossary`);
+    assert.equal(entry.status, 'failed', `${id} must stay labelled as failed`);
+  }
+});
+
+test('the audit asks real items and every one explains itself afterwards', () => {
+  const audit = raw.audit ?? [];
+  assert.ok(audit.length >= 8, `audit has ${audit.length} items`);
+  for (const item of audit) {
+    assert.ok(item.prompt?.length > 10, `${item.id} needs a prompt`);
+    assert.ok(item.reveal?.what, `${item.id} must name what it was measuring`);
+    assert.ok(item.reveal?.says?.length > 80, `${item.id} reveal is too thin`);
+    assert.ok(['choice', 'number'].includes(item.kind), `${item.id} has odd kind`);
+    if (item.kind === 'choice') assert.ok(item.options?.length >= 2, `${item.id} needs options`);
+    // Between-subjects items must offer more than one arm, or the manipulation is fake.
+    if (item.arms) assert.ok(item.arms.length >= 2, `${item.id} has only one arm`);
+  }
+});
+
+test('only items with a defined correct answer can be graded', () => {
+  const audit = raw.audit ?? [];
+  const graded = audit.filter((i) => i.options?.some((o) => 'correct' in o));
+  assert.ok(graded.length >= 3, 'some items should be gradeable');
+  // Every gradeable item must have exactly one correct option, or scoring is incoherent.
+  for (const item of graded) {
+    const n = item.options.filter((o) => o.correct).length;
+    assert.equal(n, 1, `${item.id} has ${n} correct options`);
+  }
+  // And the arm-based items must NOT be graded — a single arm cannot be right or wrong.
+  for (const item of audit.filter((i) => i.arms)) {
+    assert.ok(!item.options?.some((o) => 'correct' in o),
+      `${item.id} is between-subjects and must not claim a correct answer`);
+  }
+});

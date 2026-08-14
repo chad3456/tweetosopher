@@ -12,6 +12,7 @@ import { voronoiTreemap } from '../voronoi.js';
 import { score, verdicts, nameFor } from './scoring.js';
 import { buildSitting, capacity, seedFrom, TRACKS, TEST_LENGTH, testsFor, buildTest } from './select.js';
 import { matchPhilosophers, sphereFor, tiedWith } from './match.js';
+import { renderGlossary, buildAudit, renderAuditQuestion, renderAuditResult } from './glossary.js';
 
 const corpus = { ...corpusData, byId: new Map(corpusData.entries.map((e) => [e.id, e])) };
 
@@ -186,9 +187,13 @@ function openPicker(theme) {
 
 // ── The sitting ────────────────────────────────────────────────────────────
 
+const STAGES = ['#stage-picker', '#stage-sitting', '#stage-result', '#stage-audit', '#stage-audit-result'];
+const FRONT = ['#hero', '#about', '#themes', '#long', '#glossary', '#audit'];
+
 function showStage(id) {
-  for (const s of ['#stage-picker', '#stage-sitting', '#stage-result']) $(s).hidden = s !== id;
-  for (const s of ['#hero', '#about', '#themes', '#long']) $(s).hidden = id !== null;
+  for (const s of STAGES) $(s).hidden = s !== id;
+  for (const s of FRONT) $(s).hidden = id !== null;
+  document.querySelector('.tabs').hidden = id !== null;
 }
 
 function beginTest(test) {
@@ -625,6 +630,51 @@ $('#hero-random').addEventListener('click', () => {
   const tests = testsFor(corpus, theme.id);
   beginTest(tests[Math.floor(Math.random() * tests.length)]);
 });
+
+// ── Bias Audit ─────────────────────────────────────────────────────────────
+
+const audit = { steps: [], answers: [], at: 0 };
+
+function beginAudit() {
+  audit.steps = buildAudit(corpus);
+  audit.answers = [];
+  audit.at = 0;
+  showStage('#stage-audit');
+  renderAuditStep();
+}
+
+function renderAuditStep() {
+  if (audit.at >= audit.steps.length) {
+    showStage('#stage-audit-result');
+    renderAuditResult($('#stage-audit-result'), audit.steps, audit.answers);
+    const foot = el('div', 'result-foot');
+    const back = el('button', 'primary', 'Back to the site');
+    back.type = 'button';
+    back.addEventListener('click', () => {
+      showStage(null);
+      $('#audit').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+    });
+    foot.append(back);
+    $('#stage-audit-result').append(foot);
+    window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+    return;
+  }
+  $('#audit-progress').style.width = `${(audit.at / audit.steps.length) * 100}%`;
+  renderAuditQuestion($('#audit-question'), audit.steps[audit.at], audit.at, audit.steps.length, (answer) => {
+    audit.answers[audit.at] = answer;
+    audit.at += 1;
+    renderAuditStep();
+  });
+  window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+}
+
+// ── Wiring ─────────────────────────────────────────────────────────────────
+
+$('#begin-audit').addEventListener('click', beginAudit);
+
+renderGlossary($('#glossary-mount'), corpus);
+$('#audit-note').textContent =
+  `${corpus.audit.length} items, a few minutes. Nothing is sent anywhere.`;
 
 renderFront();
 heroField();

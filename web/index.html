@@ -23,6 +23,12 @@
   <body>
     <a class="skip" href="#themes">Skip to the tests</a>
 
+    <nav class="tabs" aria-label="Sections">
+      <a href="#themes" data-tab="themes">The tests</a>
+      <a href="#glossary" data-tab="glossary">Glossary</a>
+      <a href="#audit" data-tab="audit">Bias Audit</a>
+    </nav>
+
     <!-- ── Hero ──────────────────────────────────────────────────────────── -->
     <header class="hero" id="hero">
       <!-- The ten moral spheres, drawn as a live partition. It is the same solver
@@ -142,6 +148,39 @@
           <button class="primary" id="begin" type="button">Begin the sitting</button>
         </div>
       </section>
+
+      <!-- ── Glossary ────────────────────────────────────────────────────── -->
+      <section class="sec" id="glossary">
+        <div class="sec-head"><h2>Glossary</h2><div class="line"></div></div>
+        <p class="sec-lede">
+          Biases, heuristics, effects, principles and paradoxes — with the one thing most
+          lists of this kind leave out: whether the finding actually replicated.
+        </p>
+        <div id="glossary-mount"></div>
+      </section>
+
+      <!-- ── Bias Audit ──────────────────────────────────────────────────── -->
+      <section class="sec" id="audit">
+        <div class="sec-head"><h2>The Bias Audit</h2><div class="line"></div></div>
+        <p class="sec-lede">
+          Every other test here asks what you believe. This one runs the classic
+          demonstrations on you and tells you afterwards what they were for — because asking
+          "are you susceptible to anchoring?" measures self-image, and showing you an
+          arbitrary number then asking for an estimate measures the thing itself.
+        </p>
+        <div class="desk-foot">
+          <button class="primary" id="begin-audit" type="button">Take the audit</button>
+          <p class="note" id="audit-note"></p>
+        </div>
+      </section>
+
+      <!-- ── Audit run ───────────────────────────────────────────────────── -->
+      <section class="stage" id="stage-audit" hidden>
+        <div class="rail"><div class="rail__bar"><i id="audit-progress"></i></div></div>
+        <article class="question" id="audit-question" aria-live="polite"></article>
+      </section>
+
+      <section class="stage" id="stage-audit-result" hidden></section>
 
       <!-- ── Test picker (revealed) ──────────────────────────────────────── -->
       <section class="stage" id="stage-picker" hidden></section>
