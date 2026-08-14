@@ -16,6 +16,7 @@ import {
   renderGlossary, buildAudit, renderAuditQuestion, renderAuditResult,
   renderFallacies, buildOutrage, renderOutrageQuestion, renderOutrageResult,
 } from './glossary.js';
+import { mountSwing } from './swing.js';
 
 const corpus = { ...corpusData, byId: new Map(corpusData.entries.map((e) => [e.id, e])) };
 
@@ -723,3 +724,12 @@ $('#audit-note').textContent =
 
 renderFront();
 heroField();
+
+// The figure takes its colour from the theme's ink rather than a literal, so it stays a
+// silhouette in both light and dark, and is re-read when the viewer switches.
+const swingInk = () => getComputedStyle(document.documentElement).getPropertyValue('--ink').trim() || '#14161b';
+let stopSwing = mountSwing($('#hero-swing'), { ink: swingInk() });
+window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener?.('change', () => {
+  stopSwing?.();
+  stopSwing = mountSwing($('#hero-swing'), { ink: swingInk() });
+});

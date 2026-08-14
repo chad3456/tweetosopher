@@ -18,11 +18,70 @@ const el = (tag, cls, text) => {
 const STATUS_ORDER = ['robust', 'mixed', 'contested', 'failed', '—'];
 const STATUS_LABEL = { robust: 'Robust', mixed: 'Mixed', contested: 'Contested', failed: 'Failed', '—': 'Not empirical' };
 
+// A probe's kind is a claim about what answering it can establish, so it is shown to
+// the reader rather than kept as an internal field. "Run it on yourself" means the
+// answer is evidence about them; "Where you land" means it indicates a leaning with no
+// control condition behind it; "Check your belief" means the effect is disputed or dead
+// and the probe exists to show them the record rather than to demonstrate anything.
+const PROBE_ORDER = ['demo', 'judgement', 'audit'];
+const PROBE_LABEL = { demo: 'Run it on yourself', judgement: 'Where you land', audit: 'Check your belief' };
+const PROBE_NOTE = {
+  demo: 'This one runs on you. Answer before reading on — the explanation spoils it.',
+  judgement: 'No control condition here, so your answer indicates a leaning rather than proving one.',
+  audit: 'This asks what you already believe, then shows you the record.',
+};
+
+/** One glossary entry's test. Locks after an answer: the reveal is not re-winnable. */
+function renderProbe(probe) {
+  const box = el('div', `probe probe--${probe.kind}`);
+  const head = el('p', 'probe__head');
+  head.append(
+    el('span', `probe__kind probe__kind--${probe.kind}`, PROBE_LABEL[probe.kind]),
+    el('span', 'probe__note', PROBE_NOTE[probe.kind]),
+  );
+  box.append(head);
+  box.append(el('p', 'probe__ask', probe.ask));
+
+  const options = el('div', 'probe__options');
+  const buttons = [];
+  for (const opt of probe.options) {
+    const b = el('button', 'probe__option');
+    b.type = 'button';
+    b.textContent = opt.label;
+    b.addEventListener('click', () => answer(opt, b));
+    buttons.push(b);
+    options.append(b);
+  }
+  box.append(options);
+
+  const after = el('div', 'probe__after');
+  after.hidden = true;
+  box.append(after);
+
+  function answer(opt, button) {
+    for (const b of buttons) { b.disabled = true; b.classList.remove('is-chosen'); }
+    button.classList.add('is-chosen');
+    after.replaceChildren();
+    after.append(el('p', 'probe__tell', opt.tell));
+    // Every option's consequence is shown, not only the chosen one — otherwise the
+    // reader learns their own answer and nothing about the alternatives, which is
+    // where most of the content is.
+    for (const other of probe.options) {
+      if (other.id === opt.id) continue;
+      after.append(el('p', 'probe__other', `${other.label} — ${other.tell}`));
+    }
+    after.append(el('p', 'probe__reveal', probe.reveal));
+    after.hidden = false;
+  }
+
+  return box;
+}
+
 // ── Glossary ───────────────────────────────────────────────────────────────
 
 export function renderGlossary(mount, corpus) {
   const entries = corpus.glossary ?? [];
-  const state = { q: '', status: 'all', category: 'all' };
+  const state = { q: '', status: 'all', category: 'all', kind: 'all' };
 
   mount.replaceChildren();
 
@@ -73,13 +132,35 @@ export function renderGlossary(mount, corpus) {
   for (const c of categories) addCat(c, c);
   controls.append(catRow);
 
+  const kindRow = el('div', 'gl-filters');
+  kindRow.setAttribute('role', 'group');
+  kindRow.setAttribute('aria-label', 'Filter by what the entry’s test can show');
+  const kindButtons = [];
+  const kindCounts = {};
+  for (const g of entries) if (g.probe) kindCounts[g.probe.kind] = (kindCounts[g.probe.kind] ?? 0) + 1;
+  const addKind = (value, label) => {
+    const b = el('button', 'gl-chip');
+    b.type = 'button';
+    b.textContent = label;
+    b.setAttribute('aria-pressed', String(state.kind === value));
+    b.addEventListener('click', () => { state.kind = value; draw(); });
+    kindButtons.push([b, value]);
+    kindRow.append(b);
+  };
+  addKind('all', 'Every test');
+  for (const k of PROBE_ORDER) if (kindCounts[k]) addKind(k, `${PROBE_LABEL[k]} ${kindCounts[k]}`);
+  controls.append(kindRow);
+
   mount.append(controls);
 
   const legend = el('p', 'gl-legend');
   legend.textContent =
     'Status is the point of this list. Most published bias lists were assembled before the '
     + 'replication crisis and still present findings that did not survive it — so each entry '
-    + 'says whether it held up. Filter by "Failed" to see what you have probably been repeating.';
+    + 'says whether it held up. Filter by "Failed" to see what you have probably been repeating. '
+    + 'Every entry also carries a test: open one and answer before you read on. The test\'s label '
+    + 'says what answering it can actually establish, which for a failed finding is nothing about '
+    + 'you and everything about the record.';
   mount.append(legend);
 
   const count = el('p', 'gl-count');
@@ -91,13 +172,16 @@ export function renderGlossary(mount, corpus) {
   function draw() {
     for (const [b, v] of statusButtons) b.setAttribute('aria-pressed', String(state.status === v));
     for (const [b, v] of catButtons) b.setAttribute('aria-pressed', String(state.category === v));
+    for (const [b, v] of kindButtons) b.setAttribute('aria-pressed', String(state.kind === v));
 
     const q = state.q.trim().toLowerCase();
     const shown = entries.filter((g) => {
       if (state.status !== 'all' && g.status !== state.status) return false;
       if (state.category !== 'all' && g.category !== state.category) return false;
+      if (state.kind !== 'all' && g.probe?.kind !== state.kind) return false;
       if (!q) return true;
-      return `${g.name} ${g.definition} ${g.example} ${g.source}`.toLowerCase().includes(q);
+      const probeText = g.probe ? `${g.probe.ask} ${g.probe.reveal}` : '';
+      return `${g.name} ${g.definition} ${g.example} ${g.source} ${probeText}`.toLowerCase().includes(q);
     });
 
     count.textContent = shown.length === entries.length
@@ -124,6 +208,7 @@ export function renderGlossary(mount, corpus) {
       const body = el('div', 'gl-body');
       body.append(el('p', 'gl-source', `${g.source} · ${g.category}`));
       body.append(el('p', 'gl-case', g.example));
+      if (g.probe) body.append(renderProbe(g.probe));
       item.append(body);
       list.append(item);
     }

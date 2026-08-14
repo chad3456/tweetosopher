@@ -264,3 +264,98 @@ test('the outrage test is politically two-directional', () => {
     assert.ok(text.includes(side), `expected a case touching "${side}"`);
   }
 });
+
+test('every glossary entry carries a probe, and every probe a glossary entry', () => {
+  const entries = raw.glossary ?? [];
+  assert.ok(entries.length >= 100, `only ${entries.length} glossary entries`);
+  for (const g of entries) {
+    assert.ok(g.probe, `${g.id} has no probe — a definition the reader can only nod at`);
+    assert.ok(['demo', 'judgement', 'audit'].includes(g.probe.kind), `${g.id} has kind ${g.probe.kind}`);
+    assert.ok(g.probe.ask?.length > 30, `${g.id} probe needs a real question`);
+    assert.ok(g.probe.reveal?.length > 120, `${g.id} probe reveal is too thin`);
+    assert.ok(g.probe.options?.length >= 2, `${g.id} probe needs at least two options`);
+    const ids = new Set();
+    for (const o of g.probe.options) {
+      assert.ok(o.label?.length > 3, `${g.id}/${o.id} needs a label`);
+      assert.ok(o.tell?.length > 25, `${g.id}/${o.id} needs to say what the answer indicates`);
+      assert.ok(!ids.has(o.id), `${g.id} repeats option id ${o.id}`);
+      ids.add(o.id);
+    }
+  }
+});
+
+test('a finding that failed replication is never probed as if it were real', () => {
+  // This is the honesty rule the whole probe file exists under. A `demo` claims the
+  // reader's answer is evidence about them; running one for ego depletion would be
+  // staging a demonstration of an effect that is not there. Such entries get an
+  // `audit` — asked what they believe, then shown the record.
+  const failed = (raw.glossary ?? []).filter((g) => g.status === 'failed');
+  assert.ok(failed.length >= 3, `expected several failed findings, found ${failed.length}`);
+  for (const g of failed) {
+    assert.equal(g.probe.kind, 'audit', `${g.id} failed replication but is probed as a ${g.probe.kind}`);
+    // The reveal must name what happened, not merely restate the claim.
+    const names = /replicat|did not survive|no effect|near zero|no longer believ|failed/i.test(g.probe.reveal);
+    assert.ok(names, `${g.id} reveal does not say the finding failed`);
+  }
+});
+
+test('disputed findings are not probed as settled ones', () => {
+  const shaky = (raw.glossary ?? []).filter((g) => g.status === 'contested' || g.status === 'mixed');
+  assert.ok(shaky.length >= 20, `expected many disputed entries, found ${shaky.length}`);
+  const asDemo = shaky.filter((g) => g.probe.kind === 'demo').map((g) => g.id);
+  // Some contested effects can still be run on a reader honestly — the endowment
+  // effect will produce a gap in an inexperienced trader whatever the literature
+  // says about generality. But most should be audits or judgements, and if that
+  // ratio inverts, the file has drifted into presenting disputes as demonstrations.
+  assert.ok(
+    asDemo.length <= shaky.length / 2,
+    `${asDemo.length} of ${shaky.length} disputed entries are run as demos: ${asDemo.join(', ')}`,
+  );
+  for (const g of shaky) {
+    // Markers that the reveal acknowledges the dispute rather than reporting the
+    // headline. Deliberately broad: "an artefact of how the task is explained" and
+    // "the effect shrinks" both concede as much as the word "contested" does.
+    const hedged = /disput|mixed|contested|replicat|meta-analys|smaller|shr[ai]nk|artefact|less general|lost significance|unresolved|not established|not supported|weak|inconsistent|uneven|near zero|no consistent|no significant|far below/i
+      .test(g.probe.reveal);
+    assert.ok(hedged, `${g.id} is ${g.status} but its reveal reads as settled`);
+  }
+});
+
+test('the hero animation honours prefers-reduced-motion and a missing canvas', async () => {
+  // The hero's swinging figure is the one thing on the page that moves on its own, so
+  // the reduced-motion promise is worth holding with a test rather than a comment. The
+  // module is mounted against stub globals: if it ever starts a frame loop or touches
+  // the canvas under `reduce`, one of the stubs below records it.
+  const calls = { raf: 0, ctx: 0, observed: 0 };
+  const stubCanvas = () => ({
+    getContext: () => { calls.ctx += 1; return null; },
+    getBoundingClientRect: () => ({ width: 800, height: 600 }),
+    width: 0, height: 0,
+  });
+  const prior = { window: globalThis.window, IntersectionObserver: globalThis.IntersectionObserver };
+  globalThis.window = {
+    matchMedia: (q) => ({ matches: /reduced-motion/.test(q), addEventListener() {} }),
+    devicePixelRatio: 1,
+    addEventListener() {}, removeEventListener() {},
+  };
+  globalThis.requestAnimationFrame = () => { calls.raf += 1; return 1; };
+  globalThis.cancelAnimationFrame = () => {};
+  globalThis.IntersectionObserver = class { observe() { calls.observed += 1; } disconnect() {} };
+
+  try {
+    const { mountSwing } = await import('../web/src/test/swing.js');
+    const teardown = mountSwing(stubCanvas());
+    assert.equal(typeof teardown, 'function', 'mountSwing must always return a teardown');
+    assert.equal(calls.raf, 0, 'no frame loop may start under prefers-reduced-motion');
+    assert.equal(calls.ctx, 0, 'the canvas must not be touched under prefers-reduced-motion');
+    assert.equal(calls.observed, 0, 'nothing to observe if nothing animates');
+    teardown();
+    // A missing canvas must be survivable too — the hero renders without the element in
+    // any embedding that strips it, and this must not throw on the way past.
+    assert.equal(typeof mountSwing(null), 'function');
+    assert.equal(typeof mountSwing({}), 'function');
+  } finally {
+    globalThis.window = prior.window;
+    globalThis.IntersectionObserver = prior.IntersectionObserver;
+  }
+});

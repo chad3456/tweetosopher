@@ -20,6 +20,7 @@ import { parse } from 'yaml';
 import { THEMES, inTheme } from '../data/themes.mjs';
 import { PHILOSOPHERS } from '../data/philosophers.mjs';
 import { GLOSSARY, GLOSSARY_STATUS } from '../data/glossary.mjs';
+import { PROBES } from '../data/glossary-probes.mjs';
 import { AUDIT } from '../data/bias-audit.mjs';
 import { FALLACIES, FALLACY_FAMILIES } from '../data/fallacies.mjs';
 import { OUTRAGE_ITEMS, OUTRAGE_SCALE } from '../data/outrage-test.mjs';
@@ -113,6 +114,29 @@ const orphans = entries.filter((e) => !themes.some((t) => t.entries.includes(e.i
 
 const questionCount = entries.reduce((n, e) => n + e.questions.length, 0);
 
+// Every glossary entry carries its own probe, joined here rather than stored inline so
+// that the prose file and the test file can be edited independently. The join is
+// enforced in both directions: an entry without a probe is a definition the reader can
+// only nod at, and a probe without an entry is dead weight that will never render.
+//
+// The second check is the one that matters. A probe for an effect that failed
+// replication must be an `audit` — it may ask what the reader believes and then show
+// them the record, and it may not be built to appear to demonstrate the effect. Ego
+// depletion did not survive; a quiz that walks the reader through feeling depleted
+// would be a lie with an interaction on it. This is a build error, not a lint warning.
+const missingProbe = GLOSSARY.filter((e) => !PROBES[e.id]).map((e) => e.id);
+const orphanProbe = Object.keys(PROBES).filter((id) => !GLOSSARY.some((e) => e.id === id));
+if (missingProbe.length) throw new Error(`glossary entries with no probe: ${missingProbe.join(', ')}`);
+if (orphanProbe.length) throw new Error(`probes with no glossary entry: ${orphanProbe.join(', ')}`);
+
+const glossary = GLOSSARY.map((entry) => {
+  const probe = PROBES[entry.id];
+  if (entry.status === 'failed' && probe.kind !== 'audit') {
+    throw new Error(`${entry.id} failed replication, so its probe must be an audit, not a ${probe.kind}`);
+  }
+  return { ...entry, probe };
+});
+
 const corpus = {
   generatedBy: 'scripts/build-corpus.mjs',
   written: entries.length,
@@ -122,7 +146,7 @@ const corpus = {
   entries,
   themes,
   philosophers: PHILOSOPHERS,
-  glossary: GLOSSARY,
+  glossary,
   glossaryStatus: GLOSSARY_STATUS,
   audit: AUDIT,
   fallacies: FALLACIES,
@@ -152,6 +176,11 @@ console.log(
 console.log(
   `glossary: ${GLOSSARY.length} · fallacies: ${FALLACIES.length} · `
   + `audit: ${AUDIT.length} items · outrage: ${OUTRAGE_ITEMS.length} pairs`,
+);
+const kinds = glossary.reduce((acc, e) => ({ ...acc, [e.probe.kind]: (acc[e.probe.kind] ?? 0) + 1 }), {});
+console.log(
+  `probes: ${glossary.length} · `
+  + Object.entries(kinds).map(([k, n]) => `${k} ${n}`).join(' · '),
 );
 if (orphans.length) {
   console.log(`${orphans.length} entries match no theme: ${orphans.slice(0, 8).map((e) => e.id).join(', ')}`);

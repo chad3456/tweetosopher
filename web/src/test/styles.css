@@ -401,7 +401,17 @@ button[disabled] { opacity: .4; cursor: not-allowed; }
     linear-gradient(to bottom, transparent 62%, var(--paper) 100%);
 }
 
+/* The figure swings between the wash and the type: over the partition so it is legible,
+   under the title so it never crosses a word. The wash already lightens the middle, so
+   the figure is deliberately not dimmed further — it should pass behind the headline as
+   a solid thing rather than a ghost. */
+.hero__swing {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+}
+
 .hero__inner {
+  position: relative; z-index: 1;
   max-width: 46rem; margin: 0 auto; padding: var(--s8) var(--s5) var(--s7);
   text-align: center;
 }
@@ -648,6 +658,55 @@ button[disabled] { opacity: .4; cursor: not-allowed; }
 .gl-source { font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
              color: var(--ink-faint); margin: 0; text-transform: uppercase; }
 .gl-case { margin: 0; font-size: 16px; color: var(--ink-soft); max-width: 70ch; }
+
+/* ── The per-entry probe ────────────────────────────────────────────────── */
+
+/* Set apart from the entry's prose, because it asks for something rather than
+   telling. The left rule is the only colour: it encodes what the probe can claim. */
+.probe {
+  margin-top: var(--s3); padding: var(--s3) var(--s4);
+  background: var(--paper-2); border-left: 2px solid var(--rule);
+  display: grid; gap: var(--s3); max-width: 70ch;
+}
+.probe--demo      { border-left-color: var(--pos); }
+.probe--judgement { border-left-color: var(--brass); }
+.probe--audit     { border-left-color: var(--neg); }
+
+.probe__head { margin: 0; display: flex; gap: var(--s3); flex-wrap: wrap; align-items: baseline; }
+.probe__kind {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .14em;
+  text-transform: uppercase; white-space: nowrap;
+}
+.probe__kind--demo      { color: var(--pos); }
+.probe__kind--judgement { color: var(--brass); }
+.probe__kind--audit     { color: var(--neg); }
+.probe__note { font-size: 13px; color: var(--ink-faint); line-height: 1.5; }
+
+.probe__ask { margin: 0; font-size: 17px; line-height: 1.55; }
+
+.probe__options { display: grid; gap: var(--s2); }
+.probe__option {
+  font: inherit; font-size: 15px; text-align: left; line-height: 1.45;
+  padding: var(--s2) var(--s3); cursor: pointer;
+  background: var(--paper); color: var(--ink);
+  border: 1px solid var(--rule-2);
+}
+/* Guarded, because a sticky :hover on touch makes an unchosen option look chosen. */
+@media (hover: hover) {
+  .probe__option:hover:not(:disabled) { border-color: var(--brass); }
+}
+.probe__option:disabled { cursor: default; color: var(--ink-faint); }
+.probe__option.is-chosen {
+  border-color: var(--brass); color: var(--ink); background: var(--paper-3);
+}
+
+.probe__after { display: grid; gap: var(--s2); }
+.probe__tell { margin: 0; font-size: 15px; line-height: 1.55; }
+.probe__other { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ink-faint); }
+.probe__reveal {
+  margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-soft);
+  border-top: 1px solid var(--rule-2); padding-top: var(--s3);
+}
 
 /* ── Bias Audit ─────────────────────────────────────────────────────────── */
 
