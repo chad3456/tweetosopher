@@ -19,10 +19,11 @@
     "corpus": "node scripts/build-registry.mjs && node scripts/build-corpus.mjs",
     "validate": "node scripts/validate-theories.mjs",
     "prebuild": "node scripts/build-corpus.mjs",
-    "predev:web": "node scripts/build-corpus.mjs"
+    "predev:web": "node scripts/build-corpus.mjs",
+    "autofill": "node scripts/autofill/cli.mjs"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.71.0",
+    "@anthropic-ai/sdk": "^0.68.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",

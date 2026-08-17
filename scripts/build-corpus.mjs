@@ -139,6 +139,19 @@ const glossary = GLOSSARY.map((entry) => {
   return { ...entry, probe };
 });
 
+// Generated entries live in their own file so codegen never edits hand-written prose.
+// The merge is hand-written-wins: an id present in both resolves to the hand-written
+// entry, so writing one properly permanently supersedes its generated version without
+// anyone having to delete anything.
+const generatedPath = join(ROOT, 'data', 'fallacies.generated.mjs');
+let generatedFallacies = [];
+if (existsSync(generatedPath)) {
+  ({ GENERATED_FALLACIES: generatedFallacies = [] } = await import('../data/fallacies.generated.mjs'));
+}
+const handWritten = new Set(FALLACIES.map((f) => f.id));
+const superseded = generatedFallacies.filter((f) => handWritten.has(f.id)).map((f) => f.id);
+const ALL_FALLACIES = [...FALLACIES, ...generatedFallacies.filter((f) => !handWritten.has(f.id))];
+
 // Every fallacy carries a modern reading, joined the same way and enforced the same
 // way as the glossary probes. A reference that stops at the Latin teaches recognition
 // and not use, which is how a reader ends up naming moves instead of answering them.
@@ -146,7 +159,11 @@ const missingModern = FALLACIES.filter((f) => !FALLACY_MODERN[f.id]).map((f) => 
 const orphanModern = Object.keys(FALLACY_MODERN).filter((id) => !FALLACIES.some((f) => f.id === id));
 if (missingModern.length) throw new Error(`fallacies with no modern reading: ${missingModern.join(', ')}`);
 if (orphanModern.length) throw new Error(`modern readings with no fallacy: ${orphanModern.join(', ')}`);
-const fallacies = FALLACIES.map((f) => ({ ...f, modern: FALLACY_MODERN[f.id] }));
+// A generated entry authors its own `modern`; a hand-written one takes it from the
+// companion file. Either way every entry that ships has one.
+const fallacies = ALL_FALLACIES.map((f) => ({ ...f, modern: f.modern ?? FALLACY_MODERN[f.id] }));
+const stillMissing = fallacies.filter((f) => !f.modern?.now).map((f) => f.id);
+if (stillMissing.length) throw new Error(`fallacies with no modern reading: ${stillMissing.join(', ')}`);
 
 // Diagrams are keyed by entry id across two namespaces — theory entries and glossary
 // entries — because they share a renderer. Coverage is deliberately partial: a diagram
@@ -206,7 +223,8 @@ console.log(
     (thin.length ? ` · thin: ${thin.map((t) => `${t.id}(${t.questions}q)`).join(', ')}` : ''),
 );
 console.log(
-  `glossary: ${GLOSSARY.length} · fallacies: ${FALLACIES.length} · `
+  `glossary: ${GLOSSARY.length} · fallacies: ${fallacies.length} `
+  + `(${FALLACIES.length} written, ${fallacies.length - FALLACIES.length} generated) · `
   + `audit: ${AUDIT.length} items · outrage: ${OUTRAGE_ITEMS.length} pairs (${INTERLEAVE.length} questions)`,
 );
 const drawnTheory = Object.keys(DIAGRAMS).filter((id) => entries.some((e) => e.id === id)).length;
@@ -221,6 +239,9 @@ console.log(
   `probes: ${glossary.length} · `
   + Object.entries(kinds).map(([k, n]) => `${k} ${n}`).join(' · '),
 );
+if (superseded.length) {
+  console.log(`${superseded.length} generated entries superseded by hand-written ones: ${superseded.join(', ')}`);
+}
 if (orphans.length) {
   console.log(`${orphans.length} entries match no theme: ${orphans.slice(0, 8).map((e) => e.id).join(', ')}`);
 }
